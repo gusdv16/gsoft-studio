@@ -6,3 +6,4 @@ lighthouse/*.html
 .DS_Store
 dist-hostinger/
 *.zip
+dist-old/
