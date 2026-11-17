@@ -11,6 +11,8 @@ import buscador from '../assets/proyectos/buscador-replica.png';
 import habit from '../assets/proyectos/tracker-habits.png';
 
 const { t } = Astro.props;
+const ENDPOINT = 'https://gustavobentancor.com/gsoft-studio/contact.php';
+const SITEKEY = import.meta.env.PUBLIC_TURNSTILE_SITEKEY ?? '';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const isEn = t.lang === 'en';
 const path = isEn ? '/en/' : '/';
@@ -256,8 +258,16 @@ const icons = {
           <p class="kick">{t.contact.kicker}</p>
           <h2>{t.contact.title}</h2>
           <p class="sub">{t.contact.text}</p>
-          <a class="btn btn-p" href={`mailto:${t.email}?subject=${encodeURIComponent(t.contact.subject)}`}>{t.contact.cta}</a>
-          <a class="mail" href={`mailto:${t.email}`}>{t.contact.emailLabel}</a>
+          <form class="cform" data-form novalidate action={ENDPOINT} method="post" data-endpoint={ENDPOINT} data-lang={t.lang} data-sitekey={SITEKEY} data-msg={JSON.stringify(t.contact.form)}>
+            <label>{t.contact.form.name}<input name="name" type="text" autocomplete="name" required maxlength="100"></label>
+            <label>{t.contact.form.email}<input name="email" type="email" autocomplete="email" required maxlength="150" inputmode="email"></label>
+            <label>{t.contact.form.message}<textarea name="message" rows="5" required minlength="10" maxlength="3000"></textarea></label>
+            <input class="hp" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div data-ts></div>
+            <button class="btn btn-p" type="submit">{t.contact.form.send}</button>
+            <p class="fstat" role="status" aria-live="polite" data-status></p>
+          </form>
+          <span class="mail">{t.contact.form.or} <a href={`mailto:${t.email}`}>{t.contact.emailLabel}</a></span>
         </div>
       </div>
     </section>
@@ -270,6 +280,62 @@ const icons = {
     </div>
   </footer>
 
+  <script>
+    // Formulario: AJAX hacia contact.php. Turnstile (si hay site key) se carga solo al enfocar el formulario.
+    const form = document.querySelector('[data-form]');
+    if (form) {
+      const msg = JSON.parse(form.dataset.msg);
+      const status = form.querySelector('[data-status]');
+      const btn = form.querySelector('button');
+      const t0 = Date.now();
+      let cf = '';
+      let tsLoaded = false;
+      const loadTs = () => {
+        const key = form.dataset.sitekey;
+        if (!key || tsLoaded) return;
+        tsLoaded = true;
+        window.__tsReady = () => window.turnstile.render(form.querySelector('[data-ts]'), { sitekey: key, callback: (tk) => (cf = tk), 'expired-callback': () => (cf = '') });
+        const sc = document.createElement('script');
+        sc.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=__tsReady';
+        sc.async = true;
+        document.head.appendChild(sc);
+      };
+      form.addEventListener('focusin', loadTs, { once: true });
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        status.className = 'fstat';
+        const d = Object.fromEntries(new FormData(form));
+        if (!form.checkValidity()) {
+          status.textContent = form.email.validity.valid ? msg.invalid : msg.email_bad;
+          status.classList.add('bad');
+          return;
+        }
+        btn.disabled = true;
+        status.textContent = msg.sending;
+        try {
+          const r = await fetch(form.dataset.endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: d.name, email: d.email, message: d.message, website: d.website, lang: form.dataset.lang, t: t0, cf }),
+          });
+          const j = await r.json().catch(() => ({}));
+          if (j.ok) {
+            status.textContent = msg.ok;
+            status.classList.add('good');
+            form.reset();
+          } else {
+            status.textContent = msg[j.error === 'rate' ? 'rate' : j.error === 'captcha' ? 'captcha' : j.error === 'email' ? 'email_bad' : j.error === 'invalid' ? 'invalid' : 'err'];
+            status.classList.add('bad');
+            if (window.turnstile && cf) { window.turnstile.reset(); cf = ''; }
+          }
+        } catch (_) {
+          status.textContent = msg.err;
+          status.classList.add('bad');
+        }
+        btn.disabled = false;
+      });
+    }
+  </script>
   <script>
     // GSAP: el modulo se descarga 4 s despues de `load`, cuando el navegador esta libre, y la
     // animacion arranca con la primera interaccion (scroll, toque, tecla) o a los 10 s.

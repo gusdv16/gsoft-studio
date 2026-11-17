@@ -156,8 +156,17 @@ html:not(.anim) .steps .bar{transform:none}
 .box>*{position:relative}
 .box h2{margin-inline:auto}
 .box .sub{margin-inline:auto}
-.box .btn{margin-top:30px}
-.mail{display:block;margin-top:16px;color:var(--muted);font-size:.95rem}
+.cform{max-width:540px;margin:30px auto 0;text-align:left;display:grid;gap:16px}
+.cform label{display:grid;gap:6px;font-size:.88rem;font-weight:600;color:var(--muted)}
+.cform input,.cform textarea{font:400 1rem/1.5 var(--font);color:var(--text);background:rgba(7,8,13,.7);border:1px solid var(--line);border-radius:12px;padding:13px 15px;width:100%;min-height:46px;transition:border-color .2s}
+.cform textarea{resize:vertical;min-height:120px}
+.cform input:focus,.cform textarea:focus{outline:none;border-color:var(--b)}
+.cform .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.cform .btn{justify-self:start;margin-top:4px}
+.cform .btn:disabled{opacity:.6;cursor:wait}
+.fstat{font-size:.92rem;min-height:1.4em;color:var(--muted)}
+.fstat.good{color:var(--b)}.fstat.bad{color:#ff8f8f}
+.mail{display:block;margin-top:22px;color:var(--muted);font-size:.95rem}
 footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:.88rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
 
