@@ -4,7 +4,7 @@ import { defineConfig } from 'astro/config';
 const pages = process.env.GH_PAGES === '1';
 
 export default defineConfig({
-  site: pages ? 'https://gusdv16.github.io' : 'http://localhost:4330',
+  site: pages ? (process.env.SITE_URL ?? 'https://gusdv16.github.io') : 'http://localhost:4330',
   base: pages ? '/gsoft-studio' : '/',
   trailingSlash: 'always',
   compressHTML: true,

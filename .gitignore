@@ -4,3 +4,5 @@ dist/
 shots/
 lighthouse/*.html
 .DS_Store
+dist-hostinger/
+*.zip
