@@ -42,6 +42,17 @@ npm run preview            # http://localhost:4330/
 npm run lighthouse -- http://localhost:4330/ mobile
 ```
 
+## Formulario de contacto
+
+El formulario (en ambas copias del sitio) envía por AJAX (`fetch`, JSON) a `public/contact.php`, que corre en el hosting con PHP (`https://gustavobentancor.com/gsoft-studio/contact.php`) y manda el correo a `info@gustavobentancor.com`.
+
+Protecciones del endpoint: CORS limitado a `gustavobentancor.com` y `gusdv16.github.io`, solo `application/json` (obliga a preflight), honeypot, tiempo mínimo de relleno, límite de 4 envíos por IP y hora y 60 por día en total, validación y límites de tamaño, y saltos de línea eliminados en nombre y email (sin inyección de cabeceras).
+
+**Cloudflare Turnstile (opcional):**
+1. Crea el sitio en Turnstile con los dominios `gustavobentancor.com` y `gusdv16.github.io`.
+2. Build con la clave pública: `PUBLIC_TURNSTILE_SITEKEY=<site key> GH_PAGES=1 SITE_URL=https://gustavobentancor.com npm run build`.
+3. En el servidor, crea `gsoft-contact-config.php` **fuera de `public_html`** (dos niveles sobre `gsoft-studio/`) con `<?php return ['turnstile_secret' => '<secret key>'];`. Al existir el secreto, el captcha pasa a ser obligatorio. La clave secreta nunca va en el repo.
+
 ## Desarrollo
 
 ```bash
