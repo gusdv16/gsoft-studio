@@ -3,9 +3,9 @@ export default {
   htmlLang: 'en',
   brand: 'Gsoft Studio',
   meta: {
-    title: 'Gsoft Studio · Custom solutions with AI for your business',
+    title: 'Gsoft Studio · Automation, AI and custom web development',
     description:
-      'We automate processes, add AI to your workflows, and build fast custom websites, apps and extensions. See the projects we have published.',
+      'We automate processes, add AI to your workflows and build fast websites, custom apps and extensions. See our published projects.',
   },
   skip: 'Skip to content',
   nav: {

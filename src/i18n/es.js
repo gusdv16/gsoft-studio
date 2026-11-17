@@ -3,9 +3,9 @@ export default {
   htmlLang: 'es',
   brand: 'Gsoft Studio',
   meta: {
-    title: 'Gsoft Studio · Soluciones a medida con IA para tu empresa',
+    title: 'Gsoft Studio · Automatización, IA y desarrollo web a medida',
     description:
-      'Automatizamos procesos, integramos IA en tus flujos de trabajo y desarrollamos webs, apps y extensiones rápidas a medida. Mira los proyectos publicados.',
+      'Automatizamos procesos, integramos IA en tus flujos de trabajo y creamos webs rápidas, apps y extensiones a medida. Mira los proyectos publicados.',
   },
   skip: 'Saltar al contenido',
   nav: {

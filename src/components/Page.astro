@@ -14,9 +14,40 @@ const { t } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const isEn = t.lang === 'en';
 const path = isEn ? '/en/' : '/';
-const site = Astro.site?.origin ?? '';
-const canonical = `${site}${base}${path}`;
-const alt = `${site}${base}${isEn ? '/' : '/en/'}`;
+// URL canonica unica: el dominio propio (la copia de GitHub Pages apunta aqui para no duplicar contenido)
+const CANON = 'https://gustavobentancor.com/gsoft-studio';
+const canonical = `${CANON}${path}`;
+const alt = `${CANON}${isEn ? '/' : '/en/'}`;
+const ogAlt = isEn ? 'Gsoft Studio: we solve what your business needs, accelerated with AI' : 'Gsoft Studio: resolvemos lo que tu empresa necesita, acelerado con IA';
+const ld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${CANON}/#org`,
+      name: t.brand,
+      url: `${CANON}/`,
+      email: t.email,
+      description: t.meta.description,
+      image: `${CANON}/og.png`,
+      founder: { '@type': 'Person', name: 'Gustavo Bentancor', sameAs: [t.github] },
+      sameAs: [t.github],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: t.services.title,
+        itemListElement: t.services.items.map((x) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: x.title, description: x.text } })),
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${CANON}/#web`,
+      url: `${CANON}/`,
+      name: t.brand,
+      inLanguage: ['es', 'en'],
+      publisher: { '@id': `${CANON}/#org` },
+    },
+  ],
+};
 const other = isEn ? `${base}/` : `${base}/en/`;
 const fontCss = `@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("${base}/fonts/inter-latin-wght-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}`;
 const images = { 'easy-pdf-free': null, 'tracker-habits': habit, 'moova-tracker-extension': moova, 'img-generator': imgGen, 'web-performance': perf, 'insight-demo': insight, 'buscador-replica': buscador };
@@ -44,8 +75,20 @@ const icons = {
   <meta property="og:title" content={t.meta.title}>
   <meta property="og:description" content={t.meta.description}>
   <meta property="og:url" content={canonical}>
-  <meta property="og:image" content={`${site}${base}/og.png`}>
+  <meta property="og:site_name" content={t.brand}>
+  <meta property="og:locale" content={isEn ? 'en_US' : 'es_ES'}>
+  <meta property="og:locale:alternate" content={isEn ? 'es_ES' : 'en_US'}>
+  <meta property="og:image" content={`${CANON}/og.png`}>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content={ogAlt}>
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={t.meta.title}>
+  <meta name="twitter:description" content={t.meta.description}>
+  <meta name="twitter:image" content={`${CANON}/og.png`}>
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="sitemap" type="application/xml" href={`${base}/sitemap.xml`}>
+  <script type="application/ld+json" set:html={JSON.stringify(ld)}></script>
   <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`}>
   <link rel="preload" href={`${base}/fonts/inter-latin-wght-normal.woff2`} as="font" type="font/woff2" crossorigin>
   <style is:inline set:html={fontCss}></style>
@@ -170,7 +213,7 @@ const icons = {
                     formats={["avif", "webp"]} fallbackFormat="webp"
                     widths={mediaClass[p.id] ? [400, 600] : [480, 720, 960]}
                     sizes={mediaClass[p.id] ? '(min-width:760px) 300px, 70vw' : '(min-width:1120px) 540px, (min-width:760px) 46vw, 92vw'}
-                    alt={`${p.title}`}
+                    alt={isEn ? `Screenshot of ${p.title}` : `Captura de ${p.title}`}
                     data-par
                   />
                 )}
