@@ -1,5 +1,7 @@
 # Gsoft Studio · sitio de presentación
 
+**Sitio en vivo: https://gusdv16.github.io/gsoft-studio/** (inglés: https://gusdv16.github.io/gsoft-studio/en/)
+
 Sitio estático (Astro) para presentar los servicios de Gsoft Studio y los proyectos publicados. Disponible en español (`/`) y en inglés (`/en/`).
 
 > Propuesta: *Resolvemos lo que tu empresa necesita, acelerado con IA.*
