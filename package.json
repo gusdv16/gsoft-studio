@@ -1,0 +1,20 @@
+{
+  "name": "gsoft-studio",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview --port 4330",
+    "lighthouse": "node scripts/lighthouse.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "astro": "^7.4.12",
+    "chrome-launcher": "^1.2.3",
+    "gsap": "^3.15.1",
+    "lighthouse": "^13.6.0",
+    "sharp": "^0.35.5"
+  }
+}

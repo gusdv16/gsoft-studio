@@ -1,0 +1,261 @@
+---
+import '../styles/global.css';
+import { Picture } from 'astro:assets';
+import eps1 from '../assets/proyectos/easy-pdf-inicio.png';
+import eps2 from '../assets/proyectos/easy-pdf-lector.jpg';
+import moova from '../assets/proyectos/moova-popup.png';
+import imgGen from '../assets/proyectos/img-generator.png';
+import perf from '../assets/proyectos/web-performance.png';
+import insight from '../assets/proyectos/insight-demo.png';
+import buscador from '../assets/proyectos/buscador-replica.png';
+import habit from '../assets/proyectos/tracker-habits.png';
+
+const { t } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const isEn = t.lang === 'en';
+const path = isEn ? '/en/' : '/';
+const site = Astro.site?.origin ?? '';
+const canonical = `${site}${base}${path}`;
+const alt = `${site}${base}${isEn ? '/' : '/en/'}`;
+const other = isEn ? `${base}/` : `${base}/en/`;
+const fontCss = `@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("${base}/fonts/inter-latin-wght-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}`;
+const images = { 'easy-pdf-free': null, 'tracker-habits': habit, 'moova-tracker-extension': moova, 'img-generator': imgGen, 'web-performance': perf, 'insight-demo': insight, 'buscador-replica': buscador };
+const mediaClass = { 'tracker-habits': 'logo', 'moova-tracker-extension': 'contain', 'easy-pdf-free': 'duo' };
+const icons = {
+  cog: 'M12 15a3 3 0 100-6 3 3 0 000 6zm7.4-3a7.4 7.4 0 00-.1-1.2l2-1.6-2-3.4-2.4 1a7.5 7.5 0 00-2-1.2L14.5 3h-4l-.4 2.6a7.5 7.5 0 00-2 1.2l-2.4-1-2 3.4 2 1.6a7.4 7.4 0 000 2.4l-2 1.6 2 3.4 2.4-1a7.5 7.5 0 002 1.2l.4 2.6h4l.4-2.6a7.5 7.5 0 002-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z',
+  spark: 'M12 2l2.2 6.3L20.5 10l-6.3 2.2L12 18.5l-2.2-6.3L3.5 10l6.3-1.7L12 2zm7 13l1 2.8 2.8 1-2.8 1-1 2.8-1-2.8-2.8-1 2.8-1 1-2.8z',
+  bolt: 'M13 2L4 14h6l-1 8 9-12h-6l1-8z',
+  box: 'M12 2l9 4.5v11L12 22l-9-4.5v-11L12 2zm0 2.2L5.5 7.5 12 10.8l6.5-3.3L12 4.2zM5 9.2v7.1l6 3V12.2L5 9.2zm14 0l-6 3v7.1l6-3V9.2z',
+};
+---
+<!doctype html>
+<html lang={t.htmlLang}>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{t.meta.title}</title>
+  <meta name="description" content={t.meta.description}>
+  <meta name="theme-color" content="#07080d">
+  <link rel="canonical" href={canonical}>
+  <link rel="alternate" hreflang="es" href={isEn ? alt : canonical}>
+  <link rel="alternate" hreflang="en" href={isEn ? canonical : alt}>
+  <link rel="alternate" hreflang="x-default" href={isEn ? alt : canonical}>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content={t.meta.title}>
+  <meta property="og:description" content={t.meta.description}>
+  <meta property="og:url" content={canonical}>
+  <meta property="og:image" content={`${site}${base}/og.png`}>
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`}>
+  <link rel="preload" href={`${base}/fonts/inter-latin-wght-normal.woff2`} as="font" type="font/woff2" crossorigin>
+  <style is:inline set:html={fontCss}></style>
+  <script is:inline>
+    (function(){var r=document.documentElement;if(!matchMedia('(prefers-reduced-motion:reduce)').matches){r.classList.add('anim');window.__af=setTimeout(function(){r.classList.remove('anim')},6000)}})();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">{t.skip}</a>
+  <header class="hd">
+    <div class="wrap">
+      <a class="logo" href={`${base}${path}`} aria-label={t.brand}>
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#10131e" stroke="#1f2434"/><path d="M9 21l5-10 4 7 2-4 3 7" fill="none" stroke="#7c8cff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        {t.brand}
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="#servicios">{t.nav.services}</a>
+        <a href="#proceso">{t.nav.process}</a>
+        <a href="#proyectos">{t.nav.projects}</a>
+        <a href="#sobre-mi">{t.nav.about}</a>
+      </nav>
+      <a class="lang" href={other} hreflang={isEn ? 'es' : 'en'} title={t.nav.other.title}>{t.nav.other.label}</a>
+      <a class="btn btn-p" href="#contacto">{t.nav.cta}</a>
+      <details class="menu">
+        <summary aria-label="Menu"><span class="ic"></span></summary>
+        <nav aria-label="Menu">
+          <a href="#servicios">{t.nav.services}</a>
+          <a href="#proceso">{t.nav.process}</a>
+          <a href="#proyectos">{t.nav.projects}</a>
+          <a href="#sobre-mi">{t.nav.about}</a>
+          <a href="#contacto">{t.nav.contact}</a>
+        </nav>
+      </details>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" data-hero>
+      <div class="orb o1" data-orb="1"></div>
+      <div class="orb o2" data-orb="2"></div>
+      <div class="wrap">
+        <div>
+          <span class="badge"><i></i>{t.hero.badge}</span>
+          <h1>
+            <span class="ln"><span style="--i:0">{t.hero.title[0]}</span></span>
+            <span class="ln"><span style="--i:1">{t.hero.title[1]}</span></span>
+            <span class="ln"><span class="g" style="--i:2">{t.hero.title[2]}</span></span>
+          </h1>
+          <p class="lead">{t.hero.lead}</p>
+          <div class="cta">
+            <a class="btn btn-p" href="#contacto">{t.hero.primary}</a>
+            <a class="btn btn-s" href="#proyectos">{t.hero.secondary}</a>
+          </div>
+        </div>
+        <div class="flow" aria-hidden="true" data-flow>
+          <div class="pulse"><i data-pulse></i></div>
+          <div class="node"><b>1</b>{t.hero.flow[0]}</div>
+          <div class="node"><b>2</b>{t.hero.flow[1]}</div>
+          <div class="node"><b>3</b>{t.hero.flow[2]}</div>
+          <p>{t.hero.flowNote}</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="strip">
+      <small>{t.stack.label}</small>
+      <ul class="track" data-track>
+        {t.stack.items.map((s) => <li>{s}</li>)}
+        {t.stack.items.map((s) => <li aria-hidden="true">{s}</li>)}
+      </ul>
+    </div>
+
+    <section id="servicios" class="cv" style="--m:1230px;--d:700px">
+      <div class="wrap">
+        <p class="kick" data-r>{t.services.kicker}</p>
+        <h2 data-r>{t.services.title}</h2>
+        <div class="grid4">
+          {t.services.items.map((s) => (
+            <article class="card" data-r="card">
+              <div class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={icons[s.icon]}/></svg></div>
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="proceso" class="alt cv" style="--m:830px;--d:600px">
+      <div class="wrap">
+        <p class="kick" data-r>{t.process.kicker}</p>
+        <h2 data-r>{t.process.title}</h2>
+        <div class="steps" data-steps role="list">
+          <span class="bar" data-bar aria-hidden="true"></span>
+          {t.process.steps.map((s) => (
+            <div class="step" role="listitem" data-r="step">
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="proyectos" class="cv" style="--m:4700px;--d:2750px">
+      <div class="wrap">
+        <p class="kick" data-r>{t.projects.kicker}</p>
+        <h2 data-r>{t.projects.title}</h2>
+        <p class="sub" data-r>{t.projects.lead}</p>
+        <div class="pgrid">
+          {t.projects.items.map((p, i) => (
+            <article class:list={['proj', { feat: i === 0 }]} data-r="card">
+              <div class:list={['media', mediaClass[p.id]]}>
+                {p.id === 'easy-pdf-free' ? (
+                  <>
+                    <Picture src={eps1} formats={["avif", "webp"]} fallbackFormat="webp" widths={[240, 360]} sizes="(min-width:760px) 180px, 40vw" alt={isEn ? 'Easy PDF Free home screen' : 'Pantalla de inicio de Easy PDF Free'} data-par />
+                    <Picture src={eps2} formats={["avif", "webp"]} fallbackFormat="webp" widths={[240, 360]} sizes="(min-width:760px) 180px, 40vw" alt={isEn ? 'Reader with large controls' : 'Lector con controles grandes'} data-par />
+                  </>
+                ) : (
+                  <Picture
+                    src={images[p.id]}
+                    formats={["avif", "webp"]} fallbackFormat="webp"
+                    widths={mediaClass[p.id] ? [400, 600] : [480, 720, 960]}
+                    sizes={mediaClass[p.id] ? '(min-width:760px) 300px, 70vw' : '(min-width:1120px) 540px, (min-width:760px) 46vw, 92vw'}
+                    alt={`${p.title}`}
+                    data-par
+                  />
+                )}
+              </div>
+              <div class="pbody">
+                <span class="type">{t.projects.types[p.type]}</span>
+                <h3>{p.title}</h3>
+                <p>{p.text}</p>
+                <ul class="tags">{p.tags.map((g) => <li>{g}</li>)}</ul>
+                <div class="links">
+                  {p.demo && <a class="btn btn-p" href={p.demo} target="_blank" rel="noopener">{t.projects.demo} ↗</a>}
+                  <a class="btn btn-s" href={p.code} target="_blank" rel="noopener">{t.projects.code} ↗</a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre-mi" class="alt cv" style="--m:850px;--d:700px">
+      <div class="wrap about">
+        <div class="txt">
+          <p class="kick" data-r>{t.about.kicker}</p>
+          <h2 data-r>{t.about.title}</h2>
+          <div data-r style="margin-top:20px">
+            {t.about.paragraphs.map((p) => <p>{p}</p>)}
+            <a class="ghl" href={t.github} target="_blank" rel="noopener">{t.about.github} ↗</a>
+          </div>
+        </div>
+        <ul class="pts">
+          {t.about.points.map((p) => <li data-r="card">{p}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section id="contacto" class="contact cv" style="--m:540px;--d:650px">
+      <div class="wrap">
+        <div class="box" data-r>
+          <p class="kick">{t.contact.kicker}</p>
+          <h2>{t.contact.title}</h2>
+          <p class="sub">{t.contact.text}</p>
+          <a class="btn btn-p" href={`mailto:${t.email}?subject=${encodeURIComponent(t.contact.subject)}`}>{t.contact.cta}</a>
+          <a class="mail" href={`mailto:${t.email}`}>{t.contact.emailLabel}</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>{t.footer}</span>
+      <a href={t.github} target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </footer>
+
+  <script>
+    // GSAP: el modulo se descarga 4 s despues de `load`, cuando el navegador esta libre, y la
+    // animacion arranca con la primera interaccion (scroll, toque, tecla) o a los 10 s.
+    // Sin interaccion no hay trabajo extra en el hilo principal durante la carga.
+    if (!matchMedia('(prefers-reduced-motion:reduce)').matches) {
+      let mod;
+      let go = false;
+      const evs = ['scroll', 'touchstart', 'pointerdown', 'keydown', 'wheel'];
+      const run = () => mod && mod.then((m) => m.init());
+      const start = () => {
+        if (go) return;
+        go = true;
+        evs.forEach((e) => removeEventListener(e, start));
+        if (mod) run();
+        else {
+          mod = import('../scripts/anim.js');
+          run();
+        }
+      };
+      evs.forEach((e) => addEventListener(e, start, { passive: true }));
+      // ?eager arranca GSAP en `load` (solo para medir el peor caso con Lighthouse)
+      if (location.search.includes('eager')) addEventListener('load', start, { once: true });
+      addEventListener('load', () => {
+        const fetchMod = () => { if (!mod) { mod = import('../scripts/anim.js'); if (go) run(); } };
+        // Espera 4 s tras `load` para no competir con la carga inicial; con interaccion antes, arranca antes.
+        setTimeout(() => ('requestIdleCallback' in window ? requestIdleCallback(fetchMod, { timeout: 2000 }) : fetchMod()), 4000);
+        setTimeout(start, 10000);
+      }, { once: true });
+    }
+  </script>
+</body>
+</html>
