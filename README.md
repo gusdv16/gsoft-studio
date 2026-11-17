@@ -2,6 +2,8 @@
 
 **Sitio en vivo: https://gusdv16.github.io/gsoft-studio/** (inglés: https://gusdv16.github.io/gsoft-studio/en/)
 
+También en: https://gustavobentancor.com/gsoft-studio/
+
 Sitio estático (Astro) para presentar los servicios de Gsoft Studio y los proyectos publicados. Disponible en español (`/`) y en inglés (`/en/`).
 
 > Propuesta: *Resolvemos lo que tu empresa necesita, acelerado con IA.*
