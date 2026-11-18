@@ -14,6 +14,7 @@ import habit from '../assets/proyectos/tracker-habits.png';
 import mPerf from '../assets/proyectos/m-web-performance.png';
 import mInsight from '../assets/proyectos/m-insight-demo.png';
 import mBuscador from '../assets/proyectos/m-buscador-replica.png';
+import foto from '../assets/gustavo.jpg';
 
 const { t } = Astro.props;
 const ENDPOINT = 'https://gustavobentancor.com/gsoft-studio/contact.php';
@@ -292,9 +293,14 @@ const icons = {
             <a class="ghl" href={t.github} target="_blank" rel="noopener">{t.about.github} ↗</a>
           </div>
         </div>
-        <ul class="pts">
-          {t.about.points.map((p) => <li data-r="card">{p}</li>)}
-        </ul>
+        <div class="aside">
+          <figure class="foto" data-r="card">
+            <Picture src={foto} formats={["avif", "webp"]} fallbackFormat="webp" widths={[280, 420, 560]} sizes="(min-width:900px) 300px, 70vw" alt="Gustavo Bentancor" />
+          </figure>
+          <ul class="pts">
+            {t.about.points.map((p) => <li data-r="card">{p}</li>)}
+          </ul>
+        </div>
       </div>
       <div class="wrap skills">
         <h3 data-r>{t.about.skillsTitle}</h3>
