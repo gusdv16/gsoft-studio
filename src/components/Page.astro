@@ -10,6 +10,9 @@ import insight from '../assets/proyectos/insight-demo.png';
 import buscador from '../assets/proyectos/buscador-replica.png';
 import gletir from '../assets/proyectos/gletir-tracker.png';
 import habit from '../assets/proyectos/tracker-habits.png';
+import mPerf from '../assets/proyectos/m-web-performance.png';
+import mInsight from '../assets/proyectos/m-insight-demo.png';
+import mBuscador from '../assets/proyectos/m-buscador-replica.png';
 
 const { t } = Astro.props;
 const ENDPOINT = 'https://gustavobentancor.com/gsoft-studio/contact.php';
@@ -54,6 +57,12 @@ const ld = {
 const other = isEn ? `${base}/` : `${base}/en/`;
 const fontCss = `@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("${base}/fonts/inter-latin-wght-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}`;
 const images = { 'gletir-tracker': gletir, 'easy-pdf-free': null, 'tracker-habits': habit, 'moova-tracker-extension': moova, 'img-generator': imgGen, 'web-performance': perf, 'insight-demo': insight, 'buscador-replica': buscador };
+// Orden: Gletir destacado, luego sitios web (con vista movil) y luego aplicaciones/herramientas propias
+const order = ['gletir-tracker', 'web-performance', 'insight-demo', 'buscador-replica', 'easy-pdf-free', 'tracker-habits', 'moova-tracker-extension', 'img-generator'];
+const groupOf = { 'web-performance': 'web', 'insight-demo': 'web', 'buscador-replica': 'web', 'easy-pdf-free': 'own', 'tracker-habits': 'own', 'moova-tracker-extension': 'own', 'img-generator': 'own' };
+const featIds = ['gletir-tracker', 'web-performance'];
+const mobile = { 'web-performance': mPerf, 'insight-demo': mInsight, 'buscador-replica': mBuscador };
+const sorted = order.map((id) => t.projects.items.find((x) => x.id === id));
 const mediaClass = { 'gletir-tracker': 'shot', 'tracker-habits': 'logo', 'moova-tracker-extension': 'contain', 'easy-pdf-free': 'duo' };
 const icons = {
   cog: 'M12 15a3 3 0 100-6 3 3 0 000 6zm7.4-3a7.4 7.4 0 00-.1-1.2l2-1.6-2-3.4-2.4 1a7.5 7.5 0 00-2-1.2L14.5 3h-4l-.4 2.6a7.5 7.5 0 00-2 1.2l-2.4-1-2 3.4 2 1.6a7.4 7.4 0 000 2.4l-2 1.6 2 3.4 2.4-1a7.5 7.5 0 002 1.2l.4 2.6h4l.4-2.6a7.5 7.5 0 002-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z',
@@ -196,14 +205,16 @@ const icons = {
       </div>
     </section>
 
-    <section id="proyectos" class="cv" style="--m:5700px;--d:3350px">
+    <section id="proyectos" class="cv" style="--m:6600px;--d:3500px">
       <div class="wrap">
         <p class="kick" data-r>{t.projects.kicker}</p>
         <h2 data-r>{t.projects.title}</h2>
         <p class="sub" data-r>{t.projects.lead}</p>
         <div class="pgrid">
-          {t.projects.items.map((p, i) => (
-            <article class:list={['proj', { feat: i < 2 }]} data-r="card">
+          {sorted.map((p, i) => (
+            <Fragment>
+              {groupOf[p.id] && groupOf[p.id] !== groupOf[sorted[i - 1]?.id] && <h3 class="ghead" data-r>{t.projects.groups[groupOf[p.id]]}</h3>}
+            <article class:list={['proj', { feat: featIds.includes(p.id) }]} data-r="card">
               <div class:list={['media', mediaClass[p.id]]}>
                 {p.id === 'easy-pdf-free' ? (
                   <>
@@ -219,6 +230,14 @@ const icons = {
                     alt={isEn ? `Screenshot of ${p.title}` : `Captura de ${p.title}`}
                     data-par
                   />
+                )}
+                {mobile[p.id] && (
+                  <>
+                    <span class="rbadge">{t.projects.responsive}</span>
+                    <div class="phone">
+                      <Picture src={mobile[p.id]} formats={["avif", "webp"]} fallbackFormat="webp" widths={[200, 300]} sizes="130px" alt={isEn ? `${p.title} on mobile` : `${p.title} en móvil`} />
+                    </div>
+                  </>
                 )}
               </div>
               <div class="pbody">
@@ -236,12 +255,13 @@ const icons = {
                 </div>
               </div>
             </article>
+            </Fragment>
           ))}
         </div>
       </div>
     </section>
 
-    <section id="sobre-mi" class="alt cv" style="--m:850px;--d:700px">
+    <section id="sobre-mi" class="alt cv" style="--m:1500px;--d:1000px">
       <div class="wrap about">
         <div class="txt">
           <p class="kick" data-r>{t.about.kicker}</p>
@@ -254,6 +274,17 @@ const icons = {
         <ul class="pts">
           {t.about.points.map((p) => <li data-r="card">{p}</li>)}
         </ul>
+      </div>
+      <div class="wrap skills">
+        <h3 data-r>{t.about.skillsTitle}</h3>
+        <div class="sgrid">
+          {t.about.skills.map((g) => (
+            <div class="sgroup" data-r="card">
+              <h4>{g.title}</h4>
+              <ul class="tags">{g.items.map((x) => <li>{x}</li>)}</ul>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
 

@@ -75,6 +75,8 @@ export default {
     lead: 'Todo está publicado y puedes probarlo; casi todo con el código abierto en GitHub. Las réplicas de diseño usan marcas ficticias.',
     demo: 'Ver demo',
     code: 'Código',
+    groups: { web: 'Sitios web y diseño responsive', own: 'Aplicaciones, extensiones y herramientas' },
+    responsive: 'Responsive',
     store: 'Chrome Web Store',
     more: 'Más información',
     types: { product: 'Producto', tool: 'Herramienta', design: 'Ejercicio de diseño', showcase: 'Muestra técnica' },
@@ -159,9 +161,17 @@ export default {
     title: 'Hola, soy Gustavo',
     paragraphs: [
       'Soy Gustavo Bentancor, desarrollador web y la persona detrás de Gsoft Studio. Me gusta resolver problemas concretos: una herramienta que ahorra tiempo, una web que carga rápido, una extensión que evita revisar algo a mano.',
-      'Uso la IA como herramienta de trabajo para acelerar lo repetitivo, y reviso y pruebo todo antes de entregarlo. Lo que ves en esta página son proyectos reales que puedes abrir y leer en GitHub.',
+      'Uso la IA como herramienta de trabajo para acelerar lo repetitivo, y reviso y pruebo todo antes de entregarlo. Lo que ves en esta página son proyectos reales que puedes abrir y, casi todos, leer en GitHub.',
     ],
     points: ['Webs rápidas, medidas con Lighthouse', 'Código limpio y documentado', 'Comunicación directa, sin intermediarios'],
+    skillsTitle: 'Habilidades',
+    skills: [
+      { title: 'Front-end y diseño responsive', items: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'Diseño responsive / mobile-first', 'Astro', 'GSAP', 'Accesibilidad'] },
+      { title: 'Rendimiento y SEO', items: ['Core Web Vitals', 'Lighthouse', 'Imágenes AVIF/WebP', 'CSS crítico', 'SEO técnico', 'Datos estructurados'] },
+      { title: 'Apps y extensiones', items: ['Extensiones Chrome (MV3)', 'PWA', 'Android con Capacitor', 'Firebase', 'Chart.js', 'PDF.js'] },
+      { title: 'Back-end y automatización', items: ['PHP', 'Google Apps Script', 'APIs REST', 'Git y GitHub', 'GitHub Actions', 'Hosting y despliegue'] },
+      { title: 'IA', items: ['Integración de IA en flujos de trabajo', 'Desarrollo asistido por IA', 'Claude'] },
+    ],
     github: 'Mi GitHub',
   },
   contact: {

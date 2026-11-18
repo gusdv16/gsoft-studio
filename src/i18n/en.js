@@ -75,6 +75,8 @@ export default {
     lead: 'Everything is published and you can try it; most with open code on GitHub. Design replicas use fictional brands.',
     demo: 'Live demo',
     code: 'Code',
+    groups: { web: 'Websites and responsive design', own: 'Apps, extensions and tools' },
+    responsive: 'Responsive',
     store: 'Chrome Web Store',
     more: 'Learn more',
     types: { product: 'Product', tool: 'Tool', design: 'Design exercise', showcase: 'Technical showcase' },
@@ -159,9 +161,17 @@ export default {
     title: "Hi, I'm Gustavo",
     paragraphs: [
       "I'm Gustavo Bentancor, a web developer and the person behind Gsoft Studio. I like solving concrete problems: a tool that saves time, a site that loads fast, an extension that saves you from checking something by hand.",
-      'I use AI as a work tool to speed up the repetitive parts, and I review and test everything before delivering. What you see on this page are real projects you can open and read on GitHub.',
+      'I use AI as a work tool to speed up the repetitive parts, and I review and test everything before delivering. What you see on this page are real projects you can open and, for almost all, read on GitHub.',
     ],
     points: ['Fast sites, measured with Lighthouse', 'Clean, documented code', 'Direct communication, no middlemen'],
+    skillsTitle: 'Skills',
+    skills: [
+      { title: 'Front-end and responsive design', items: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'Responsive / mobile-first design', 'Astro', 'GSAP', 'Accessibility'] },
+      { title: 'Performance and SEO', items: ['Core Web Vitals', 'Lighthouse', 'AVIF/WebP images', 'Critical CSS', 'Technical SEO', 'Structured data'] },
+      { title: 'Apps and extensions', items: ['Chrome extensions (MV3)', 'PWA', 'Android with Capacitor', 'Firebase', 'Chart.js', 'PDF.js'] },
+      { title: 'Back-end and automation', items: ['PHP', 'Google Apps Script', 'REST APIs', 'Git and GitHub', 'GitHub Actions', 'Hosting and deployment'] },
+      { title: 'AI', items: ['AI in workflows', 'AI-assisted development', 'Claude'] },
+    ],
     github: 'My GitHub',
   },
   contact: {
