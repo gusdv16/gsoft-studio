@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { Picture } from 'astro:assets';
-import { siHtml5, siCss, siJavascript, siAstro, siGreensock, siLighthouse, siGooglesearchconsole, siGooglechrome, siPwa, siAndroid, siFirebase, siChartdotjs, siMozilla, siPhp, siGoogleappsscript, siGithub, siGithubactions, siClaude } from 'simple-icons';
+import { brand, gen } from '../icons.js';
 import eps1 from '../assets/proyectos/easy-pdf-inicio.png';
 import eps2 from '../assets/proyectos/easy-pdf-lector.jpg';
 import moova from '../assets/proyectos/moova-popup.png';
@@ -61,22 +61,10 @@ const images = { 'gletir-tracker': gletir, 'easy-pdf-free': null, 'tracker-habit
 // Orden: Gletir destacado, luego sitios web (con vista movil) y luego aplicaciones/herramientas propias
 const order = ['gletir-tracker', 'web-performance', 'insight-demo', 'buscador-replica', 'easy-pdf-free', 'tracker-habits', 'moova-tracker-extension', 'img-generator'];
 const groupOf = { 'web-performance': 'web', 'insight-demo': 'web', 'buscador-replica': 'web', 'easy-pdf-free': 'own', 'tracker-habits': 'own', 'moova-tracker-extension': 'own', 'img-generator': 'own' };
+const catOf = { 'web-performance': 'web', 'insight-demo': 'web', 'buscador-replica': 'web', 'easy-pdf-free': 'apps', 'tracker-habits': 'apps', 'gletir-tracker': 'ext', 'moova-tracker-extension': 'ext', 'img-generator': 'ext' };
 const featIds = ['gletir-tracker', 'web-performance'];
 const mobile = { 'web-performance': mPerf, 'insight-demo': mInsight, 'buscador-replica': mBuscador };
 const sorted = order.map((id) => t.projects.items.find((x) => x.id === id));
-const brand = { siHtml5, siCss, siJavascript, siAstro, siGreensock, siLighthouse, siGooglesearchconsole, siGooglechrome, siPwa, siAndroid, siFirebase, siChartdotjs, siMozilla, siPhp, siGoogleappsscript, siGithub, siGithubactions, siClaude };
-const gen = {
-  phone: '<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18h2"/>',
-  access: '<circle cx="12" cy="4.5" r="1.8"/><path d="M5 8.5l7 1.5 7-1.5M12 10v5l-3 6M12 15l3 6"/>',
-  gauge: '<path d="M4.5 17a8.5 8.5 0 1 1 15 0"/><path d="M12 14l4-5"/>',
-  image: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/>',
-  braces: '<path d="M8 4c-2 0-3 1-3 3v2c0 1.5-1 2.5-2 3 1 .5 2 1.5 2 3v2c0 2 1 3 3 3M16 4c2 0 3 1 3 3v2c0 1.5 1 2.5 2 3-1 .5-2 1.5-2 3v2c0 2-1 3-3 3"/>',
-  bolt: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
-  plug: '<path d="M8 7H5a4 4 0 0 0 0 8h3M16 7h3a4 4 0 0 1 0 8h-3M8 12h8"/>',
-  server: '<rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/>',
-  spark: '<path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>',
-  code: '<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/>',
-};
 const mediaClass = { 'gletir-tracker': 'shot', 'tracker-habits': 'logo', 'moova-tracker-extension': 'contain', 'easy-pdf-free': 'duo' };
 const icons = {
   cog: 'M12 15a3 3 0 100-6 3 3 0 000 6zm7.4-3a7.4 7.4 0 00-.1-1.2l2-1.6-2-3.4-2.4 1a7.5 7.5 0 00-2-1.2L14.5 3h-4l-.4 2.6a7.5 7.5 0 00-2 1.2l-2.4-1-2 3.4 2 1.6a7.4 7.4 0 000 2.4l-2 1.6 2 3.4 2.4-1a7.5 7.5 0 002 1.2l.4 2.6h4l.4-2.6a7.5 7.5 0 002-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z',
@@ -224,11 +212,16 @@ const icons = {
         <p class="kick" data-r>{t.projects.kicker}</p>
         <h2 data-r>{t.projects.title}</h2>
         <p class="sub" data-r>{t.projects.lead}</p>
+        <div class="filters" role="group" aria-label={t.projects.filterLabel} data-filters hidden>
+          {['all', 'web', 'apps', 'ext'].map((k) => (
+            <button type="button" class="chip" data-f={k} aria-pressed={k === 'all' ? 'true' : 'false'}>{t.projects.filters[k]}</button>
+          ))}
+        </div>
         <div class="pgrid">
           {sorted.map((p, i) => (
             <Fragment>
               {groupOf[p.id] && groupOf[p.id] !== groupOf[sorted[i - 1]?.id] && <h3 class="ghead" data-r>{t.projects.groups[groupOf[p.id]]}</h3>}
-            <article class:list={['proj', { feat: featIds.includes(p.id) }]} data-r="card">
+            <article class:list={['proj', { feat: featIds.includes(p.id) }]} data-r="card" data-cat={catOf[p.id]}>
               <div class:list={['media', mediaClass[p.id]]}>
                 {p.id === 'easy-pdf-free' ? (
                   <>
@@ -260,12 +253,17 @@ const icons = {
                 <p>{p.text}</p>
                 {p.price && <p class="price"><strong>{p.price}</strong></p>}
                 {p.note && <p class="pnote">{p.note}</p>}
+                <ul class="dpts" hidden>
+                  <li class="dh">{t.projects.highlights}</li>
+                  {p.points.map((x) => <li>{x}</li>)}
+                </ul>
                 <ul class="tags">{p.tags.map((g) => <li>{g}</li>)}</ul>
                 <div class="links">
                   {p.store && <a class="btn btn-p" href={p.store} target="_blank" rel="noopener">{t.projects.store} ↗</a>}
                   {p.landing && <a class="btn btn-s" href={p.landing} target="_blank" rel="noopener">{t.projects.more} ↗</a>}
                   {p.demo && <a class="btn btn-p" href={p.demo} target="_blank" rel="noopener">{t.projects.demo} ↗</a>}
                   {p.code && <a class="btn btn-s" href={p.code} target="_blank" rel="noopener">{t.projects.code} ↗</a>}
+                  <button type="button" class="btn btn-s" data-open aria-haspopup="dialog">{t.projects.detail}</button>
                 </div>
               </div>
             </article>
@@ -297,11 +295,7 @@ const icons = {
               <h4>{g.title}</h4>
               <ul class="tags sk">{g.items.map(([label, key]) => (
                 <li>
-                  {brand[key] ? (
-                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={brand[key].path} /></svg>
-                  ) : (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={gen[key]} />
-                  )}
+                  <svg aria-hidden="true"><use href={`${base}/icons.svg#${key}`} /></svg>
                   {label}
                 </li>
               ))}</ul>
@@ -332,6 +326,11 @@ const icons = {
     </section>
   </main>
 
+  <dialog class="dlg" data-dlg aria-label={t.projects.title}>
+    <button type="button" class="dx" data-close aria-label={t.projects.close}>×</button>
+    <div class="dscroll"><div data-dmedia></div><div class="pbody" data-dbody></div></div>
+  </dialog>
+
   <footer>
     <div class="wrap">
       <span>{t.footer}</span>
@@ -339,6 +338,43 @@ const icons = {
     </div>
   </footer>
 
+  <script>
+    // Filtros por categoria y detalle en <dialog> nativo (se mejora lo que ya existe; sin JS todo sigue visible).
+    const grid = document.querySelector('.pgrid');
+    const bar = document.querySelector('[data-filters]');
+    const dlg = document.querySelector('[data-dlg]');
+    if (grid && bar) {
+      bar.hidden = false;
+      bar.addEventListener('click', (e) => {
+        const b = e.target.closest('button[data-f]');
+        if (!b) return;
+        const f = b.dataset.f;
+        bar.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+        grid.querySelectorAll('article[data-cat]').forEach((a) => { a.hidden = f !== 'all' && a.dataset.cat !== f; });
+        grid.querySelectorAll('.ghead').forEach((h) => { h.hidden = f !== 'all'; });
+      });
+    }
+    if (grid && dlg) {
+      const dm = dlg.querySelector('[data-dmedia]');
+      const db = dlg.querySelector('[data-dbody]');
+      grid.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-open]');
+        if (!btn) return;
+        const card = btn.closest('article');
+        const media = card.querySelector('.media').cloneNode(true);
+        media.querySelectorAll('source,img').forEach((x) => { x.sizes = '(min-width:900px) 860px, 96vw'; if (x.loading) x.loading = 'eager'; });
+        const body = card.querySelector('.pbody').cloneNode(true);
+        body.querySelector('[data-open]').remove();
+        const pts = body.querySelector('.dpts');
+        pts.hidden = false;
+        dm.replaceChildren(media);
+        db.replaceChildren(...body.childNodes);
+        dlg.showModal();
+        dlg.querySelector('.dscroll').scrollTop = 0;
+      });
+      dlg.addEventListener('click', (e) => { if (e.target === dlg || e.target.closest('[data-close]')) dlg.close(); });
+    }
+  </script>
   <script>
     // Formulario: AJAX hacia contact.php. Turnstile (si hay site key) se carga solo al enfocar el formulario.
     const form = document.querySelector('[data-form]');

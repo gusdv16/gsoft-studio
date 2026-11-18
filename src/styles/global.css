@@ -30,7 +30,7 @@ ul{padding:0;list-style:none}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 .95rem/1 var(--font);text-decoration:none;padding:14px 22px;border-radius:999px;border:1px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s;min-height:44px}
 .btn-p{background:var(--grad);color:#07080d;box-shadow:0 8px 28px -10px rgba(54,226,192,.55)}
 .btn-p:hover{transform:translateY(-2px);box-shadow:0 12px 32px -8px rgba(54,226,192,.7)}
-.btn-s{border-color:var(--line);background:var(--card)}
+.btn-s{border-color:var(--line);background:var(--card);color:var(--text)}
 .btn-s:hover{border-color:var(--a)}
 .hd .btn{display:none;padding:11px 18px;min-height:40px}
 .menu{position:relative}
@@ -126,10 +126,10 @@ html:not(.anim) .steps .bar{transform:none}
 .media.duo img{height:92%;width:auto;border-radius:12px;box-shadow:0 14px 40px -10px #000}
 .pbody{padding:24px 26px 28px;display:flex;flex-direction:column;gap:14px;flex:1}
 .type{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--a)}
-.proj h3{font-size:1.35rem;letter-spacing:-.02em}
-.proj p{color:var(--muted);font-size:.96rem}
-.proj .price{color:var(--text);font-size:.95rem}
-.proj .pnote{font-size:.85rem;color:var(--muted);border-left:2px solid var(--line);padding-left:12px}
+.proj h3,.dlg h3{font-size:1.35rem;letter-spacing:-.02em}
+.proj p,.dlg .pbody p{color:var(--muted);font-size:.96rem}
+.proj .price,.dlg .price{color:var(--text);font-size:.95rem}
+.proj .pnote,.dlg .pnote{font-size:.85rem;color:var(--muted);border-left:2px solid var(--line);padding-left:12px}
 .ghead{grid-column:1/-1;font-size:1.05rem;letter-spacing:-.01em;color:var(--muted);font-weight:700;margin-top:18px;padding-bottom:10px;border-bottom:1px solid var(--line)}
 .phone{position:absolute;z-index:2;right:6%;bottom:-9%;width:27%;max-width:158px;aspect-ratio:390/844;padding:5px;border-radius:24px;background:linear-gradient(160deg,#343949,#12141c 60%);box-shadow:0 22px 48px -10px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.16),inset 0 0 0 1px rgba(255,255,255,.06)}
 .phone::before{content:"";position:absolute;right:-3px;top:22%;width:3px;height:14%;border-radius:0 2px 2px 0;background:#2a2e3b}
@@ -201,3 +201,32 @@ html.anim [data-r]{opacity:0;transform:translate3d(0,26px,0)}
 }
 .cv{content-visibility:auto;contain-intrinsic-size:auto var(--m,800px)}
 @media(min-width:760px){.cv{contain-intrinsic-size:auto var(--d,600px)}}
+
+/* filtros y detalle */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.filters[hidden],.proj[hidden],.ghead[hidden],.dpts[hidden]{display:none}
+.chip{font:600 .88rem/1 var(--font);color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:11px 18px;min-height:42px;cursor:pointer;transition:color .2s,border-color .2s,background .2s}
+.chip:hover{color:var(--text);border-color:#3a4268}
+.chip[aria-pressed="true"]{color:#07080d;background:var(--grad);border-color:transparent}
+.filters+.pgrid{margin-top:26px}
+.dpts{display:grid;gap:10px;margin:2px 0 4px;list-style:none;padding:0}
+.dpts li{position:relative;padding-left:22px;color:var(--muted);font-size:.96rem}
+.dpts li::before{content:"";position:absolute;left:2px;top:.62em;width:8px;height:8px;border-radius:50%;background:var(--b)}
+.dpts li.dh{padding:0;color:var(--a);font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.dpts li.dh::before{display:none}
+.dlg{width:min(900px,94vw);max-height:90vh;padding:0;border:1px solid var(--line);border-radius:24px;background:var(--card);color:var(--text);overflow:hidden}
+.dlg[open]{animation:dpop .28s cubic-bezier(.2,.8,.2,1)}
+.dlg::backdrop{background:rgba(3,4,8,.8)}
+.dscroll{max-height:90vh;overflow:auto;overscroll-behavior:contain}
+.dlg .media{aspect-ratio:16/9;min-height:0}
+.dlg .proj{all:unset}
+.dlg .pbody{padding:26px 30px 32px}
+.dlg .links{padding-top:10px}
+.dx{position:absolute;right:14px;top:14px;z-index:6;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(7,8,13,.88);color:var(--text);font:400 1.6rem/1 var(--font);cursor:pointer}
+.dx:hover{border-color:var(--b)}
+html:has(dialog[open]){overflow:hidden}
+@keyframes dpop{from{opacity:0;transform:translate3d(0,14px,0) scale(.98)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.dlg[open]{animation:none}}
+.dlg h3{font-size:1.6rem}
+.dlg .pbody p.price{color:var(--text)}
+.dlg .pbody{display:flex;flex-direction:column;gap:14px}
