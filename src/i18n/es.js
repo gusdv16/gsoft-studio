@@ -72,11 +72,24 @@ export default {
   projects: {
     kicker: 'Proyectos',
     title: 'Lo que ya construimos',
-    lead: 'Todo está publicado y puedes probarlo o leer el código. Las réplicas de diseño usan marcas ficticias.',
+    lead: 'Todo está publicado y puedes probarlo; casi todo con el código abierto en GitHub. Las réplicas de diseño usan marcas ficticias.',
     demo: 'Ver demo',
     code: 'Código',
+    store: 'Chrome Web Store',
+    more: 'Más información',
     types: { product: 'Producto', tool: 'Herramienta', design: 'Ejercicio de diseño', showcase: 'Muestra técnica' },
     items: [
+      {
+        id: 'gletir-tracker',
+        type: 'product',
+        title: 'Gletir Tracker',
+        text: 'Extensión de Chrome que lee el estado de cuenta de la plataforma Gletir cuando entras y arma tu historial: balance, evolución diaria y rendimiento anualizado (XIRR), además de volatilidad, drawdown, diversificación, rebalanceo y proyección. Exporta a PDF, CSV y JSON y sincroniza entre computadoras con tu propia Google Sheet. Los datos se guardan solo en tu navegador, sin servidor propio ni rastreadores.',
+        price: 'Gratis, con versión PRO de pago único de US$ 9 (licencia por Gumroad).',
+        note: 'Proyecto independiente, no oficial y no afiliado a Gletir. Capturas con datos de ejemplo.',
+        tags: ['JavaScript', 'Chrome MV3', 'Chart.js', 'jsPDF', 'Google Apps Script', 'Gumroad'],
+        store: 'https://chromewebstore.google.com/detail/jiegdchlfegkgidgjhiikilcgngicoim',
+        landing: 'https://gustavobentancor.com/gletir/',
+      },
       {
         id: 'easy-pdf-free',
         type: 'product',

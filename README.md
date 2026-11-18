@@ -10,7 +10,7 @@ Sitio estático (Astro) para presentar los servicios de Gsoft Studio y los proye
 
 ## Secciones
 
-Hero con propuesta de valor · servicios · cómo trabajamos · proyectos (7, todos públicos) · sobre mí · contacto.
+Hero con propuesta de valor · servicios · cómo trabajamos · proyectos (8; destaca Gletir Tracker, de la Chrome Web Store, y el resto con demo o código público) · sobre mí · contacto.
 
 El texto de cada idioma vive en `src/i18n/es.js` y `src/i18n/en.js`; ambos alimentan el mismo componente (`src/components/Page.astro`). Las capturas de los proyectos están en `src/assets/proyectos/`.
 

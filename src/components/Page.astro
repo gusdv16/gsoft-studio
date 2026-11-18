@@ -8,6 +8,7 @@ import imgGen from '../assets/proyectos/img-generator.png';
 import perf from '../assets/proyectos/web-performance.png';
 import insight from '../assets/proyectos/insight-demo.png';
 import buscador from '../assets/proyectos/buscador-replica.png';
+import gletir from '../assets/proyectos/gletir-tracker.png';
 import habit from '../assets/proyectos/tracker-habits.png';
 
 const { t } = Astro.props;
@@ -52,8 +53,8 @@ const ld = {
 };
 const other = isEn ? `${base}/` : `${base}/en/`;
 const fontCss = `@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("${base}/fonts/inter-latin-wght-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}`;
-const images = { 'easy-pdf-free': null, 'tracker-habits': habit, 'moova-tracker-extension': moova, 'img-generator': imgGen, 'web-performance': perf, 'insight-demo': insight, 'buscador-replica': buscador };
-const mediaClass = { 'tracker-habits': 'logo', 'moova-tracker-extension': 'contain', 'easy-pdf-free': 'duo' };
+const images = { 'gletir-tracker': gletir, 'easy-pdf-free': null, 'tracker-habits': habit, 'moova-tracker-extension': moova, 'img-generator': imgGen, 'web-performance': perf, 'insight-demo': insight, 'buscador-replica': buscador };
+const mediaClass = { 'gletir-tracker': 'shot', 'tracker-habits': 'logo', 'moova-tracker-extension': 'contain', 'easy-pdf-free': 'duo' };
 const icons = {
   cog: 'M12 15a3 3 0 100-6 3 3 0 000 6zm7.4-3a7.4 7.4 0 00-.1-1.2l2-1.6-2-3.4-2.4 1a7.5 7.5 0 00-2-1.2L14.5 3h-4l-.4 2.6a7.5 7.5 0 00-2 1.2l-2.4-1-2 3.4 2 1.6a7.4 7.4 0 000 2.4l-2 1.6 2 3.4 2.4-1a7.5 7.5 0 002 1.2l.4 2.6h4l.4-2.6a7.5 7.5 0 002-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z',
   spark: 'M12 2l2.2 6.3L20.5 10l-6.3 2.2L12 18.5l-2.2-6.3L3.5 10l6.3-1.7L12 2zm7 13l1 2.8 2.8 1-2.8 1-1 2.8-1-2.8-2.8-1 2.8-1 1-2.8z',
@@ -195,14 +196,14 @@ const icons = {
       </div>
     </section>
 
-    <section id="proyectos" class="cv" style="--m:4700px;--d:2750px">
+    <section id="proyectos" class="cv" style="--m:5700px;--d:3350px">
       <div class="wrap">
         <p class="kick" data-r>{t.projects.kicker}</p>
         <h2 data-r>{t.projects.title}</h2>
         <p class="sub" data-r>{t.projects.lead}</p>
         <div class="pgrid">
           {t.projects.items.map((p, i) => (
-            <article class:list={['proj', { feat: i === 0 }]} data-r="card">
+            <article class:list={['proj', { feat: i < 2 }]} data-r="card">
               <div class:list={['media', mediaClass[p.id]]}>
                 {p.id === 'easy-pdf-free' ? (
                   <>
@@ -213,8 +214,8 @@ const icons = {
                   <Picture
                     src={images[p.id]}
                     formats={["avif", "webp"]} fallbackFormat="webp"
-                    widths={mediaClass[p.id] ? [400, 600] : [480, 720, 960]}
-                    sizes={mediaClass[p.id] ? '(min-width:760px) 300px, 70vw' : '(min-width:1120px) 540px, (min-width:760px) 46vw, 92vw'}
+                    widths={mediaClass[p.id] && p.id !== 'gletir-tracker' ? [400, 600] : [480, 720, 960, 1200]}
+                    sizes={mediaClass[p.id] && p.id !== 'gletir-tracker' ? '(min-width:760px) 300px, 70vw' : p.id === 'gletir-tracker' ? '(min-width:1120px) 580px, (min-width:760px) 55vw, 92vw' : '(min-width:1120px) 540px, (min-width:760px) 46vw, 92vw'}
                     alt={isEn ? `Screenshot of ${p.title}` : `Captura de ${p.title}`}
                     data-par
                   />
@@ -224,10 +225,14 @@ const icons = {
                 <span class="type">{t.projects.types[p.type]}</span>
                 <h3>{p.title}</h3>
                 <p>{p.text}</p>
+                {p.price && <p class="price"><strong>{p.price}</strong></p>}
+                {p.note && <p class="pnote">{p.note}</p>}
                 <ul class="tags">{p.tags.map((g) => <li>{g}</li>)}</ul>
                 <div class="links">
+                  {p.store && <a class="btn btn-p" href={p.store} target="_blank" rel="noopener">{t.projects.store} ↗</a>}
+                  {p.landing && <a class="btn btn-s" href={p.landing} target="_blank" rel="noopener">{t.projects.more} ↗</a>}
                   {p.demo && <a class="btn btn-p" href={p.demo} target="_blank" rel="noopener">{t.projects.demo} ↗</a>}
-                  <a class="btn btn-s" href={p.code} target="_blank" rel="noopener">{t.projects.code} ↗</a>
+                  {p.code && <a class="btn btn-s" href={p.code} target="_blank" rel="noopener">{t.projects.code} ↗</a>}
                 </div>
               </div>
             </article>
