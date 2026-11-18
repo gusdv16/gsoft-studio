@@ -167,6 +167,14 @@ const icons = {
       </div>
     </section>
 
+    <div class="stats">
+      <div class="wrap">
+        <ul class="sgr" aria-label={t.stats.label}>
+          {t.stats.items.map((x) => <li><b>{x.n}</b><span>{x.label}</span></li>)}
+        </ul>
+      </div>
+    </div>
+
     <div class="strip">
       <small>{t.stack.label}</small>
       <ul class="track" data-track>
@@ -238,6 +246,7 @@ const icons = {
                     data-par
                   />
                 )}
+                <span class="mview" aria-hidden="true">{t.projects.detail} ↗</span>
                 {mobile[p.id] && (
                   <>
                     <div class="phone">
@@ -312,6 +321,18 @@ const icons = {
           <h2>{t.contact.title}</h2>
           <p class="sub">{t.contact.text}</p>
           <form class="cform" data-form novalidate action={ENDPOINT} method="post" data-endpoint={ENDPOINT} data-lang={t.lang} data-sitekey={SITEKEY} data-msg={JSON.stringify(t.contact.form)}>
+            <fieldset class="opts">
+              <legend>{t.contact.form.scopeLabel}</legend>
+              <div class="orow">
+                {Object.entries(t.contact.form.scope).map(([k, v]) => <label class="opt"><input type="radio" name="scope" value={k}><span>{v}</span></label>)}
+              </div>
+            </fieldset>
+            <fieldset class="opts">
+              <legend>{t.contact.form.timeLabel}</legend>
+              <div class="orow">
+                {Object.entries(t.contact.form.time).map(([k, v]) => <label class="opt"><input type="radio" name="time" value={k}><span>{v}</span></label>)}
+              </div>
+            </fieldset>
             <label>{t.contact.form.name}<input name="name" type="text" autocomplete="name" required maxlength="100"></label>
             <label>{t.contact.form.email}<input name="email" type="email" autocomplete="email" required maxlength="150" inputmode="email"></label>
             <label>{t.contact.form.message}<textarea name="message" rows="5" required minlength="10" maxlength="3000"></textarea></label>
@@ -358,7 +379,7 @@ const icons = {
       const dm = dlg.querySelector('[data-dmedia]');
       const db = dlg.querySelector('[data-dbody]');
       grid.addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-open]');
+        const btn = e.target.closest('[data-open], .media');
         if (!btn) return;
         const card = btn.closest('article');
         const media = card.querySelector('.media').cloneNode(true);
@@ -411,7 +432,7 @@ const icons = {
           const r = await fetch(form.dataset.endpoint, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name: d.name, email: d.email, message: d.message, website: d.website, lang: form.dataset.lang, t: t0, cf }),
+            body: JSON.stringify({ name: d.name, email: d.email, message: d.message, scope: d.scope || '', time: d.time || '', website: d.website, lang: form.dataset.lang, t: t0, cf }),
           });
           const j = await r.json().catch(() => ({}));
           if (j.ok) {

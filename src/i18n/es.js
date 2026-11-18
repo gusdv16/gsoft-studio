@@ -33,6 +33,15 @@ export default {
       'Astro', 'JavaScript', 'GSAP', 'Firebase', 'Capacitor', 'Android', 'Chrome MV3', 'PDF.js', 'PWA', 'Lighthouse', 'Claude',
     ],
   },
+  stats: {
+    label: 'Datos del estudio',
+    items: [
+      { n: '8', label: 'Proyectos publicados' },
+      { n: '3', label: 'Plataformas: web, Chrome y Android' },
+      { n: '95+', label: 'Lighthouse móvil, medido en este sitio' },
+      { n: '100', label: 'Accesibilidad y SEO en Lighthouse' },
+    ],
+  },
   services: {
     kicker: 'Servicios',
     title: 'Qué podemos hacer por tu empresa',
@@ -239,6 +248,9 @@ export default {
     text: 'Cuéntanos qué necesitas y te respondemos con una propuesta clara. Sin compromiso.',
     cta: 'Escribir un email',
     form: {
+      scopeLabel: 'Tipo de proyecto', timeLabel: 'Plazo estimado',
+      scope: { automation: 'Automatización', ai: 'IA en mi flujo de trabajo', web: 'Web rápida', app: 'Extensión o app', other: 'Otro' },
+      time: { asap: 'Lo antes posible', m1: '1 a 2 meses', flex: 'Sin apuro', unk: 'Aún no lo sé' },
       name: 'Nombre', email: 'Email', message: 'Cuéntanos qué necesitas', send: 'Enviar mensaje',
       sending: 'Enviando…', ok: '¡Gracias! Recibimos tu mensaje y te respondemos pronto.',
       invalid: 'Revisa los campos: el mensaje debe tener al menos 10 caracteres.', email_bad: 'El email no parece válido.',

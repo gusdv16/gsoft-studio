@@ -65,6 +65,12 @@ $name    = one_line(field($data, 'name', 100));
 $email   = one_line(field($data, 'email', 150));
 $message = field($data, 'message', 3000);
 $lang    = (isset($data['lang']) && $data['lang'] === 'en') ? 'en' : 'es';
+$scopes = ['automation' => 'Automatizacion de procesos', 'ai' => 'IA en flujos de trabajo', 'web' => 'Desarrollo web rapido', 'app' => 'Extension o app a medida', 'other' => 'Otro'];
+$times  = ['asap' => 'Lo antes posible', 'm1' => '1 a 2 meses', 'flex' => 'Sin apuro', 'unk' => 'Aun no lo sabe'];
+$sk = field($data, 'scope', 20);
+$tk = field($data, 'time', 20);
+$scope = isset($scopes[$sk]) ? $scopes[$sk] : '-';
+$time  = isset($times[$tk]) ? $times[$tk] : '-';
 if ($name === '' || $message === '' || strlen($message) < 10) { out(422, false, 'invalid'); }
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { out(422, false, 'email'); }
 
@@ -106,7 +112,7 @@ if (!empty($cfg['turnstile_secret'])) {
 $subject = ($lang === 'en' ? 'New message from the site' : 'Nuevo mensaje desde el sitio') . ' - ' . $name;
 $encSubject = function_exists('mb_encode_mimeheader') ? mb_encode_mimeheader($subject, 'UTF-8', 'B') : $subject;
 $encName = function_exists('mb_encode_mimeheader') ? mb_encode_mimeheader($name, 'UTF-8', 'B') : '';
-$body = "Nombre: $name\nEmail: $email\nIdioma: $lang\nOrigen: " . ($origin !== '' ? $origin : '-') . "\nIP: $ip\nFecha: " . gmdate('Y-m-d H:i') . " UTC\n\n" . $message . "\n";
+$body = "Nombre: $name\nEmail: $email\nTipo de proyecto: $scope\nPlazo: $time\nIdioma: $lang\nOrigen: " . ($origin !== '' ? $origin : '-') . "\nIP: $ip\nFecha: " . gmdate('Y-m-d H:i') . " UTC\n\n" . $message . "\n";
 $headers = [
     'From: Gsoft Studio <' . FROM_EMAIL . '>',
     'Reply-To: ' . ($encName !== '' ? $encName . ' ' : '') . '<' . $email . '>',
