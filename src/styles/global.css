@@ -269,3 +269,6 @@ html:has(dialog[open]){overflow:hidden}
 .foto picture{display:block;width:100%;height:100%}
 .foto img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
 @media(min-width:900px){.foto{width:100%;max-width:300px}}
+
+.ghl+.ghl{margin-left:18px}
+.flinks{display:flex;gap:18px}

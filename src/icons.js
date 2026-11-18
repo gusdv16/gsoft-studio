@@ -1,7 +1,7 @@
 // Iconos de habilidades: logos de simple-icons (se resuelven en el build) e iconos genericos propios.
-import { siHtml5, siCss, siJavascript, siAstro, siGreensock, siLighthouse, siGooglesearchconsole, siGooglechrome, siPwa, siAndroid, siFirebase, siChartdotjs, siMozilla, siPhp, siGoogleappsscript, siGithub, siGithubactions, siClaude } from 'simple-icons';
+import { siHtml5, siCss, siJavascript, siAstro, siGreensock, siLighthouse, siGooglesearchconsole, siGooglechrome, siPwa, siAndroid, siFirebase, siChartdotjs, siMozilla, siPhp, siMysql, siGoogleappsscript, siGithub, siGithubactions, siClaude } from 'simple-icons';
 
-export const brand = { siHtml5, siCss, siJavascript, siAstro, siGreensock, siLighthouse, siGooglesearchconsole, siGooglechrome, siPwa, siAndroid, siFirebase, siChartdotjs, siMozilla, siPhp, siGoogleappsscript, siGithub, siGithubactions, siClaude };
+export const brand = { siHtml5, siCss, siJavascript, siAstro, siGreensock, siLighthouse, siGooglesearchconsole, siGooglechrome, siPwa, siAndroid, siFirebase, siChartdotjs, siMozilla, siPhp, siMysql, siGoogleappsscript, siGithub, siGithubactions, siClaude };
 
 export const gen = {
   phone: '<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18h2"/>',

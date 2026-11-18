@@ -36,10 +36,10 @@ export default {
   stats: {
     label: 'Datos del estudio',
     items: [
+      { n: '12+', label: 'Años creando soluciones web' },
+      { n: '500+', label: 'Páginas creadas' },
       { n: '8', label: 'Proyectos publicados' },
-      { n: '3', label: 'Plataformas: web, Chrome y Android' },
       { n: '95+', label: 'Lighthouse móvil, medido en este sitio' },
-      { n: '100', label: 'Accesibilidad y SEO en Lighthouse' },
     ],
   },
   services: {
@@ -228,7 +228,7 @@ export default {
     kicker: 'Sobre mí',
     title: 'Hola, soy Gustavo',
     paragraphs: [
-      'Soy Gustavo Bentancor, desarrollador web y la persona detrás de Gsoft Studio. Me gusta resolver problemas concretos: una herramienta que ahorra tiempo, una web que carga rápido, una extensión que evita revisar algo a mano.',
+      'Soy Gustavo Bentancor, Full-Stack Developer y Product Engineer, y la persona detrás de Gsoft Studio. Desde 2014 creo soluciones web (PHP, MySQL, JavaScript) y me gusta traducir requerimientos de negocio en código que funciona: una herramienta que ahorra tiempo, una web que carga rápido, una extensión que evita revisar algo a mano.',
       'Uso la IA como herramienta de trabajo para acelerar lo repetitivo, y reviso y pruebo todo antes de entregarlo. Lo que ves en esta página son proyectos reales que puedes abrir y, casi todos, leer en GitHub.',
     ],
     points: ['Webs rápidas, medidas con Lighthouse', 'Código limpio y documentado', 'Comunicación directa, sin intermediarios'],
@@ -237,7 +237,7 @@ export default {
       { title: 'Front-end y diseño responsive', items: [['HTML5', 'siHtml5'], ['CSS3', 'siCss'], ['JavaScript (ES6+)', 'siJavascript'], ['Diseño responsive / mobile-first', 'phone'], ['Astro', 'siAstro'], ['GSAP', 'siGreensock'], ['Accesibilidad', 'access']] },
       { title: 'Rendimiento y SEO', items: [['Core Web Vitals', 'gauge'], ['Lighthouse', 'siLighthouse'], ['Imágenes AVIF/WebP', 'image'], ['CSS crítico', 'bolt'], ['SEO técnico', 'siGooglesearchconsole'], ['Datos estructurados', 'braces']] },
       { title: 'Apps y extensiones', items: [['Extensiones Chrome (MV3)', 'siGooglechrome'], ['PWA', 'siPwa'], ['Android con Capacitor', 'siAndroid'], ['Firebase', 'siFirebase'], ['Chart.js', 'siChartdotjs'], ['PDF.js', 'siMozilla']] },
-      { title: 'Back-end y automatización', items: [['PHP', 'siPhp'], ['Google Apps Script', 'siGoogleappsscript'], ['APIs REST', 'plug'], ['Git y GitHub', 'siGithub'], ['GitHub Actions', 'siGithubactions'], ['Hosting y despliegue', 'server']] },
+      { title: 'Back-end y automatización', items: [['PHP', 'siPhp'], ['MySQL', 'siMysql'], ['Google Apps Script', 'siGoogleappsscript'], ['APIs REST', 'plug'], ['Git y GitHub', 'siGithub'], ['GitHub Actions', 'siGithubactions'], ['Hosting y despliegue', 'server']] },
       { title: 'IA', items: [['Integración de IA en flujos de trabajo', 'spark'], ['Desarrollo asistido por IA', 'code'], ['Claude', 'siClaude']] },
     ],
     github: 'Mi GitHub',
@@ -265,4 +265,5 @@ export default {
   footer: '© 2026 Gsoft Studio',
   email: 'info@gustavobentancor.com',
   github: 'https://github.com/gusdv16',
+  linkedin: 'https://www.linkedin.com/in/gustavo-bentancor-896205198/',
 };

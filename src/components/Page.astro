@@ -38,8 +38,8 @@ const ld = {
       email: t.email,
       description: t.meta.description,
       image: `${CANON}/og.png`,
-      founder: { '@type': 'Person', name: 'Gustavo Bentancor', sameAs: [t.github] },
-      sameAs: [t.github],
+      founder: { '@type': 'Person', name: 'Gustavo Bentancor', jobTitle: 'Full-Stack Developer & Product Engineer', sameAs: [t.github, t.linkedin] },
+      sameAs: [t.github, t.linkedin],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: t.services.title,
@@ -291,6 +291,7 @@ const icons = {
           <div data-r style="margin-top:20px">
             {t.about.paragraphs.map((p) => <p>{p}</p>)}
             <a class="ghl" href={t.github} target="_blank" rel="noopener">{t.about.github} ↗</a>
+            <a class="ghl" href={t.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
           </div>
         </div>
         <div class="aside">
@@ -347,7 +348,7 @@ const icons = {
             <button class="btn btn-p" type="submit">{t.contact.form.send}</button>
             <p class="fstat" role="status" aria-live="polite" data-status></p>
           </form>
-          <span class="mail">{t.contact.form.or} <a href={`mailto:${t.email}`}>{t.contact.emailLabel}</a></span>
+          <span class="mail">{t.contact.form.or} <a href={`mailto:${t.email}`}>{t.contact.emailLabel}</a> · <a href={t.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a></span>
         </div>
       </div>
     </section>
@@ -361,7 +362,7 @@ const icons = {
   <footer>
     <div class="wrap">
       <span>{t.footer}</span>
-      <a href={t.github} target="_blank" rel="noopener">GitHub</a>
+      <span class="flinks"><a href={t.linkedin} target="_blank" rel="noopener">LinkedIn</a><a href={t.github} target="_blank" rel="noopener">GitHub</a></span>
     </div>
   </footer>
 

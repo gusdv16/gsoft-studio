@@ -36,10 +36,10 @@ export default {
   stats: {
     label: 'Studio facts',
     items: [
+      { n: '12+', label: 'Years building web solutions' },
+      { n: '500+', label: 'Pages built' },
       { n: '8', label: 'Published projects' },
-      { n: '3', label: 'Platforms: web, Chrome and Android' },
       { n: '95+', label: 'Mobile Lighthouse, measured on this site' },
-      { n: '100', label: 'Accessibility and SEO in Lighthouse' },
     ],
   },
   services: {
@@ -237,7 +237,7 @@ export default {
       { title: 'Front-end and responsive design', items: [['HTML5', 'siHtml5'], ['CSS3', 'siCss'], ['JavaScript (ES6+)', 'siJavascript'], ['Responsive / mobile-first design', 'phone'], ['Astro', 'siAstro'], ['GSAP', 'siGreensock'], ['Accessibility', 'access']] },
       { title: 'Performance and SEO', items: [['Core Web Vitals', 'gauge'], ['Lighthouse', 'siLighthouse'], ['AVIF/WebP images', 'image'], ['Critical CSS', 'bolt'], ['Technical SEO', 'siGooglesearchconsole'], ['Structured data', 'braces']] },
       { title: 'Apps and extensions', items: [['Chrome extensions (MV3)', 'siGooglechrome'], ['PWA', 'siPwa'], ['Android with Capacitor', 'siAndroid'], ['Firebase', 'siFirebase'], ['Chart.js', 'siChartdotjs'], ['PDF.js', 'siMozilla']] },
-      { title: 'Back-end and automation', items: [['PHP', 'siPhp'], ['Google Apps Script', 'siGoogleappsscript'], ['REST APIs', 'plug'], ['Git and GitHub', 'siGithub'], ['GitHub Actions', 'siGithubactions'], ['Hosting and deployment', 'server']] },
+      { title: 'Back-end and automation', items: [['PHP', 'siPhp'], ['MySQL', 'siMysql'], ['Google Apps Script', 'siGoogleappsscript'], ['REST APIs', 'plug'], ['Git and GitHub', 'siGithub'], ['GitHub Actions', 'siGithubactions'], ['Hosting and deployment', 'server']] },
       { title: 'AI', items: [['AI in workflows', 'spark'], ['AI-assisted development', 'code'], ['Claude', 'siClaude']] },
     ],
     github: 'My GitHub',
@@ -265,4 +265,5 @@ export default {
   footer: '© 2026 Gsoft Studio',
   email: 'info@gustavobentancor.com',
   github: 'https://github.com/gusdv16',
+  linkedin: 'https://www.linkedin.com/in/gustavo-bentancor-896205198/',
 };
