@@ -296,6 +296,7 @@ const icons = {
               <p>{w.text}</p>
               <p class="wrole"><b>{t.work.role}:</b> {w.role}</p>
               {w.link && <a class="btn btn-s" href={w.link} target="_blank" rel="noopener">{t.work.visit} ↗</a>}
+              {w.links && <div class="wlinks">{w.links.map((k) => <a class="btn btn-s" href={k.url} target="_blank" rel="noopener">{k.label} ↗</a>)}</div>}
             </article>
           ))}
         </div>
