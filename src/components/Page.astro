@@ -306,6 +306,9 @@ const icons = {
 
     <section id="sobre-mi" class="alt cv" style="--m:1500px;--d:1000px">
       <div class="wrap about">
+        <figure class="foto" data-r="card">
+          <Picture src={foto} formats={["avif", "webp"]} fallbackFormat="webp" widths={[280, 420, 560]} sizes="(min-width:900px) 320px, 70vw" alt="Gustavo Bentancor" />
+        </figure>
         <div class="txt">
           <p class="kick" data-r>{t.about.kicker}</p>
           <h2 data-r>{t.about.title}</h2>
@@ -315,14 +318,9 @@ const icons = {
             <a class="ghl" href={t.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
           </div>
         </div>
-        <div class="aside">
-          <figure class="foto" data-r="card">
-            <Picture src={foto} formats={["avif", "webp"]} fallbackFormat="webp" widths={[280, 420, 560]} sizes="(min-width:900px) 300px, 70vw" alt="Gustavo Bentancor" />
-          </figure>
-          <ul class="pts">
-            {t.about.points.map((p) => <li data-r="card">{p}</li>)}
-          </ul>
-        </div>
+        <ul class="pts">
+          {t.about.points.map((p) => <li data-r="card">{p}</li>)}
+        </ul>
       </div>
       <div class="wrap skills">
         <h3 data-r>{t.about.skillsTitle}</h3>

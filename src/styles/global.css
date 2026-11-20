@@ -285,3 +285,12 @@ html:has(dialog[open]){overflow:hidden}
 @media(min-width:760px){.wgrid{grid-template-columns:repeat(3,1fr)}}
 
 .wlinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+
+/* Sobre mi: foto a la izquierda, texto a la derecha y los tres puntos en fila debajo */
+.about .foto{width:min(300px,72%)}
+.about .pts{grid-template-columns:1fr}
+@media(min-width:900px){
+ .about{grid-template-columns:320px 1fr;gap:28px 64px;align-items:center}
+ .about .foto{width:100%;max-width:320px}
+ .about .pts{grid-column:1/-1;grid-template-columns:repeat(3,1fr);gap:16px}
+}
