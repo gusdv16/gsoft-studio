@@ -231,8 +231,8 @@ export default {
     role: 'Rol',
     visit: 'Visitar sitio',
     items: [
-      { type: 'Portal de noticias', title: 'Urugol', text: 'Portal de noticias del fútbol uruguayo e internacional.', role: 'Desarrollo web', link: 'https://urugol.uy/' },
-      { type: 'Institucional', title: 'AUF', text: 'Sitio de la Asociación Uruguaya de Fútbol, el cuerpo gobernante del fútbol de Uruguay.', role: 'Desarrollo web', link: 'https://www.auf.org.uy/home/' },
+      { type: 'Portal de noticias', title: 'Urugol', text: 'Portal de noticias del fútbol uruguayo e internacional, creado desde cero sobre WordPress.', role: 'Desarrollo completo del portal', link: 'https://urugol.uy/' },
+      { type: 'Institucional', title: 'AUF', text: 'Sitio de la Asociación Uruguaya de Fútbol, el cuerpo gobernante del fútbol de Uruguay. Migración del sitio anterior y desarrollo del front-end del sitio actual.', role: 'Migración y front-end', link: 'https://www.auf.org.uy/home/' },
       { type: 'Freelance', title: 'Sitios para BROU', text: 'Tres sitios web: Beneficios, Asistencia y MiBROU, desarrollados como programador freelance.', role: 'Desarrollo web' },
     ],
     note: 'Los nombres y marcas pertenecen a sus titulares y se mencionan solo como referencia del trabajo realizado, sin afiliación ni respaldo.',

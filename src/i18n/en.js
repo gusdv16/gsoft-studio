@@ -231,8 +231,8 @@ export default {
     role: 'Role',
     visit: 'Visit site',
     items: [
-      { type: 'News portal', title: 'Urugol', text: 'News portal about Uruguayan and international football.', role: 'Web development', link: 'https://urugol.uy/' },
-      { type: 'Institutional', title: 'AUF', text: 'Website of the Uruguayan Football Association, the governing body of football in Uruguay.', role: 'Web development', link: 'https://www.auf.org.uy/home/' },
+      { type: 'News portal', title: 'Urugol', text: 'News portal about Uruguayan and international football, built from scratch on WordPress.', role: 'Full portal development', link: 'https://urugol.uy/' },
+      { type: 'Institutional', title: 'AUF', text: 'Website of the Uruguayan Football Association, the governing body of football in Uruguay. Migration of the previous site and development of the current front end.', role: 'Migration and front end', link: 'https://www.auf.org.uy/home/' },
       { type: 'Freelance', title: 'Sites for BROU', text: 'Three websites: Beneficios, Asistencia and MiBROU, developed as a freelance programmer.', role: 'Web development' },
     ],
     note: 'Names and trademarks belong to their respective owners and are mentioned only as a reference to the work done, with no affiliation or endorsement.',
