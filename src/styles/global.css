@@ -272,3 +272,14 @@ html:has(dialog[open]){overflow:hidden}
 
 .ghl+.ghl{margin-left:18px}
 .flinks{display:flex;gap:18px}
+
+/* trabajo en produccion */
+.wgrid{display:grid;gap:16px;margin-top:36px}
+.wcard{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.wcard .type{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--a)}
+.wcard h3{font-size:1.25rem}
+.wcard .wrole{font-size:.9rem;color:var(--muted)}
+.wcard .wrole b{color:var(--text)}
+.wcard .btn{margin-top:auto}
+.wnote{margin-top:22px;font-size:.82rem;color:var(--muted);max-width:70ch}
+@media(min-width:760px){.wgrid{grid-template-columns:repeat(3,1fr)}}

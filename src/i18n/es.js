@@ -224,6 +224,19 @@ export default {
       },
     ],
   },
+  work: {
+    kicker: 'Trabajo en producción',
+    title: 'Sitios en línea en los que trabajé',
+    lead: 'Además de mis proyectos propios, trabajé en el desarrollo web de estos sitios.',
+    role: 'Rol',
+    visit: 'Visitar sitio',
+    items: [
+      { type: 'Portal de noticias', title: 'Urugol', text: 'Portal de noticias del fútbol uruguayo e internacional.', role: 'Desarrollo web', link: 'https://urugol.uy/' },
+      { type: 'Institucional', title: 'AUF', text: 'Sitio de la Asociación Uruguaya de Fútbol, el cuerpo gobernante del fútbol de Uruguay.', role: 'Desarrollo web', link: 'https://www.auf.org.uy/home/' },
+      { type: 'Freelance', title: 'Sitios para BROU', text: 'Tres sitios web: Beneficios, Asistencia y MiBROU, desarrollados como programador freelance.', role: 'Desarrollo web' },
+    ],
+    note: 'Los nombres y marcas pertenecen a sus titulares y se mencionan solo como referencia del trabajo realizado, sin afiliación ni respaldo.',
+  },
   about: {
     kicker: 'Sobre mí',
     title: 'Hola, soy Gustavo',

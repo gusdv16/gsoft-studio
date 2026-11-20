@@ -283,6 +283,26 @@ const icons = {
       </div>
     </section>
 
+    <section id="trabajo" class="cv" style="--m:1500px;--d:620px">
+      <div class="wrap">
+        <p class="kick" data-r>{t.work.kicker}</p>
+        <h2 data-r>{t.work.title}</h2>
+        <p class="sub" data-r>{t.work.lead}</p>
+        <div class="wgrid">
+          {t.work.items.map((w) => (
+            <article class="card wcard" data-r="card">
+              <span class="type">{w.type}</span>
+              <h3>{w.title}</h3>
+              <p>{w.text}</p>
+              <p class="wrole"><b>{t.work.role}:</b> {w.role}</p>
+              {w.link && <a class="btn btn-s" href={w.link} target="_blank" rel="noopener">{t.work.visit} ↗</a>}
+            </article>
+          ))}
+        </div>
+        <p class="wnote" data-r>{t.work.note}</p>
+      </div>
+    </section>
+
     <section id="sobre-mi" class="alt cv" style="--m:1500px;--d:1000px">
       <div class="wrap about">
         <div class="txt">

@@ -224,6 +224,19 @@ export default {
       },
     ],
   },
+  work: {
+    kicker: 'Work in production',
+    title: 'Live sites I worked on',
+    lead: 'Besides my own projects, I worked on the web development of these sites.',
+    role: 'Role',
+    visit: 'Visit site',
+    items: [
+      { type: 'News portal', title: 'Urugol', text: 'News portal about Uruguayan and international football.', role: 'Web development', link: 'https://urugol.uy/' },
+      { type: 'Institutional', title: 'AUF', text: 'Website of the Uruguayan Football Association, the governing body of football in Uruguay.', role: 'Web development', link: 'https://www.auf.org.uy/home/' },
+      { type: 'Freelance', title: 'Sites for BROU', text: 'Three websites: Beneficios, Asistencia and MiBROU, developed as a freelance programmer.', role: 'Web development' },
+    ],
+    note: 'Names and trademarks belong to their respective owners and are mentioned only as a reference to the work done, with no affiliation or endorsement.',
+  },
   about: {
     kicker: 'About',
     title: "Hi, I'm Gustavo",
