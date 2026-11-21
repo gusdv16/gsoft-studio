@@ -1,0 +1,55 @@
+name: Build para Hostinger
+
+# Compila el sitio para https://gustavobentancor.com/gsoft-studio/ y publica el resultado
+# en la rama `hosting`. Hostinger descarga esa rama (despliegue por Git + webhook).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hosting
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+        env:
+          GH_PAGES: '1'
+          SITE_URL: 'https://gustavobentancor.com'
+          # Clave pública de Cloudflare Turnstile (no es secreta)
+          PUBLIC_TURNSTILE_SITEKEY: '0x4AAAAAAGEi7nu7Y3WrE5Bz'
+      - name: Publicar dist en la rama hosting
+        run: |
+          set -e
+          REMOTE="https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          if git ls-remote --exit-code --heads "$REMOTE" hosting >/dev/null 2>&1; then
+            git clone --quiet --branch hosting --single-branch "$REMOTE" "$RUNNER_TEMP/hosting"
+          else
+            mkdir "$RUNNER_TEMP/hosting"
+            git -C "$RUNNER_TEMP/hosting" init --quiet -b hosting
+            git -C "$RUNNER_TEMP/hosting" remote add origin "$REMOTE"
+          fi
+          rsync -a --delete --exclude='.git' dist/ "$RUNNER_TEMP/hosting/"
+          cd "$RUNNER_TEMP/hosting"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Sin cambios para publicar."
+            exit 0
+          fi
+          git commit --quiet -m "Build de ${{ github.sha }}"
+          git push --quiet origin hosting
