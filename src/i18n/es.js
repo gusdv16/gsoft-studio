@@ -257,7 +257,7 @@ export default {
   },
   contact: {
     kicker: 'Contacto',
-    title: '¿Tienes algo que automatizar o construir?',
+    title: '¿Tienes un proyecto web en mente?',
     text: 'Cuéntanos qué necesitas y te respondemos con una propuesta clara. Sin compromiso.',
     cta: 'Escribir un email',
     form: {
