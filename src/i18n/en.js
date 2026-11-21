@@ -232,10 +232,12 @@ export default {
     lead: 'Besides my own projects, I worked on the web development of these sites.',
     role: 'Role',
     visit: 'Visit site',
+    view: 'View demo',
     items: [
       { type: 'News portal', title: 'Urugol', text: 'News portal about Uruguayan and international football, built from scratch on WordPress.', role: 'Full portal development', link: 'https://urugol.uy/' },
       { type: 'Institutional', title: 'AUF', text: 'Website of the Uruguayan Football Association, the governing body of football in Uruguay. Migration of the previous site and development of the current front end.', role: 'Migration and front end', link: 'https://www.auf.org.uy/home/' },
       { type: 'Freelance', title: 'Sites for BROU', text: 'Three websites: Beneficios, Asistencia and MiBROU, developed as a freelance programmer.', role: 'Web development', links: [{ label: 'Beneficios', url: 'https://beneficios.brou.com.uy/' }, { label: 'Asistencia', url: 'https://asistencia.brou.com.uy/' }, { label: 'MiBROU', url: 'https://mi.brou.com.uy/' }] },
+      { type: 'Digital marketing', title: 'HTML5 banners for Google Ads', text: 'Five responsive ads built in Google Web Designer for a financial planning campaign (2020), ready for 300×250, 728×90 and 160×600.', role: 'Ad design and development', link: '/demos/banners/' },
     ],
     note: 'Names and trademarks belong to their respective owners and are mentioned only as a reference to the work done, with no affiliation or endorsement.',
   },

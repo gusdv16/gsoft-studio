@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Banners HTML5 para Google Ads · Gsoft Studio</title>
+<style>
+:root{--bg:#07080d;--card:#10131e;--line:#1f2434;--text:#eceef6;--muted:#a2a8bd;--grad:linear-gradient(110deg,#8f9bff,#36e2c0)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+main{max-width:1120px;margin:0 auto;padding:32px clamp(16px,5vw,40px) 72px}
+a{color:#8f9bff}
+.back{display:inline-block;margin-bottom:28px;font-weight:600;text-decoration:none}
+h1{margin:0 0 10px;font-size:clamp(1.7rem,4.5vw,2.6rem);line-height:1.15}
+.lead{color:var(--muted);max-width:62ch;margin:0 0 28px}
+.sizes{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px}
+.sizes button{font:inherit;font-weight:600;font-size:.9rem;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:9px 16px;cursor:pointer}
+.sizes button[aria-pressed=true]{color:#07080d;background:var(--grad);border-color:transparent}
+.grid{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}
+figure{margin:0}
+figcaption{margin-top:8px;font-size:.82rem;color:var(--muted)}
+.ad{position:relative;background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.ad iframe{display:block;border:0;width:100%;height:100%}
+.ad::after{content:"";position:absolute;inset:0}
+.note{margin-top:36px;font-size:.85rem;color:var(--muted);max-width:70ch}
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="../../">← Volver a Gsoft Studio</a>
+  <h1>Banners HTML5 para Google Ads</h1>
+  <p class="lead">Cinco anuncios responsive hechos en Google Web Designer para una campaña de planificación financiera (2020). Cada uno se adapta a los tamaños estándar de display. Cambiá el formato para verlos.</p>
+  <div class="sizes" role="group" aria-label="Tamaño del anuncio">
+    <button type="button" data-w="300" data-h="250" aria-pressed="true">300 × 250</button>
+    <button type="button" data-w="728" data-h="90" aria-pressed="false">728 × 90</button>
+    <button type="button" data-w="160" data-h="600" aria-pressed="false">160 × 600</button>
+  </div>
+  <div class="grid" id="grid"></div>
+  <p class="note">Las marcas y logotipos que aparecen pertenecen a sus titulares y se muestran solo como referencia del trabajo realizado, sin afiliación ni respaldo. Los anuncios son de demostración: el botón no lleva a ningún sitio.</p>
+</main>
+<script>
+(function(){
+  var grid=document.getElementById('grid'),ads=[];
+  for(var n=1;n<=5;n++){
+    var f=document.createElement('figure'),box=document.createElement('div'),ifr=document.createElement('iframe'),cap=document.createElement('figcaption');
+    box.className='ad';
+    ifr.src=n+'/index.html';ifr.loading='lazy';ifr.title='Banner '+n;ifr.setAttribute('referrerpolicy','no-referrer');
+    cap.textContent='Banner '+n;
+    box.appendChild(ifr);f.appendChild(box);f.appendChild(cap);grid.appendChild(f);ads.push(box);
+  }
+  function size(w,h){ads.forEach(function(b){b.style.width=w+'px';b.style.height=h+'px'})}
+  var btns=document.querySelectorAll('.sizes button');
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    btns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    size(+b.dataset.w,+b.dataset.h);
+  })});
+  size(300,250);
+})();
+</script>
+</body>
+</html>

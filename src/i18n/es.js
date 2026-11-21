@@ -232,10 +232,12 @@ export default {
     lead: 'Además de mis proyectos propios, trabajé en el desarrollo web de estos sitios.',
     role: 'Rol',
     visit: 'Visitar sitio',
+    view: 'Ver demo',
     items: [
       { type: 'Portal de noticias', title: 'Urugol', text: 'Portal de noticias del fútbol uruguayo e internacional, creado desde cero sobre WordPress.', role: 'Desarrollo completo del portal', link: 'https://urugol.uy/' },
       { type: 'Institucional', title: 'AUF', text: 'Sitio de la Asociación Uruguaya de Fútbol, el cuerpo gobernante del fútbol de Uruguay. Migración del sitio anterior y desarrollo del front-end del sitio actual.', role: 'Migración y front-end', link: 'https://www.auf.org.uy/home/' },
       { type: 'Freelance', title: 'Sitios para BROU', text: 'Tres sitios web: Beneficios, Asistencia y MiBROU, desarrollados como programador freelance.', role: 'Desarrollo web', links: [{ label: 'Beneficios', url: 'https://beneficios.brou.com.uy/' }, { label: 'Asistencia', url: 'https://asistencia.brou.com.uy/' }, { label: 'MiBROU', url: 'https://mi.brou.com.uy/' }] },
+      { type: 'Marketing digital', title: 'Banners HTML5 para Google Ads', text: 'Cinco anuncios responsive hechos en Google Web Designer para una campaña de planificación financiera (2020), listos para los tamaños 300×250, 728×90 y 160×600.', role: 'Diseño y desarrollo de los anuncios', link: '/demos/banners/' },
     ],
     note: 'Los nombres y marcas pertenecen a sus titulares y se mencionan solo como referencia del trabajo realizado, sin afiliación ni respaldo.',
   },
@@ -265,7 +267,7 @@ export default {
     text: 'Cuéntame qué necesitas y te respondo con una propuesta clara. Sin compromiso.',
     cta: 'Escribir un email',
     form: {
-      name: 'Nombre', email: 'Email', phone: 'Teléfono o WhatsApp', hint: 'Con el email o el teléfono alcanza.', need_contact: 'Déjanos un email o un teléfono para poder responderte.', phone_bad: 'El teléfono no parece válido.', message: 'Cuéntame qué necesitas', send: 'Enviar mensaje',
+      name: 'Nombre', email: 'Email', phone: 'Teléfono o WhatsApp', hint: 'Con el email o el teléfono alcanza.', need_contact: 'Déjame un email o un teléfono para poder responderte.', phone_bad: 'El teléfono no parece válido.', message: 'Cuéntame qué necesitas', send: 'Enviar mensaje',
       sending: 'Enviando…', ok: '¡Gracias! Recibí tu mensaje y te respondo pronto.',
       invalid: 'Revisa los campos: el nombre y un mensaje de al menos 10 caracteres son obligatorios.', email_bad: 'El email no parece válido.',
       rate: 'Demasiados envíos seguidos. Prueba más tarde o escribe a info@gustavobentancor.com.',
