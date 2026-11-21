@@ -26,6 +26,7 @@ export default {
     secondary: 'See projects',
     flow: ['Your idea', 'Design + code', 'Live website'],
     flowNote: 'Fast, clear and measured with Lighthouse.',
+    points: ['Lighthouse 95+, measured on this very site', 'Technical SEO and Core Web Vitals', 'Direct communication, no middlemen', 'Available for new projects'],
   },
   stack: {
     label: 'Technologies we work with',
@@ -182,6 +183,7 @@ export default {
         title: 'Web Performance Showcase',
         text: 'Astro site with 0 bytes of client JavaScript that explains performance techniques and compares the same page unoptimized and optimized, measured with Lighthouse.',
         points: [
+          'Measured case: the same page went from Lighthouse 71 to 100, from a 21 s LCP to 1.4 s, and from 11.8 MB to 98 KB.',
           '10 techniques explained: Core Web Vitals, WebP/AVIF images, srcset and lazy loading, fonts, critical CSS, caching and CDN, and more.',
           'Lab: the same page unoptimized and optimized, measured with the same method.',
           'Example landing pages and sites (fictional brand) with no JavaScript, plus a real case explained.',
@@ -242,6 +244,7 @@ export default {
     title: "Hi, I'm Gustavo",
     paragraphs: [
       "I'm Gustavo Bentancor, a web developer and the person behind Gsoft Studio. I like solving concrete problems: a tool that saves time, a site that loads fast, an extension that saves you from checking something by hand.",
+      'I come from marketing, and it shows in how I build: every site is made to be found on Google and to turn visits into inquiries, not just to look good.',
       'I use AI as a work tool to speed up the repetitive parts, and I review and test everything before delivering. What you see on this page are real projects you can open and, for almost all, read on GitHub.',
     ],
     points: ['Fast sites, measured with Lighthouse', 'Clean, documented code', 'Direct communication, no middlemen'],

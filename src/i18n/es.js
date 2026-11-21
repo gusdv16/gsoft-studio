@@ -26,6 +26,7 @@ export default {
     secondary: 'Ver proyectos',
     flow: ['Tu idea', 'Diseño + código', 'Web publicada'],
     flowNote: 'Rápida, clara y medida con Lighthouse.',
+    points: ['Lighthouse 95+, medido en este mismo sitio', 'SEO técnico y Core Web Vitals', 'Comunicación directa, sin intermediarios', 'Disponible para nuevos proyectos'],
   },
   stack: {
     label: 'Tecnologías con las que trabajamos',
@@ -182,6 +183,7 @@ export default {
         title: 'Web Performance Showcase',
         text: 'Sitio Astro con 0 bytes de JavaScript que explica técnicas de performance y compara una misma página sin optimizar y optimizada, medidas con Lighthouse.',
         points: [
+          'Caso medido: la misma página pasó de Lighthouse 71 a 100, de un LCP de 21 s a 1,4 s y de 11,8 MB a 98 KB.',
           '10 técnicas explicadas: Core Web Vitals, imágenes WebP/AVIF, srcset y lazy loading, fuentes, CSS crítico, caché y CDN, entre otras.',
           'Laboratorio: la misma página sin optimizar y optimizada, medidas con el mismo método.',
           'Landings y sitios de ejemplo (marca ficticia) sin JavaScript, y un caso real explicado.',
@@ -242,6 +244,7 @@ export default {
     title: 'Hola, soy Gustavo',
     paragraphs: [
       'Soy Gustavo Bentancor, Full-Stack Developer y Product Engineer, y la persona detrás de Gsoft Studio. Desde 2014 creo soluciones web (PHP, MySQL, JavaScript) y me gusta traducir requerimientos de negocio en código que funciona: una herramienta que ahorra tiempo, una web que carga rápido, una extensión que evita revisar algo a mano.',
+      'Vengo del marketing, y eso se nota en cómo construyo: cada sitio sale pensado para que se encuentre en Google y convierta visitas en consultas, no solo para que se vea bien.',
       'Uso la IA como herramienta de trabajo para acelerar lo repetitivo, y reviso y pruebo todo antes de entregarlo. Lo que ves en esta página son proyectos reales que puedes abrir y, casi todos, leer en GitHub.',
     ],
     points: ['Webs rápidas, medidas con Lighthouse', 'Código limpio y documentado', 'Comunicación directa, sin intermediarios'],

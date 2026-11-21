@@ -157,6 +157,9 @@ const icons = {
             <a class="btn btn-p" href="#contacto">{t.hero.primary}</a>
             <a class="btn btn-s" href="#proyectos">{t.hero.secondary}</a>
           </div>
+          <ul class="hpts">
+            {t.hero.points.map((x) => <li>{x}</li>)}
+          </ul>
         </div>
         <div class="flow" aria-hidden="true" data-flow>
           <div class="pulse"><i data-pulse></i></div>
