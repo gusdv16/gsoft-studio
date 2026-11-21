@@ -5,12 +5,12 @@ export default {
   meta: {
     title: 'Gsoft Studio · Desarrollo web rápido, SEO, apps y extensiones',
     description:
-      'Creamos webs rápidas, apps y extensiones a medida, con SEO técnico y Core Web Vitals en verde. Mira los proyectos publicados.',
+      'Creo webs rápidas, apps y extensiones a medida, con SEO técnico y Core Web Vitals en verde. Mira los proyectos publicados.',
   },
   skip: 'Saltar al contenido',
   nav: {
     services: 'Servicios',
-    process: 'Cómo trabajamos',
+    process: 'Cómo trabajo',
     projects: 'Proyectos',
     about: 'Sobre mí',
     contact: 'Contacto',
@@ -21,15 +21,15 @@ export default {
     badge: 'Desarrollo web a medida',
     title: ['Webs rápidas', 'que se ven bien', 'y se encuentran en Google'],
     lead:
-      'Diseñamos y desarrollamos sitios web, apps y extensiones rápidos, pensados para móviles y buscadores. Del problema a algo funcionando.',
-    primary: 'Cuéntanos tu problema',
+      'Diseño y desarrollo sitios web, apps y extensiones rápidos, pensados para móviles y buscadores. Del problema a algo funcionando.',
+    primary: 'Cuéntame tu problema',
     secondary: 'Ver proyectos',
     flow: ['Tu idea', 'Diseño + código', 'Web publicada'],
     flowNote: 'Rápida, clara y medida con Lighthouse.',
     points: ['Lighthouse 95+, medido en este mismo sitio', 'SEO técnico y Core Web Vitals', 'Comunicación directa, sin intermediarios', 'Disponible para nuevos proyectos'],
   },
   stack: {
-    label: 'Tecnologías con las que trabajamos',
+    label: 'Tecnologías con las que trabajo',
     items: [
       'Astro', 'JavaScript', 'GSAP', 'Firebase', 'Capacitor', 'Android', 'Chrome MV3', 'PDF.js', 'PWA', 'Lighthouse', 'Claude',
     ],
@@ -45,7 +45,7 @@ export default {
   },
   services: {
     kicker: 'Servicios',
-    title: 'Qué podemos hacer por tu empresa',
+    title: 'Qué puedo hacer por tu negocio',
     items: [
       {
         icon: 'bolt',
@@ -60,7 +60,7 @@ export default {
       {
         icon: 'spark',
         title: 'IA en tus flujos de trabajo',
-        text: 'Integramos asistentes y modelos de IA donde ya trabajas: clasificar, resumir, redactar o extraer datos.',
+        text: 'Integro asistentes y modelos de IA donde ya trabajas: clasificar, resumir, redactar o extraer datos.',
       },
       {
         icon: 'cog',
@@ -70,18 +70,18 @@ export default {
     ],
   },
   process: {
-    kicker: 'Cómo trabajamos',
+    kicker: 'Cómo trabajo',
     title: 'Simple, claro y con resultados temprano',
     steps: [
-      { title: 'Conversamos', text: 'Entendemos el problema, quién lo usa y qué significa que quede resuelto.' },
-      { title: 'Proponemos', text: 'Te presentamos un alcance concreto: qué se construye, con qué y cómo se prueba.' },
-      { title: 'Construimos', text: 'Entregamos versiones funcionando desde el principio. La IA acelera lo repetitivo; la revisión es humana.' },
-      { title: 'Entregamos y acompañamos', text: 'Recibes el código y la documentación, y seguimos disponibles para ajustes.' },
+      { title: 'Hablamos', text: 'Entiendo el problema, quién lo usa y qué significa que quede resuelto.' },
+      { title: 'Propongo', text: 'Te presento un alcance concreto: qué se construye, con qué y cómo se prueba.' },
+      { title: 'Construyo', text: 'Entrego versiones funcionando desde el principio. La IA acelera lo repetitivo; la revisión es humana.' },
+      { title: 'Entrego y acompaño', text: 'Recibes el código y la documentación, y sigo disponible para ajustes.' },
     ],
   },
   projects: {
     kicker: 'Proyectos',
-    title: 'Lo que ya construimos',
+    title: 'Lo que ya construí',
     lead: 'Todo está publicado y puedes probarlo; casi todo con el código abierto en GitHub. Las réplicas de diseño usan marcas ficticias.',
     demo: 'Ver demo',
     code: 'Código',
@@ -261,15 +261,15 @@ export default {
   contact: {
     kicker: 'Contacto',
     title: '¿Tienes un proyecto web en mente?',
-    text: 'Cuéntanos qué necesitas y te respondemos con una propuesta clara. Sin compromiso.',
+    text: 'Cuéntame qué necesitas y te respondo con una propuesta clara. Sin compromiso.',
     cta: 'Escribir un email',
     form: {
-      name: 'Nombre', email: 'Email', phone: 'Teléfono o WhatsApp', hint: 'Con el email o el teléfono alcanza.', need_contact: 'Déjanos un email o un teléfono para poder responderte.', phone_bad: 'El teléfono no parece válido.', message: 'Cuéntanos qué necesitas', send: 'Enviar mensaje',
-      sending: 'Enviando…', ok: '¡Gracias! Recibimos tu mensaje y te respondemos pronto.',
+      name: 'Nombre', email: 'Email', phone: 'Teléfono o WhatsApp', hint: 'Con el email o el teléfono alcanza.', need_contact: 'Déjanos un email o un teléfono para poder responderte.', phone_bad: 'El teléfono no parece válido.', message: 'Cuéntame qué necesitas', send: 'Enviar mensaje',
+      sending: 'Enviando…', ok: '¡Gracias! Recibí tu mensaje y te respondo pronto.',
       invalid: 'Revisa los campos: el nombre y un mensaje de al menos 10 caracteres son obligatorios.', email_bad: 'El email no parece válido.',
       rate: 'Demasiados envíos seguidos. Prueba más tarde o escribe a info@gustavobentancor.com.',
-      captcha: 'No pudimos verificar que eres una persona. Recarga e inténtalo de nuevo.',
-      err: 'No se pudo enviar. Escríbenos directamente a info@gustavobentancor.com.',
+      captcha: 'No pude verificar que eres una persona. Recarga e inténtalo de nuevo.',
+      err: 'No se pudo enviar. Escríbeme directamente a info@gustavobentancor.com.',
       or: 'O escribe directamente a',
     },
     emailLabel: 'info@gustavobentancor.com',

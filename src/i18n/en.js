@@ -5,12 +5,12 @@ export default {
   meta: {
     title: 'Gsoft Studio · Fast web development, SEO, apps and extensions',
     description:
-      'We build fast websites, custom apps and extensions, with technical SEO and green Core Web Vitals. See our published projects.',
+      'I build fast websites, custom apps and extensions, with technical SEO and green Core Web Vitals. See my published projects.',
   },
   skip: 'Skip to content',
   nav: {
     services: 'Services',
-    process: 'How we work',
+    process: 'How I work',
     projects: 'Projects',
     about: 'About',
     contact: 'Contact',
@@ -21,15 +21,15 @@ export default {
     badge: 'Custom web development',
     title: ['Fast websites', 'that look good', 'and get found on Google'],
     lead:
-      'We design and build fast websites, apps and extensions made for mobile and search engines. From problem to something working.',
-    primary: 'Tell us your problem',
+      'I design and build fast websites, apps and extensions made for mobile and search engines. From problem to something working.',
+    primary: 'Tell me your problem',
     secondary: 'See projects',
     flow: ['Your idea', 'Design + code', 'Live website'],
     flowNote: 'Fast, clear and measured with Lighthouse.',
     points: ['Lighthouse 95+, measured on this very site', 'Technical SEO and Core Web Vitals', 'Direct communication, no middlemen', 'Available for new projects'],
   },
   stack: {
-    label: 'Technologies we work with',
+    label: 'Technologies I work with',
     items: [
       'Astro', 'JavaScript', 'GSAP', 'Firebase', 'Capacitor', 'Android', 'Chrome MV3', 'PDF.js', 'PWA', 'Lighthouse', 'Claude',
     ],
@@ -45,7 +45,7 @@ export default {
   },
   services: {
     kicker: 'Services',
-    title: 'What we can do for your business',
+    title: 'What I can do for your business',
     items: [
       {
         icon: 'bolt',
@@ -60,7 +60,7 @@ export default {
       {
         icon: 'spark',
         title: 'AI in your workflows',
-        text: 'We plug assistants and AI models into the tools you already use: classify, summarize, draft or extract data.',
+        text: 'I plug assistants and AI models into the tools you already use: classify, summarize, draft or extract data.',
       },
       {
         icon: 'cog',
@@ -70,18 +70,18 @@ export default {
     ],
   },
   process: {
-    kicker: 'How we work',
+    kicker: 'How I work',
     title: 'Simple, clear, and early results',
     steps: [
-      { title: 'We talk', text: 'We understand the problem, who uses it, and what "solved" means.' },
-      { title: 'We propose', text: 'You get a concrete scope: what gets built, with what, and how it is tested.' },
-      { title: 'We build', text: 'Working versions from the start. AI speeds up the repetitive parts; review stays human.' },
-      { title: 'We deliver and support', text: 'You receive the code and documentation, and we stay available for adjustments.' },
+      { title: 'Let's talk', text: 'I understand the problem, who uses it, and what "solved" means.' },
+      { title: 'I propose', text: 'You get a concrete scope: what gets built, with what, and how it is tested.' },
+      { title: 'I build', text: 'Working versions from the start. AI speeds up the repetitive parts; review stays human.' },
+      { title: 'I deliver and support', text: 'You receive the code and documentation, and I stay available for adjustments.' },
     ],
   },
   projects: {
     kicker: 'Projects',
-    title: 'What we have already built',
+    title: 'What I have already built',
     lead: 'Everything is published and you can try it; most with open code on GitHub. Design replicas use fictional brands.',
     demo: 'Live demo',
     code: 'Code',
@@ -100,14 +100,14 @@ export default {
         id: 'gletir-tracker',
         type: 'product',
         title: 'Gletir Tracker',
-        text: 'Chrome extension that reads your account statement on the Gletir platform when you sign in and builds your history: balance, daily evolution and annualized return (XIRR), plus volatility, drawdown, diversification, rebalancing and projection. Exports to PDF, CSV and JSON and syncs across computers with your own Google Sheet. Data is stored only in your browser, with no server of our own and no trackers.',
+        text: 'Chrome extension that reads your account statement on the Gletir platform when you sign in and builds your history: balance, daily evolution and annualized return (XIRR), plus volatility, drawdown, diversification, rebalancing and projection. Exports to PDF, CSV and JSON and syncs across computers with your own Google Sheet. Data is stored only in your browser, with no server of my own and no trackers.',
         price: 'Free, with a one-time PRO upgrade of US$ 9 (license via Gumroad).',
         note: 'Independent project, unofficial and not affiliated with Gletir. Screenshots use sample data.',
         points: [
           'Captures your account statement when you sign in to Gletir and builds your history day by day.',
           'Free: total balance, charts by asset type and export to PDF, CSV and JSON.',
           'PRO: annualized return (XIRR), risk analysis, diversification, rebalancing, projection and Google Sheets sync.',
-          'Your data is stored only in your browser: no server of our own and no trackers.',
+          'Your data is stored only in your browser: no server of my own and no trackers.',
           'One-time PRO license through Gumroad, valid for up to 3 computers.',
         ],
         tags: ['JavaScript', 'Chrome MV3', 'Chart.js', 'jsPDF', 'Google Apps Script', 'Gumroad'],
@@ -261,15 +261,15 @@ export default {
   contact: {
     kicker: 'Contact',
     title: 'Have a web project in mind?',
-    text: 'Tell us what you need and we will reply with a clear proposal. No commitment.',
+    text: 'Tell me what you need and I will reply with a clear proposal. No commitment.',
     cta: 'Send an email',
     form: {
-      name: 'Name', email: 'Email', phone: 'Phone or WhatsApp', hint: 'Either email or phone is enough.', need_contact: 'Leave an email or a phone number so we can reply.', phone_bad: "That phone number doesn't look valid.", message: 'Tell us what you need', send: 'Send message',
-      sending: 'Sending…', ok: 'Thank you! We got your message and will reply soon.',
+      name: 'Name', email: 'Email', phone: 'Phone or WhatsApp', hint: 'Either email or phone is enough.', need_contact: 'Leave an email or a phone number so I can reply.', phone_bad: "That phone number doesn't look valid.", message: 'Tell me what you need', send: 'Send message',
+      sending: 'Sending…', ok: 'Thank you! I got your message and will reply soon.',
       invalid: 'Please check the fields: a name and a message of at least 10 characters are required.', email_bad: "That email doesn't look valid.",
       rate: 'Too many submissions in a row. Try later or write to info@gustavobentancor.com.',
-      captcha: "We couldn't verify you are a person. Reload and try again.",
-      err: 'Could not send. Please write to us directly at info@gustavobentancor.com.',
+      captcha: "I couldn't verify you are a person. Reload and try again.",
+      err: 'Could not send. Please write to me directly at info@gustavobentancor.com.',
       or: 'Or write directly to',
     },
     emailLabel: 'info@gustavobentancor.com',
