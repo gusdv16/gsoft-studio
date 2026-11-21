@@ -3,9 +3,9 @@ export default {
   htmlLang: 'en',
   brand: 'Gsoft Studio',
   meta: {
-    title: 'Gsoft Studio · Automation, AI and custom web development',
+    title: 'Gsoft Studio · Fast web development, SEO, apps and extensions',
     description:
-      'We automate processes, add AI to your workflows and build fast websites, custom apps and extensions. See our published projects.',
+      'We build fast websites, custom apps and extensions, with technical SEO and green Core Web Vitals. See our published projects.',
   },
   skip: 'Skip to content',
   nav: {
@@ -18,14 +18,14 @@ export default {
     other: { label: 'ES', href: '../', title: 'Leer en español' },
   },
   hero: {
-    badge: 'Custom development + AI',
-    title: ['We solve what', 'your business needs,', 'accelerated with AI'],
+    badge: 'Custom web development',
+    title: ['Fast websites', 'that look good', 'and get found on Google'],
     lead:
-      'We automate processes, bring artificial intelligence into the way you work, and build fast websites, apps and extensions. From problem to something working.',
+      'We design and build fast websites, apps and extensions made for mobile and search engines. From problem to something working.',
     primary: 'Tell us your problem',
     secondary: 'See projects',
-    flow: ['Your process', 'AI + code', 'Result'],
-    flowNote: 'Less manual work, more time for what matters.',
+    flow: ['Your idea', 'Design + code', 'Live website'],
+    flowNote: 'Fast, clear and measured with Lighthouse.',
   },
   stack: {
     label: 'Technologies we work with',
@@ -47,16 +47,6 @@ export default {
     title: 'What we can do for your business',
     items: [
       {
-        icon: 'cog',
-        title: 'Process automation',
-        text: 'Repetitive tasks, alerts, spreadsheets and reports that run on their own. Fewer mistakes, fewer manual hours.',
-      },
-      {
-        icon: 'spark',
-        title: 'AI in your workflows',
-        text: 'We plug assistants and AI models into the tools you already use: classify, summarize, draft or extract data.',
-      },
-      {
         icon: 'bolt',
         title: 'Fast web development',
         text: 'Static sites that load instantly, built for mobile, Core Web Vitals and search engines.',
@@ -65,6 +55,16 @@ export default {
         icon: 'box',
         title: 'Custom extensions and apps',
         text: 'Chrome extensions, PWAs and Android apps to solve the specific problem you have.',
+      },
+      {
+        icon: 'spark',
+        title: 'AI in your workflows',
+        text: 'We plug assistants and AI models into the tools you already use: classify, summarize, draft or extract data.',
+      },
+      {
+        icon: 'cog',
+        title: 'Custom tools for your business',
+        text: 'Spreadsheets, alerts and reports that save manual work, when the project calls for it.',
       },
     ],
   },
@@ -250,7 +250,7 @@ export default {
       { title: 'Front-end and responsive design', items: [['HTML5', 'siHtml5'], ['CSS3', 'siCss'], ['JavaScript (ES6+)', 'siJavascript'], ['Responsive / mobile-first design', 'phone'], ['Astro', 'siAstro'], ['GSAP', 'siGreensock'], ['Accessibility', 'access']] },
       { title: 'Performance and SEO', items: [['Core Web Vitals', 'gauge'], ['Lighthouse', 'siLighthouse'], ['AVIF/WebP images', 'image'], ['Critical CSS', 'bolt'], ['Technical SEO', 'siGooglesearchconsole'], ['Structured data', 'braces']] },
       { title: 'Apps and extensions', items: [['Chrome extensions (MV3)', 'siGooglechrome'], ['PWA', 'siPwa'], ['Android with Capacitor', 'siAndroid'], ['Firebase', 'siFirebase'], ['Chart.js', 'siChartdotjs'], ['PDF.js', 'siMozilla']] },
-      { title: 'Back-end and automation', items: [['PHP', 'siPhp'], ['MySQL', 'siMysql'], ['Google Apps Script', 'siGoogleappsscript'], ['REST APIs', 'plug'], ['Git and GitHub', 'siGithub'], ['GitHub Actions', 'siGithubactions'], ['Hosting and deployment', 'server']] },
+      { title: 'Back-end and tools', items: [['PHP', 'siPhp'], ['MySQL', 'siMysql'], ['Google Apps Script', 'siGoogleappsscript'], ['REST APIs', 'plug'], ['Git and GitHub', 'siGithub'], ['GitHub Actions', 'siGithubactions'], ['Hosting and deployment', 'server']] },
       { title: 'AI', items: [['AI in workflows', 'spark'], ['AI-assisted development', 'code'], ['Claude', 'siClaude']] },
     ],
     github: 'My GitHub',

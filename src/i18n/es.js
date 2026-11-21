@@ -3,9 +3,9 @@ export default {
   htmlLang: 'es',
   brand: 'Gsoft Studio',
   meta: {
-    title: 'Gsoft Studio · Automatización, IA y desarrollo web a medida',
+    title: 'Gsoft Studio · Desarrollo web rápido, SEO, apps y extensiones',
     description:
-      'Automatizamos procesos, integramos IA en tus flujos de trabajo y creamos webs rápidas, apps y extensiones a medida. Mira los proyectos publicados.',
+      'Creamos webs rápidas, apps y extensiones a medida, con SEO técnico y Core Web Vitals en verde. Mira los proyectos publicados.',
   },
   skip: 'Saltar al contenido',
   nav: {
@@ -18,14 +18,14 @@ export default {
     other: { label: 'EN', href: 'en/', title: 'Read in English' },
   },
   hero: {
-    badge: 'Desarrollo a medida + IA',
-    title: ['Resolvemos lo que', 'tu empresa necesita,', 'acelerado con IA'],
+    badge: 'Desarrollo web a medida',
+    title: ['Webs rápidas', 'que se ven bien', 'y se encuentran en Google'],
     lead:
-      'Automatizamos procesos, integramos inteligencia artificial en tu forma de trabajar y construimos webs, apps y extensiones rápidas. Del problema a algo funcionando.',
+      'Diseñamos y desarrollamos sitios web, apps y extensiones rápidos, pensados para móviles y buscadores. Del problema a algo funcionando.',
     primary: 'Cuéntanos tu problema',
     secondary: 'Ver proyectos',
-    flow: ['Tu proceso', 'IA + código', 'Resultado'],
-    flowNote: 'Menos trabajo manual, más tiempo para lo importante.',
+    flow: ['Tu idea', 'Diseño + código', 'Web publicada'],
+    flowNote: 'Rápida, clara y medida con Lighthouse.',
   },
   stack: {
     label: 'Tecnologías con las que trabajamos',
@@ -47,16 +47,6 @@ export default {
     title: 'Qué podemos hacer por tu empresa',
     items: [
       {
-        icon: 'cog',
-        title: 'Automatización de procesos',
-        text: 'Tareas repetitivas, avisos, planillas y reportes que se hacen solos. Menos errores, menos horas manuales.',
-      },
-      {
-        icon: 'spark',
-        title: 'IA en tus flujos de trabajo',
-        text: 'Integramos asistentes y modelos de IA donde ya trabajas: clasificar, resumir, redactar o extraer datos.',
-      },
-      {
         icon: 'bolt',
         title: 'Desarrollo web rápido',
         text: 'Sitios estáticos que cargan al instante, pensados para móviles, Core Web Vitals y buscadores.',
@@ -65,6 +55,16 @@ export default {
         icon: 'box',
         title: 'Extensiones y apps a medida',
         text: 'Extensiones de Chrome, PWA y apps Android para resolver el problema puntual que tienes.',
+      },
+      {
+        icon: 'spark',
+        title: 'IA en tus flujos de trabajo',
+        text: 'Integramos asistentes y modelos de IA donde ya trabajas: clasificar, resumir, redactar o extraer datos.',
+      },
+      {
+        icon: 'cog',
+        title: 'Herramientas a medida para tu negocio',
+        text: 'Planillas, avisos y reportes que ahorran trabajo manual, cuando el proyecto lo necesita.',
       },
     ],
   },
@@ -250,7 +250,7 @@ export default {
       { title: 'Front-end y diseño responsive', items: [['HTML5', 'siHtml5'], ['CSS3', 'siCss'], ['JavaScript (ES6+)', 'siJavascript'], ['Diseño responsive / mobile-first', 'phone'], ['Astro', 'siAstro'], ['GSAP', 'siGreensock'], ['Accesibilidad', 'access']] },
       { title: 'Rendimiento y SEO', items: [['Core Web Vitals', 'gauge'], ['Lighthouse', 'siLighthouse'], ['Imágenes AVIF/WebP', 'image'], ['CSS crítico', 'bolt'], ['SEO técnico', 'siGooglesearchconsole'], ['Datos estructurados', 'braces']] },
       { title: 'Apps y extensiones', items: [['Extensiones Chrome (MV3)', 'siGooglechrome'], ['PWA', 'siPwa'], ['Android con Capacitor', 'siAndroid'], ['Firebase', 'siFirebase'], ['Chart.js', 'siChartdotjs'], ['PDF.js', 'siMozilla']] },
-      { title: 'Back-end y automatización', items: [['PHP', 'siPhp'], ['MySQL', 'siMysql'], ['Google Apps Script', 'siGoogleappsscript'], ['APIs REST', 'plug'], ['Git y GitHub', 'siGithub'], ['GitHub Actions', 'siGithubactions'], ['Hosting y despliegue', 'server']] },
+      { title: 'Back-end y herramientas', items: [['PHP', 'siPhp'], ['MySQL', 'siMysql'], ['Google Apps Script', 'siGoogleappsscript'], ['APIs REST', 'plug'], ['Git y GitHub', 'siGithub'], ['GitHub Actions', 'siGithubactions'], ['Hosting y despliegue', 'server']] },
       { title: 'IA', items: [['Integración de IA en flujos de trabajo', 'spark'], ['Desarrollo asistido por IA', 'code'], ['Claude', 'siClaude']] },
     ],
     github: 'Mi GitHub',
