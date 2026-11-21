@@ -64,7 +64,14 @@ GH_PAGES=1 npm run build   # build para GitHub Pages (base /gsoft-studio)
 
 ## Despliegue
 
-`.github/workflows/deploy.yml` construye y publica en GitHub Pages en cada push a `main`.
+`.github/workflows/deploy.yml` construye y publica en GitHub Pages en cada push a `main`.
+
+`.github/workflows/hosting.yml` también corre en cada push a `main`: compila con `SITE_URL=https://gustavobentancor.com` y publica el resultado (`dist/`) en la rama `hosting`. Hostinger tiene esa rama clonada en `public_html/gsoft-studio/` y un webhook de GitHub (Settings → Webhooks) le avisa para que haga `git pull`. Así `gustavobentancor.com/gsoft-studio/` se actualiza solo.
+
+Notas:
+- No edites archivos directamente en esa carpeta del hosting: el siguiente pull los descarta si el repo los controla.
+- `gsoft-contact-config.php` (secreto de Turnstile) vive fuera de la carpeta y el despliegue no lo toca.
+- Para volver a clonar desde cero hay que dejar vacía la carpeta `gsoft-studio` del hosting.
 
 ## Licencia
 
