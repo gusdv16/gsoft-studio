@@ -73,7 +73,7 @@ export default {
     kicker: 'How I work',
     title: 'Simple, clear, and early results',
     steps: [
-      { title: 'Let's talk', text: 'I understand the problem, who uses it, and what "solved" means.' },
+      { title: "Let's talk", text: 'I understand the problem, who uses it, and what "solved" means.' },
       { title: 'I propose', text: 'You get a concrete scope: what gets built, with what, and how it is tested.' },
       { title: 'I build', text: 'Working versions from the start. AI speeds up the repetitive parts; review stays human.' },
       { title: 'I deliver and support', text: 'You receive the code and documentation, and I stay available for adjustments.' },
