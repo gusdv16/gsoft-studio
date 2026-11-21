@@ -289,3 +289,25 @@ html:has(dialog[open]){overflow:hidden}
  .about .foto{width:100%;max-width:320px}
  .about .pts{grid-column:1/-1;grid-template-columns:repeat(3,1fr);gap:16px}
 }
+
+/* Huevo de pascua: 5 clics en la foto -> Mordor */
+.foto{position:relative;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.foto .eye{position:absolute;left:50%;top:1%;width:64%;transform:translateX(-50%) scale(.6);opacity:0;pointer-events:none;transition:opacity .9s ease,transform .9s ease;filter:drop-shadow(0 0 14px rgba(255,80,0,.9))}
+.foto::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .9s ease;background:radial-gradient(ellipse at 50% 8%,rgba(255,90,0,.45),transparent 62%),linear-gradient(180deg,transparent 40%,rgba(120,10,0,.55))}
+.egg-msg{position:fixed;left:50%;bottom:28px;z-index:60;transform:translate(-50%,16px);margin:0;padding:12px 22px;border-radius:999px;background:rgba(18,6,4,.92);border:1px solid #7a2a14;color:#ffcf9a;font-weight:600;font-size:.95rem;opacity:0;pointer-events:none;transition:opacity .5s,transform .5s;max-width:calc(100vw - 32px);text-align:center}
+.egg-msg.show{opacity:1;transform:translate(-50%,0)}
+html.mordor{--bg:#0b0504;--bg2:#130706;--card:#190908;--line:#3d1611;--text:#f6e7d8;--muted:#c9a58e;--a:#ff5a1f;--b:#ffb000;--grad:linear-gradient(110deg,#ff3d00 0%,#ffb000 100%)}
+html.mordor body{transition:background .9s}
+html.mordor .o1{background:radial-gradient(circle,rgba(255,60,0,.5) 0,rgba(255,60,0,0) 68%)}
+html.mordor .o2{background:radial-gradient(circle,rgba(255,150,0,.34) 0,rgba(255,150,0,0) 68%)}
+html.mordor .flow{background:linear-gradient(160deg,#2a0e08,#140706)}
+html.mordor .foto{box-shadow:0 0 60px -6px rgba(255,70,0,.65);border-color:#7a2a14}
+html.mordor .foto img{filter:grayscale(.55) sepia(.85) saturate(2.4) hue-rotate(-25deg) contrast(1.15) brightness(.78);transition:filter .9s}
+html.mordor .foto .eye{opacity:1;transform:translateX(-50%) scale(1);animation:eyeflame 2.6s ease-in-out .9s infinite}
+html.mordor .foto::after{opacity:1}
+html.mordor body::after{content:"";position:fixed;inset:0;z-index:40;pointer-events:none;background:radial-gradient(ellipse at 50% 115%,rgba(255,70,0,.30),transparent 60%),radial-gradient(ellipse at 50% -10%,rgba(120,0,0,.35),transparent 55%);animation:mordorglow 5s ease-in-out infinite}
+@keyframes eyeflame{0%,100%{filter:drop-shadow(0 0 14px rgba(255,80,0,.9)) brightness(1)}50%{filter:drop-shadow(0 0 26px rgba(255,120,0,1)) brightness(1.18)}}
+@keyframes mordorglow{0%,100%{opacity:.75}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){html.mordor .foto .eye,html.mordor body::after{animation:none}.foto .eye,.foto::after,.egg-msg,html.mordor .foto img{transition:none}}
+html.mordor .box{background:linear-gradient(150deg,#2a0e08,#0d0504)}
+html.mordor .box::before{background:radial-gradient(circle,rgba(255,70,0,.32) 0,rgba(255,70,0,0) 68%)}

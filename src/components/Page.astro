@@ -309,9 +309,19 @@ const icons = {
 
     <section id="sobre-mi" class="alt cv" style="--m:1500px;--d:1000px">
       <div class="wrap about">
-        <figure class="foto" data-r="card">
+        <figure class="foto" data-r="card" data-egg={JSON.stringify(t.egg)}>
           <Picture src={foto} formats={["avif", "webp"]} fallbackFormat="webp" widths={[280, 420, 560]} sizes="(min-width:900px) 320px, 70vw" alt="Gustavo Bentancor" />
+          <svg class="eye" viewBox="0 0 200 120" aria-hidden="true" focusable="false">
+            <defs>
+              <radialGradient id="eg" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#fff3a0"/><stop offset=".35" stop-color="#ffb300"/><stop offset=".75" stop-color="#ff3d00"/><stop offset="1" stop-color="#7a0900"/></radialGradient>
+              <filter id="eglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+            </defs>
+            <path d="M6 60 Q100 -14 194 60 Q100 134 6 60Z" fill="#ff3d00" filter="url(#eglow)" opacity=".85"/>
+            <path d="M6 60 Q100 -14 194 60 Q100 134 6 60Z" fill="url(#eg)" stroke="#2a0300" stroke-width="3"/>
+            <ellipse cx="100" cy="60" rx="8" ry="40" fill="#120100"/>
+          </svg>
         </figure>
+        <p class="egg-msg" role="status" aria-live="polite" data-egg-msg></p>
         <div class="txt">
           <p class="kick" data-r>{t.about.kicker}</p>
           <h2 data-r>{t.about.title}</h2>
@@ -472,6 +482,66 @@ const icons = {
           status.classList.add('bad');
         }
         btn.disabled = false;
+      });
+    }
+  </script>
+  <script>
+    // Detalles de interaccion. Todo arranca con la primera accion del usuario, nunca durante la carga.
+    // 1) Estela de brasas/luz que sigue al mouse (solo con mouse y sin "reducir movimiento").
+    if (matchMedia('(hover:hover) and (pointer:fine)').matches && !matchMedia('(prefers-reduced-motion:reduce)').matches) {
+      let cv, cx, parts = [], raf = 0, lx = -1, ly = -1, hue = 0;
+      const root = document.documentElement;
+      const size = () => { cv.width = innerWidth; cv.height = innerHeight; };
+      const frame = (now) => {
+        cx.clearRect(0, 0, cv.width, cv.height);
+        cx.globalCompositeOperation = 'lighter';
+        parts = parts.filter((p) => now - p.t0 < p.life);
+        for (const p of parts) {
+          const k = (now - p.t0) / p.life;
+          const r = p.r * (1 - k * 0.5);
+          const g = cx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r);
+          g.addColorStop(0, 'hsla(' + p.h + ',95%,62%,' + 0.34 * (1 - k) + ')');
+          g.addColorStop(1, 'hsla(' + p.h + ',95%,55%,0)');
+          cx.fillStyle = g;
+          cx.beginPath(); cx.arc(p.x, p.y, r, 0, 6.2832); cx.fill();
+          p.y -= p.up;
+        }
+        raf = parts.length ? requestAnimationFrame(frame) : 0;
+      };
+      const add = (x, y) => {
+        const mordor = root.classList.contains('mordor');
+        hue = (hue + 7) % 60;
+        parts.push({ x, y, r: 30 + Math.random() * 22, life: 750 + Math.random() * 350, t0: performance.now(), up: mordor ? 0.7 : 0.15,
+          h: mordor ? 12 + hue * 0.7 : (hue < 30 ? 232 - hue : 172 + (hue - 30) * 0.2) });
+        if (parts.length > 70) parts.shift();
+        if (!raf) raf = requestAnimationFrame(frame);
+      };
+      const move = (e) => {
+        if (!cv) {
+          cv = document.createElement('canvas');
+          cv.setAttribute('aria-hidden', 'true');
+          cv.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:45';
+          document.body.appendChild(cv); cx = cv.getContext('2d'); size();
+          addEventListener('resize', size, { passive: true });
+        }
+        const x = e.clientX, y = e.clientY;
+        if (lx < 0 || Math.hypot(x - lx, y - ly) > 16) { add(x, y); lx = x; ly = y; }
+      };
+      addEventListener('pointermove', move, { passive: true });
+    }
+    // 2) Huevo de pascua: 5 clics seguidos en la foto invocan (o disipan) la sombra de Mordor.
+    const egg = document.querySelector('[data-egg]');
+    if (egg) {
+      const txt = JSON.parse(egg.dataset.egg);
+      const out = document.querySelector('[data-egg-msg]');
+      let n = 0, t1 = 0, t2 = 0;
+      egg.addEventListener('click', () => {
+        n++; clearTimeout(t1); t1 = setTimeout(() => { n = 0; }, 1500);
+        if (n < 5) return;
+        n = 0;
+        const on = document.documentElement.classList.toggle('mordor');
+        out.textContent = on ? txt.on : txt.off;
+        out.classList.add('show'); clearTimeout(t2); t2 = setTimeout(() => out.classList.remove('show'), 3200);
       });
     }
   </script>

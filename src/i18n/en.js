@@ -239,6 +239,7 @@ export default {
     ],
     note: 'Names and trademarks belong to their respective owners and are mentioned only as a reference to the work done, with no affiliation or endorsement.',
   },
+  egg: { on: 'One site to rule them all.', off: 'The shadow recedes… for now.' },
   about: {
     kicker: 'About',
     title: "Hi, I'm Gustavo",

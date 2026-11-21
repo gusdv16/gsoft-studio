@@ -239,6 +239,7 @@ export default {
     ],
     note: 'Los nombres y marcas pertenecen a sus titulares y se mencionan solo como referencia del trabajo realizado, sin afiliación ni respaldo.',
   },
+  egg: { on: 'Un sitio para gobernarlos a todos.', off: 'La sombra se retira… por ahora.' },
   about: {
     kicker: 'Sobre mí',
     title: 'Hola, soy Gustavo',
