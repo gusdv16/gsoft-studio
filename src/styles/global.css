@@ -181,6 +181,7 @@ html:not(.anim) .steps .bar{transform:none}
 .cform{max-width:540px;margin:30px auto 0;text-align:left;display:grid;gap:16px}
 .cform label{display:grid;gap:6px;font-size:.88rem;font-weight:600;color:var(--muted)}
 .cform input,.cform textarea{font:400 1rem/1.5 var(--font);color:var(--text);background:rgba(7,8,13,.7);border:1px solid var(--line);border-radius:12px;padding:13px 15px;width:100%;min-height:46px;transition:border-color .2s}
+.cform .fhint{margin:-8px 0 0;font-size:.82rem;color:var(--muted)}
 .cform textarea{resize:vertical;min-height:120px}
 .cform input:focus,.cform textarea:focus{outline:none;border-color:var(--b)}
 .cform .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}

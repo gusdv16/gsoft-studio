@@ -348,7 +348,9 @@ const icons = {
           <p class="sub">{t.contact.text}</p>
           <form class="cform" data-form novalidate action={ENDPOINT} method="post" data-endpoint={ENDPOINT} data-lang={t.lang} data-sitekey={SITEKEY} data-msg={JSON.stringify(t.contact.form)}>
             <label>{t.contact.form.name}<input name="name" type="text" autocomplete="name" required maxlength="100"></label>
-            <label>{t.contact.form.email}<input name="email" type="email" autocomplete="email" required maxlength="150" inputmode="email"></label>
+            <label>{t.contact.form.email}<input name="email" type="email" autocomplete="email" maxlength="150" inputmode="email"></label>
+            <label>{t.contact.form.phone}<input name="phone" type="tel" autocomplete="tel" maxlength="40" inputmode="tel"></label>
+            <p class="fhint">{t.contact.form.hint}</p>
             <label>{t.contact.form.message}<textarea name="message" rows="5" required minlength="10" maxlength="3000"></textarea></label>
             <input class="hp" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div data-ts></div>
@@ -435,8 +437,12 @@ const icons = {
         e.preventDefault();
         status.className = 'fstat';
         const d = Object.fromEntries(new FormData(form));
-        if (!form.checkValidity()) {
-          status.textContent = form.email.validity.valid ? msg.invalid : msg.email_bad;
+        const phoneOk = !d.phone || /^[+()\d\s.-]{6,}$/.test(d.phone.trim());
+        const bad = !form.checkValidity() ? (form.email.validity.valid ? msg.invalid : msg.email_bad)
+          : !d.email.trim() && !d.phone.trim() ? msg.need_contact
+          : !phoneOk ? msg.phone_bad : '';
+        if (bad) {
+          status.textContent = bad;
           status.classList.add('bad');
           return;
         }
@@ -446,7 +452,7 @@ const icons = {
           const r = await fetch(form.dataset.endpoint, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name: d.name, email: d.email, message: d.message, website: d.website, lang: form.dataset.lang, t: t0, cf }),
+            body: JSON.stringify({ name: d.name, email: d.email, phone: d.phone, message: d.message, website: d.website, lang: form.dataset.lang, t: t0, cf }),
           });
           const j = await r.json().catch(() => ({}));
           if (j.ok) {

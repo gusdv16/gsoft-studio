@@ -261,9 +261,9 @@ export default {
     text: 'Tell us what you need and we will reply with a clear proposal. No commitment.',
     cta: 'Send an email',
     form: {
-      name: 'Name', email: 'Email', message: 'Tell us what you need', send: 'Send message',
+      name: 'Name', email: 'Email', phone: 'Phone or WhatsApp', hint: 'Either email or phone is enough.', need_contact: 'Leave an email or a phone number so we can reply.', phone_bad: "That phone number doesn't look valid.", message: 'Tell us what you need', send: 'Send message',
       sending: 'Sending…', ok: 'Thank you! We got your message and will reply soon.',
-      invalid: 'Please check the fields: the message needs at least 10 characters.', email_bad: "That email doesn't look valid.",
+      invalid: 'Please check the fields: a name and a message of at least 10 characters are required.', email_bad: "That email doesn't look valid.",
       rate: 'Too many submissions in a row. Try later or write to info@gustavobentancor.com.',
       captcha: "We couldn't verify you are a person. Reload and try again.",
       err: 'Could not send. Please write to us directly at info@gustavobentancor.com.',

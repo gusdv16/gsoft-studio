@@ -63,16 +63,13 @@ if ($ts > 0 && (time() - intdiv($ts, 1000)) < MIN_FILL_SECONDS) { out(200, true)
 // --- Validacion ---
 $name    = one_line(field($data, 'name', 100));
 $email   = one_line(field($data, 'email', 150));
+$phone   = one_line(field($data, 'phone', 40));
 $message = field($data, 'message', 3000);
 $lang    = (isset($data['lang']) && $data['lang'] === 'en') ? 'en' : 'es';
-$scopes = ['automation' => 'Automatizacion de procesos', 'ai' => 'IA en flujos de trabajo', 'web' => 'Desarrollo web rapido', 'app' => 'Extension o app a medida', 'other' => 'Otro'];
-$times  = ['asap' => 'Lo antes posible', 'm1' => '1 a 2 meses', 'flex' => 'Sin apuro', 'unk' => 'Aun no lo sabe'];
-$sk = field($data, 'scope', 20);
-$tk = field($data, 'time', 20);
-$scope = isset($scopes[$sk]) ? $scopes[$sk] : '-';
-$time  = isset($times[$tk]) ? $times[$tk] : '-';
 if ($name === '' || $message === '' || strlen($message) < 10) { out(422, false, 'invalid'); }
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { out(422, false, 'email'); }
+if ($email === '' && $phone === '') { out(422, false, 'invalid'); }
+if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) { out(422, false, 'email'); }
+if ($phone !== '' && !preg_match('/^[+()\d\s.-]{6,}$/', $phone)) { out(422, false, 'invalid'); }
 
 // --- Rate limit por IP + tope global (archivos en el directorio temporal) ---
 $ip = isset($_SERVER['HTTP_CF_CONNECTING_IP']) ? $_SERVER['HTTP_CF_CONNECTING_IP'] : (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '0');
@@ -112,10 +109,10 @@ if (!empty($cfg['turnstile_secret'])) {
 $subject = ($lang === 'en' ? 'New message from the site' : 'Nuevo mensaje desde el sitio') . ' - ' . $name;
 $encSubject = function_exists('mb_encode_mimeheader') ? mb_encode_mimeheader($subject, 'UTF-8', 'B') : $subject;
 $encName = function_exists('mb_encode_mimeheader') ? mb_encode_mimeheader($name, 'UTF-8', 'B') : '';
-$body = "Nombre: $name\nEmail: $email\nTipo de proyecto: $scope\nPlazo: $time\nIdioma: $lang\nOrigen: " . ($origin !== '' ? $origin : '-') . "\nIP: $ip\nFecha: " . gmdate('Y-m-d H:i') . " UTC\n\n" . $message . "\n";
+$body = "Nombre: $name\nEmail: " . ($email !== '' ? $email : '-') . "\nTelefono: " . ($phone !== '' ? $phone : '-') . "\nIdioma: $lang\nOrigen: " . ($origin !== '' ? $origin : '-') . "\nIP: $ip\nFecha: " . gmdate('Y-m-d H:i') . " UTC\n\n" . $message . "\n";
 $headers = [
     'From: Gsoft Studio <' . FROM_EMAIL . '>',
-    'Reply-To: ' . ($encName !== '' ? $encName . ' ' : '') . '<' . $email . '>',
+    ($email !== '' ? 'Reply-To: ' . ($encName !== '' ? $encName . ' ' : '') . '<' . $email . '>' : 'X-Contact-Phone: ' . $phone),
     'MIME-Version: 1.0',
     'Content-Type: text/plain; charset=UTF-8',
     'Content-Transfer-Encoding: 8bit',

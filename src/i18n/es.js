@@ -261,9 +261,9 @@ export default {
     text: 'Cuéntanos qué necesitas y te respondemos con una propuesta clara. Sin compromiso.',
     cta: 'Escribir un email',
     form: {
-      name: 'Nombre', email: 'Email', message: 'Cuéntanos qué necesitas', send: 'Enviar mensaje',
+      name: 'Nombre', email: 'Email', phone: 'Teléfono o WhatsApp', hint: 'Con el email o el teléfono alcanza.', need_contact: 'Déjanos un email o un teléfono para poder responderte.', phone_bad: 'El teléfono no parece válido.', message: 'Cuéntanos qué necesitas', send: 'Enviar mensaje',
       sending: 'Enviando…', ok: '¡Gracias! Recibimos tu mensaje y te respondemos pronto.',
-      invalid: 'Revisa los campos: el mensaje debe tener al menos 10 caracteres.', email_bad: 'El email no parece válido.',
+      invalid: 'Revisa los campos: el nombre y un mensaje de al menos 10 caracteres son obligatorios.', email_bad: 'El email no parece válido.',
       rate: 'Demasiados envíos seguidos. Prueba más tarde o escribe a info@gustavobentancor.com.',
       captcha: 'No pudimos verificar que eres una persona. Recarga e inténtalo de nuevo.',
       err: 'No se pudo enviar. Escríbenos directamente a info@gustavobentancor.com.',
