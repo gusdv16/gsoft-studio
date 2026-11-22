@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /g2014/
+
+Sitemap: https://gustavobentancor.com/sitemap.xml
