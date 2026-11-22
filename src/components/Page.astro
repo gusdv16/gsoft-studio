@@ -125,6 +125,21 @@ const icons = {
   <script is:inline>
     (function(){var r=document.documentElement;if(!matchMedia('(prefers-reduced-motion:reduce)').matches){r.classList.add('anim');window.__af=setTimeout(function(){r.classList.remove('anim')},6000)}})();
   </script>
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-TEFWE35W1K"></script>
+  <script is:inline>
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+    gtag('js',new Date());gtag('config','G-TEFWE35W1K');
+    // Eventos de CTA: descarga de CV, clics a contacto, enlaces externos y salida a tiendas/demos.
+    document.addEventListener('click',function(e){
+      var a=e.target.closest&&e.target.closest('a,button[data-open]');if(!a)return;
+      var h=a.getAttribute('href')||'',p={link_text:(a.textContent||'').trim().slice(0,60)};
+      if(a.dataset.track==='cv')gtag('event','cv_download',p);
+      else if(h==='#contacto')gtag('event','cta_contact',p);
+      else if(/^mailto:/.test(h))gtag('event','click_email',p);
+      else if(/^tel:/.test(h))gtag('event','click_phone',p);
+      else if(/^https?:/.test(h)&&h.indexOf(location.host)<0){p.link_url=h;gtag('event','outbound_click',p)}
+    });
+  </script>
 </head>
 <body>
   <a class="skip" href="#main">{t.skip}</a>
@@ -531,6 +546,7 @@ const icons = {
           });
           const j = await r.json().catch(() => ({}));
           if (j.ok) {
+            if (window.gtag) window.gtag('event', 'generate_lead', { method: 'contact_form' });
             status.textContent = msg.ok;
             status.classList.add('good');
             form.reset();
