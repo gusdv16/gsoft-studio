@@ -133,7 +133,7 @@ const icons = {
     document.addEventListener('click',function(e){
       var a=e.target.closest&&e.target.closest('a,button[data-open]');if(!a)return;
       var h=a.getAttribute('href')||'',p={link_text:(a.textContent||'').trim().slice(0,60)};
-      if(a.dataset.track==='cv')gtag('event','cv_download',p);
+      if(a.hasAttribute("data-cv"))gtag('event','cv_download',p);
       else if(h==='#contacto')gtag('event','cta_contact',p);
       else if(/^mailto:/.test(h))gtag('event','click_email',p);
       else if(/^tel:/.test(h))gtag('event','click_phone',p);
@@ -186,7 +186,7 @@ const icons = {
           <div class="cta">
             <a class="btn btn-p" href="#contacto">{t.hero.primary}</a>
             <a class="btn btn-s" href="#proyectos">{t.hero.secondary}</a>
-            <a class="btn btn-s" href={`${base}/${t.cv.file}`} download={t.cv.name} data-track="cv">{t.cv.download}</a>
+            <a class="btn btn-s" href={`${base}/${t.cv.file}`} download={t.cv.name} data-cv>{t.cv.download}</a>
           </div>
           <ul class="hpts">
             {t.hero.points.map((x) => <li>{x}</li>)}
@@ -391,7 +391,7 @@ const icons = {
             {t.about.paragraphs.map((p) => <p>{p}</p>)}
             <a class="ghl" href={t.github} target="_blank" rel="noopener">{t.about.github} ↗</a>
             <a class="ghl" href={t.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
-            <a class="ghl" href={`${base}/${t.cv.file}`} download={t.cv.name} data-track="cv">{t.cv.download} ↓</a>
+            <a class="ghl" href={`${base}/${t.cv.file}`} download={t.cv.name} data-cv>{t.cv.download} ↓</a>
           </div>
         </div>
         <ul class="pts">
@@ -447,7 +447,7 @@ const icons = {
   <footer>
     <div class="wrap">
       <span>{t.footer}</span>
-      <span class="flinks"><a href={t.linkedin} target="_blank" rel="noopener">LinkedIn</a><a href={t.github} target="_blank" rel="noopener">GitHub</a><a href={`${base}/${t.cv.file}`} download={t.cv.name} data-track="cv">CV</a></span>
+      <span class="flinks"><a href={t.linkedin} target="_blank" rel="noopener">LinkedIn</a><a href={t.github} target="_blank" rel="noopener">GitHub</a><a href={`${base}/${t.cv.file}`} download={t.cv.name} data-cv>CV</a></span>
     </div>
   </footer>
 
