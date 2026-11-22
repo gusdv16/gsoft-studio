@@ -1,0 +1,3 @@
+# Envia Content-Type con charset para que crawlers/proxies no lean el HTML como Latin-1.
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .html .xml .svg .js .css
