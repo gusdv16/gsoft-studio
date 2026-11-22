@@ -69,6 +69,28 @@ export default {
       },
     ],
   },
+  why: {
+    kicker: 'Por qué elegirme',
+    title: 'Trabajar conmigo es directo',
+    items: [
+      { title: 'Sin intermediarios', text: 'Hablas con la persona que diseña y programa. Sin gestores de cuenta ni mensajes que se pierden.' },
+      { title: 'Rendimiento medido', text: 'Cada sitio se mide con Lighthouse y Core Web Vitals, y te muestro los números, no promesas.' },
+      { title: 'Código documentado', text: 'Recibes el código y la documentación para que no dependas de mí si algún día lo necesitas.' },
+      { title: 'Pensado para convertir', text: 'Vengo del marketing: analítica, tests A/B y SEO técnico forman parte del trabajo, no un extra.' },
+    ],
+  },
+  industries: {
+    kicker: 'Industrias',
+    title: 'Dónde ya trabajé',
+    lead: 'Proyectos reales en sectores donde la velocidad, la confianza y el contenido importan.',
+    items: [
+      { title: 'Deportes', text: 'Urugol y AUF: portales de fútbol con mucho contenido y actualizaciones constantes.' },
+      { title: 'Banca y finanzas', text: 'Sitios para BROU y Gletir Tracker, mi extensión de seguimiento de inversiones.' },
+      { title: 'Medios y noticias', text: 'Portales de noticias en WordPress y Kiosko Digital, mi visor de portadas.' },
+      { title: 'Marketing digital', text: 'Banners HTML5 para Google Ads, analítica web, tests A/B y SEO técnico.' },
+    ],
+  },
+  cv: { download: 'Descargar CV (PDF)', file: 'cv/Gustavo-Bentancor-CV-ES.pdf', name: 'Gustavo-Bentancor-CV-ES.pdf', note: 'CV actualizado 2026' },
   process: {
     kicker: 'Cómo trabajo',
     title: 'Simple, claro y con resultados temprano',

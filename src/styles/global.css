@@ -312,3 +312,9 @@ html.mordor body::after{content:"";position:fixed;inset:0;z-index:40;pointer-eve
 @media(prefers-reduced-motion:reduce){html.mordor .foto .eye,html.mordor body::after{animation:none}.foto .eye,.foto::after,.egg-msg,html.mordor .foto img{transition:none}}
 html.mordor .box{background:linear-gradient(150deg,#2a0e08,#0d0504)}
 html.mordor .box::before{background:radial-gradient(circle,rgba(255,70,0,.32) 0,rgba(255,70,0,0) 68%)}
+
+/* CTA fijo en movil */
+.sticky-cta{position:fixed;right:16px;bottom:16px;z-index:48;background:var(--grad);color:#07080d;font-weight:700;text-decoration:none;padding:12px 20px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.45);transform:translateY(90px);opacity:0;pointer-events:none;transition:transform .25s,opacity .25s}
+.sticky-cta.show{transform:none;opacity:1;pointer-events:auto}
+@media(min-width:760px){.sticky-cta{display:none}}
+@media(prefers-reduced-motion:reduce){.sticky-cta{transition:none}}

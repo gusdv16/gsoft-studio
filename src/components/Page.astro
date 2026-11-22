@@ -39,13 +39,27 @@ const ld = {
       email: t.email,
       description: t.meta.description,
       image: `${CANON}/og.png`,
-      founder: { '@type': 'Person', name: 'Gustavo Bentancor', jobTitle: 'Full-Stack Developer & Product Engineer', sameAs: [t.github, t.linkedin] },
+      founder: { '@id': `${CANON}/#person` },
       sameAs: [t.github, t.linkedin],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: t.services.title,
         itemListElement: t.services.items.map((x) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: x.title, description: x.text } })),
       },
+    },
+    {
+      '@type': 'Person',
+      '@id': `${CANON}/#person`,
+      name: 'Gustavo Bentancor',
+      jobTitle: 'Full-Stack Developer & Product Engineer',
+      url: `${CANON}/`,
+      image: `${CANON}/og.png`,
+      email: t.email,
+      address: { '@type': 'PostalAddress', addressLocality: 'Montevideo', addressCountry: 'UY' },
+      worksFor: { '@id': `${CANON}/#org` },
+      knowsAbout: ['Web development', 'Technical SEO', 'Core Web Vitals', 'Astro', 'JavaScript', 'PHP', 'Chrome extensions', 'Progressive web apps'],
+      subjectOf: { '@type': 'DigitalDocument', name: t.cv.download, url: `${CANON}/${t.cv.file}`, encodingFormat: 'application/pdf' },
+      sameAs: [t.github, t.linkedin],
     },
     {
       '@type': 'WebSite',
@@ -157,6 +171,7 @@ const icons = {
           <div class="cta">
             <a class="btn btn-p" href="#contacto">{t.hero.primary}</a>
             <a class="btn btn-s" href="#proyectos">{t.hero.secondary}</a>
+            <a class="btn btn-s" href={`${base}/${t.cv.file}`} download={t.cv.name} data-track="cv">{t.cv.download}</a>
           </div>
           <ul class="hpts">
             {t.hero.points.map((x) => <li>{x}</li>)}
@@ -198,6 +213,21 @@ const icons = {
               <div class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={icons[s.icon]}/></svg></div>
               <h3>{s.title}</h3>
               <p>{s.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="por-que" class="why cv" style="--m:700px;--d:500px">
+      <div class="wrap">
+        <p class="kick" data-r>{t.why.kicker}</p>
+        <h2 data-r>{t.why.title}</h2>
+        <div class="grid4">
+          {t.why.items.map((x) => (
+            <article class="card" data-r="card">
+              <h3>{x.title}</h3>
+              <p>{x.text}</p>
             </article>
           ))}
         </div>
@@ -308,6 +338,22 @@ const icons = {
       </div>
     </section>
 
+    <section id="industrias" class="cv" style="--m:700px;--d:500px">
+      <div class="wrap">
+        <p class="kick" data-r>{t.industries.kicker}</p>
+        <h2 data-r>{t.industries.title}</h2>
+        <p class="sub" data-r>{t.industries.lead}</p>
+        <div class="grid4">
+          {t.industries.items.map((x) => (
+            <article class="card" data-r="card">
+              <h3>{x.title}</h3>
+              <p>{x.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <section id="sobre-mi" class="alt cv" style="--m:1500px;--d:1000px">
       <div class="wrap about">
         <figure class="foto" data-r="card" data-egg={JSON.stringify(t.egg)}>
@@ -330,6 +376,7 @@ const icons = {
             {t.about.paragraphs.map((p) => <p>{p}</p>)}
             <a class="ghl" href={t.github} target="_blank" rel="noopener">{t.about.github} ↗</a>
             <a class="ghl" href={t.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a class="ghl" href={`${base}/${t.cv.file}`} download={t.cv.name} data-track="cv">{t.cv.download} ↓</a>
           </div>
         </div>
         <ul class="pts">
@@ -385,10 +432,24 @@ const icons = {
   <footer>
     <div class="wrap">
       <span>{t.footer}</span>
-      <span class="flinks"><a href={t.linkedin} target="_blank" rel="noopener">LinkedIn</a><a href={t.github} target="_blank" rel="noopener">GitHub</a></span>
+      <span class="flinks"><a href={t.linkedin} target="_blank" rel="noopener">LinkedIn</a><a href={t.github} target="_blank" rel="noopener">GitHub</a><a href={`${base}/${t.cv.file}`} download={t.cv.name} data-track="cv">CV</a></span>
     </div>
   </footer>
 
+  <a class="sticky-cta" href="#contacto" data-sticky aria-label={t.nav.cta}>{t.nav.cta}</a>
+
+  <script>
+    // CTA fijo en movil: se muestra al pasar el hero y se oculta cuando el formulario esta a la vista.
+    const stk = document.querySelector('[data-sticky]');
+    const heroEl = document.querySelector('[data-hero]');
+    const contactEl = document.getElementById('contacto');
+    if (stk && heroEl && contactEl && 'IntersectionObserver' in window) {
+      let inHero = true, inContact = false;
+      const upd = () => stk.classList.toggle('show', !inHero && !inContact);
+      new IntersectionObserver((e) => { inHero = e[0].isIntersecting; upd(); }).observe(heroEl);
+      new IntersectionObserver((e) => { inContact = e[0].isIntersecting; upd(); }).observe(contactEl);
+    }
+  </script>
   <script>
     // Filtros por categoria y detalle en <dialog> nativo (se mejora lo que ya existe; sin JS todo sigue visible).
     const grid = document.querySelector('.pgrid');

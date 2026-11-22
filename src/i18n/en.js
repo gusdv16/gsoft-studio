@@ -69,6 +69,28 @@ export default {
       },
     ],
   },
+  why: {
+    kicker: 'Why choose me',
+    title: 'Working with me is direct',
+    items: [
+      { title: 'No middlemen', text: 'You talk to the person who designs and codes. No account managers, no lost messages.' },
+      { title: 'Measured performance', text: 'Every site is measured with Lighthouse and Core Web Vitals, and I show you the numbers, not promises.' },
+      { title: 'Documented code', text: 'You get the code and the documentation, so you never depend on me if you need to move on.' },
+      { title: 'Built to convert', text: 'I come from marketing: analytics, A/B tests and technical SEO are part of the work, not an extra.' },
+    ],
+  },
+  industries: {
+    kicker: 'Industries',
+    title: "Where I've already worked",
+    lead: 'Real projects in sectors where speed, trust and content matter.',
+    items: [
+      { title: 'Sports', text: 'Urugol and AUF: football portals with lots of content and constant updates.' },
+      { title: 'Banking and finance', text: 'Sites for BROU and Gletir Tracker, my investment-tracking extension.' },
+      { title: 'Media and news', text: 'WordPress news portals and Kiosko Digital, my front-page viewer.' },
+      { title: 'Digital marketing', text: 'HTML5 banners for Google Ads, web analytics, A/B tests and technical SEO.' },
+    ],
+  },
+  cv: { download: 'Download CV (PDF)', file: 'cv/Gustavo-Bentancor-CV-EN.pdf', name: 'Gustavo-Bentancor-CV-EN.pdf', note: 'Updated CV 2026' },
   process: {
     kicker: 'How I work',
     title: 'Simple, clear, and early results',
