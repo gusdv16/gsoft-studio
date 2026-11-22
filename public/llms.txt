@@ -1,0 +1,30 @@
+# Gsoft Studio
+
+> Estudio de Gustavo Bentancor (Uruguay): desarrollo web rápido, SEO técnico, extensiones de Chrome, apps y automatización con IA para negocios. Trabajo directo con quien diseña y programa, con rendimiento medido (Lighthouse, Core Web Vitals) y código documentado.
+
+## Sitio
+
+- [Inicio (español)](https://gustavobentancor.com/): servicios, proceso de trabajo, proyectos, experiencia y contacto.
+- [Home (English)](https://gustavobentancor.com/en/): the same content in English.
+- [Sitemap](https://gustavobentancor.com/sitemap.xml)
+
+## Servicios
+
+- Desarrollo web rápido: sitios optimizados para Core Web Vitals y SEO técnico.
+- Extensiones de Chrome y apps a medida (PWA, Android con Capacitor).
+- Integración de IA en flujos de trabajo.
+- Herramientas a medida para el negocio (PHP, MySQL, Google Apps Script).
+
+## Proyectos destacados
+
+- Gletir Tracker: extensión de seguimiento de inversiones.
+- Easy PDF Free: lector de PDF sin publicidad (web y Android).
+- Moova Tracker: extensión de Chrome que avisa cuando cambia el estado de un envío.
+- Kiosko Digital: visor de portadas de diarios.
+- Web Performance Showcase, Habit Tracker, Responsive Image Generator, Insight Demo y Buscador de ofertas.
+- Código: https://github.com/gusdv16
+
+## Contacto
+
+- Email: info@gustavobentancor.com
+- Formulario en la sección de contacto de la página principal.

@@ -28,6 +28,7 @@ jobs:
       - run: npm run build
         env:
           GH_PAGES: '1'
+          ROOT_BASE: '1'
           SITE_URL: 'https://gustavobentancor.com'
           # Clave pública de Cloudflare Turnstile (no es secreta)
           PUBLIC_TURNSTILE_SITEKEY: '0x4AAAAAAGEi7nu7Y3WrE5Bz'

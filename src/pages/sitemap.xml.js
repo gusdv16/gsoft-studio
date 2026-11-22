@@ -1,5 +1,5 @@
 // Sitemap con alternates hreflang. La URL canonica es el dominio propio.
-const CANON = 'https://gustavobentancor.com/gsoft-studio';
+const CANON = 'https://gustavobentancor.com';
 export function GET() {
   const urls = [`${CANON}/`, `${CANON}/en/`];
   const links = `<xhtml:link rel="alternate" hreflang="es" href="${urls[0]}"/><xhtml:link rel="alternate" hreflang="en" href="${urls[1]}"/><xhtml:link rel="alternate" hreflang="x-default" href="${urls[0]}"/>`;

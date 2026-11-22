@@ -5,7 +5,8 @@ const pages = process.env.GH_PAGES === '1';
 
 export default defineConfig({
   site: pages ? (process.env.SITE_URL ?? 'https://gusdv16.github.io') : 'http://localhost:4330',
-  base: pages ? '/gsoft-studio' : '/',
+  // ROOT_BASE=1: build para servir en la raiz del dominio (gustavobentancor.com/)
+  base: pages && process.env.ROOT_BASE !== '1' ? '/gsoft-studio' : '/',
   trailingSlash: 'always',
   compressHTML: true,
   build: { inlineStylesheets: 'always' },
