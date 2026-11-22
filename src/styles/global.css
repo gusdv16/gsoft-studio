@@ -63,6 +63,7 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
 .hpts li::before{content:"";position:absolute;left:0;top:.38em;width:14px;height:8px;border-left:2px solid var(--b);border-bottom:2px solid var(--b);transform:rotate(-45deg) scale(.9)}
 .lead{margin-top:24px;font-size:clamp(1.02rem,2.6vw,1.2rem);color:var(--muted);max-width:56ch}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.cta .btn{flex:0 0 auto;white-space:nowrap}
 .flow{position:relative;background:linear-gradient(160deg,#141829,#0c0e17);border:1px solid var(--line);border-radius:24px;padding:26px;display:grid;gap:18px;align-self:center}
 .node{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line);font-weight:600}
 .node b{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(124,140,255,.15);color:var(--a);font-size:.9rem}
