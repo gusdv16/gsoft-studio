@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Rincón del Chef — Recetas y restaurantes</title>
+<meta name="description" content="El Rincón del Chef: recetas paso a paso, restaurantes recomendados y comunidad de cocineros. Demo de Gsoft Studio.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="demo-bar">Demo de Gsoft Studio · reescritura moderna de un proyecto de 2013 · <a href="/">Volver al portfolio</a></div>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="logo" href="#inicio"><span aria-hidden="true">🍳</span> El Rincón <b>del Chef</b></a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#recetas">Recetas</a>
+      <a href="#restaurantes">Restaurantes</a>
+      <a href="#comunidad">Comunidad</a>
+      <button class="fav-btn" id="verFavs" type="button" aria-pressed="false">♥ Favoritas <span id="favCount">0</span></button>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div>
+        <p class="kicker">Cocina rioplatense y del mundo</p>
+        <h1>Qué cocinamos hoy,<br><em>sin complicarte la vida.</em></h1>
+        <p class="lead">Recetas con pasos claros, tiempos reales y un nivel de dificultad honesto. Y cuando no tengas ganas de cocinar, restaurantes que valen la pena.</p>
+        <form class="buscar" id="buscar" role="search">
+          <input id="q" type="search" placeholder="Busca por plato o ingrediente: milanesa, dulce de leche…" aria-label="Buscar recetas">
+          <button>Buscar</button>
+        </form>
+      </div>
+      <ul class="hero-art" aria-hidden="true"><li>🥘</li><li>🥩</li><li>🍰</li><li>🥗</li></ul>
+    </div>
+  </section>
+
+  <section id="recetas" class="wrap sec">
+    <div class="sec-head">
+      <h2>Recetas</h2>
+      <div class="filtros" role="group" aria-label="Filtros">
+        <div class="chips" id="cats"></div>
+        <label>Dificultad
+          <select id="dif"><option value="">Todas</option><option>Fácil</option><option>Media</option><option>Difícil</option></select>
+        </label>
+      </div>
+    </div>
+    <p class="count" id="count" aria-live="polite"></p>
+    <ul class="grid" id="recetas-grid"></ul>
+  </section>
+
+  <section id="restaurantes" class="band">
+    <div class="wrap sec">
+      <div class="sec-head"><h2>Restaurantes recomendados</h2>
+        <label>Ciudad <select id="ciudad"><option value="">Todas</option></select></label>
+      </div>
+      <ul class="rest" id="rest-list"></ul>
+    </div>
+  </section>
+
+  <section id="comunidad" class="wrap sec com">
+    <div>
+      <h2>Súmate a la comunidad</h2>
+      <p>Guarda tus recetas favoritas, comparte las tuyas y recibe una idea nueva cada semana. Es gratis y sin spam.</p>
+      <ul class="check"><li>Guarda favoritas en tu cuenta</li><li>Publica tus recetas</li><li>Calificá y comenta</li></ul>
+    </div>
+    <form id="registro" class="form" novalidate>
+      <label>Nombre <input name="nombre" autocomplete="name" required minlength="2"><small class="err"></small></label>
+      <label>Email <input name="email" type="email" autocomplete="email" required><small class="err"></small></label>
+      <label>Clave <input name="clave" type="password" autocomplete="new-password" required minlength="8"><small class="hint">Mínimo 8 caracteres</small><small class="err"></small></label>
+      <label class="chk"><input type="checkbox" name="acepto" required> Acepto los términos y condiciones</label><small class="err"></small>
+      <button class="btn">Crear cuenta</button>
+      <p class="ok" id="regOk" role="status" hidden></p>
+    </form>
+  </section>
+</main>
+
+<footer class="foot"><div class="wrap">El Rincón del Chef · Proyecto original 2013, rediseñado por Gustavo Bentancor. Recetas y lugares de ejemplo; es una demo sin servidor.</div></footer>
+
+<dialog id="modal" aria-labelledby="m-titulo">
+  <form method="dialog"><button class="cerrar" aria-label="Cerrar">✕</button></form>
+  <div id="m-body"></div>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>

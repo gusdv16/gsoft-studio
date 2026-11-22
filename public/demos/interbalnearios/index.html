@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interbalnearios — Intercambia tu casa de playa en Uruguay</title>
+<meta name="description" content="Interbalnearios: el sitio para intercambiar alquileres de balneario en Uruguay. Demo de Gsoft Studio.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="demo-bar">Demo de Gsoft Studio · reescritura moderna de un proyecto de 2013 · <a href="/">Volver al portfolio</a></div>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="logo" href="#inicio"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3z"/></svg> Inter<b>balnearios</b></a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#como">Cómo funciona</a>
+      <a href="#resultados">Propiedades</a>
+      <a href="#publicar">Publicar</a>
+      <button class="favb" id="verFavs" type="button" aria-pressed="false">♥ Favoritos <span id="favCount">0</span></button>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="wrap">
+      <p class="kicker">El primer sitio para intercambiar alquileres de Uruguay</p>
+      <h1>Tu casa de playa por la de otro.<br><em>Sin pagar alquiler.</em></h1>
+      <form class="busca" id="filtros" aria-label="Buscar propiedades">
+        <label>Quiero ver
+          <select name="tipo"><option value="">Cualquiera</option><option>Casa</option><option>Apartamento</option><option>Cabaña</option></select></label>
+        <label>En
+          <select name="lugar"><option value="">Todo el país</option></select></label>
+        <label>Mes
+          <select name="mes"><option value="">Cualquiera</option></select></label>
+        <label>Habitaciones (mín.)
+          <select name="hab"><option value="0">Todas</option><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
+        <label>Distancia al mar
+          <select name="dist"><option value="0">Cualquiera</option><option value="100">Hasta 100 m</option><option value="500">Hasta 500 m</option><option value="2000">Hasta 2 km</option></select></label>
+        <label class="chk"><input type="checkbox" name="gratis"> Solo intercambio (sin pago)</label>
+        <button class="btn">Buscar</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="resultados" class="wrap sec" aria-live="polite">
+    <div class="sec-head"><h2 id="tituloRes">Propiedades</h2><p class="count" id="count"></p></div>
+    <ul class="grid" id="grid"></ul>
+  </section>
+
+  <section id="como" class="band">
+    <div class="wrap sec">
+      <h2>Cómo funciona</h2>
+      <ol class="pasos">
+        <li><b>1</b><h3>Publica tu casa</h3><p>Cuéntanos dónde está, qué tiene y en qué meses la puedes intercambiar.</p></li>
+        <li><b>2</b><h3>Agrega favoritas</h3><p>Guarda las propiedades que te interesan y propone el intercambio a sus dueños.</p></li>
+        <li><b>3</b><h3>Haz el intercambio</h3><p>Se ponen de acuerdo en fechas y listo: vacaciones sin alquiler. Si hay diferencia de valor, se compensa.</p></li>
+      </ol>
+      <h3 class="t">Lo que dicen los usuarios</h3>
+      <ul class="testi">
+        <li><p>«Cambié mi apartamento de Montevideo por una cabaña en Rocha. Los dueños fueron un encanto.»</p><span>Ana Sofía</span></li>
+        <li><p>«Ahorramos todo el alquiler de enero. Muy fácil de usar.»</p><span>Frank</span></li>
+        <li><p>«Preciosa casa a una cuadra de la rambla. Recomendable.»</p><span>Hargous</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="publicar" class="wrap sec pub">
+    <div><h2>Publica tu propiedad</h2><p>Es gratis. Crea la publicación en un minuto y empieza a recibir propuestas.</p></div>
+    <form class="form" id="pubForm" novalidate>
+      <label>Título <input name="titulo" required minlength="6" placeholder="Monoambiente en Playa Hermosa"><small class="err"></small></label>
+      <label>Lugar <select name="lugar" id="pubLugar" required><option value="">Elegir…</option></select><small class="err"></small></label>
+      <label>Habitaciones <input name="hab" type="number" min="1" max="10" required><small class="err"></small></label>
+      <button class="btn">Publicar</button>
+      <p class="ok" id="pubOk" role="status" hidden></p>
+    </form>
+  </section>
+</main>
+
+<footer class="foot"><div class="wrap">Interbalnearios · Proyecto original 2013, rediseñado por Gustavo Bentancor. Las propiedades son datos de ejemplo, sin servidor.</div></footer>
+
+<dialog id="modal" aria-labelledby="m-titulo">
+  <form method="dialog"><button class="cerrar" aria-label="Cerrar">✕</button></form>
+  <div id="m-body"></div>
+</dialog>
+<script src="app.js"></script>
+</body>
+</html>
