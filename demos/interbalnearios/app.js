@@ -51,7 +51,7 @@
     $('#grid').innerHTML = l.length ? l.map(function (p) {
       var on = favs.indexOf(p.id) >= 0;
       return '<li class="card"><button class="main" data-id="' + p.id + '">' + art(p) +
-        '<span class="body"><span class="tipo">' + esc(p.tipo) + ' · ' + esc(p.l) + '</span><strong>' + esc(p.t) + '</strong>' +
+        '<span class="body"><span class="tipo">' + esc(p.tipo) + ' · ' + esc(p.l) + ', ' + esc(p.dep) + '</span><strong>' + esc(p.t) + '</strong>' +
         '<span class="spec">' + p.hab + ' hab. · ' + p.ban + ' baño' + (p.ban > 1 ? 's' : '') + ' · ' + p.dist + ' m del mar</span>' +
         '<span class="precio' + (p.pagar ? ' pago' : '') + '">' + precio(p) + '</span></span></button>' +
         '<button class="heart' + (on ? ' on' : '') + '" data-fav="' + p.id + '" aria-pressed="' + on + '" aria-label="' + (on ? 'Quitar de' : 'Agregar a') + ' favoritos: ' + esc(p.t) + '">' + (on ? '♥' : '♡') + '</button></li>';

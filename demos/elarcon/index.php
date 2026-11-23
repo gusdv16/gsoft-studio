@@ -16,7 +16,7 @@ if (!isset($ordenes[$orden])) $orden = 'novedad';
 
 $where = []; $args = [];
 if ($q !== '') {
-    $where[] = '(titulo LIKE ? OR autor LIKE ? OR editorial LIKE ?)';
+    $where[] = "(titulo LIKE ? ESCAPE '\\' OR autor LIKE ? ESCAPE '\\' OR editorial LIKE ? ESCAPE '\\')";
     $like = '%' . str_replace(['%', '_'], ['\\%', '\\_'], $q) . '%';
     array_push($args, $like, $like, $like);
 }
@@ -80,7 +80,8 @@ site_header('', $q);
           <?php if ($l['oferta'] > 0): ?><span class="badge">−<?= (int)$l['oferta'] ?>%</span><?php endif; ?>
           <h2><?= e($l['titulo']) ?></h2>
           <p class="autor"><?= e($l['autor']) ?></p>
-          <p class="precio"><?= money($pf) ?><?php if ($l['oferta'] > 0): ?> <s><?= money($l['precio']) ?></s><?php endif; ?></p>
+          <p class="meta"><?= e($l['editorial']) ?><?= $l['anio'] ? ' · ' . (int)$l['anio'] : '' ?></p>
+           <p class="precio"><?= money($pf) ?><?php if ($l['oferta'] > 0): ?> <s><?= money($l['precio']) ?></s><?php endif; ?></p>
           <?php if ($l['stock'] < 1): ?><p class="agotado">Agotado</p><?php elseif ($l['stock'] <= 5): ?><p class="poco">Últimas <?= (int)$l['stock'] ?> unidades</p><?php endif; ?>
         </a>
       </li>
