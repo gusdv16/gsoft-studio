@@ -103,8 +103,9 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
 .m-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px;flex-wrap:wrap}.m-foot .precio{font-size:20px;font-weight:700}
 
 @media(max-width:760px){
-  .wrap{padding:0 16px}
-  .top-in{padding:12px 0;gap:10px}
+  .wrap{padding:0 20px}
+  .top-in{padding:14px 0;gap:10px}
+  .demo-bar{padding:6px 12px}
   .logo{font-size:19px}
   .nav{gap:4px}
   .nav a,.favb{padding:8px 10px;font-size:13px}

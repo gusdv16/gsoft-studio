@@ -55,5 +55,5 @@ dialog::backdrop{background:rgba(20,12,6,.55)}
 .m-head{height:140px;display:grid;place-items:center;font-size:72px;background:linear-gradient(135deg,hsl(var(--h) 85% 88%),hsl(calc(var(--h) + 30) 80% 78%))}
 .m-in{padding:6px 28px 28px}.m-in h2{margin:2px 0 6px;font-size:28px}.m-in h3{margin:22px 0 6px}
 .ing{columns:2;padding-left:20px}.pasos{padding-left:22px}.pasos li{margin-bottom:8px}
-@media(max-width:760px){.hero-in,.com{grid-template-columns:1fr}.hero-art{display:none}.rest li{flex-direction:column;align-items:flex-start}.rm{justify-content:flex-start}.ing{columns:1}}
+@media(max-width:760px){.hero-in,.com{grid-template-columns:1fr}.hero-art{display:none}.rest li{flex-direction:column;align-items:flex-start}.rm{justify-content:flex-start}.ing{columns:1}.wrap{padding:0 20px}.top-in{padding:12px 0;gap:10px}.demo-bar{padding:6px 12px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
