@@ -37,7 +37,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['accion'] ?? '') === 'borra
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['accion'] ?? '') === 'vendido') {
     csrf_check();
-    db()->prepare('UPDATE libros SET vendidos = vendidos + 1, stock = MAX(stock - 1, 0) WHERE id = ?')->execute([(int)$_POST['id']]);
+    $idv = (int)$_POST['id'];
+    db()->prepare('UPDATE libros SET vendidos = vendidos + 1, stock = MAX(stock - 1, 0) WHERE id = ?')->execute([$idv]);
+    $stv = db()->prepare('SELECT stock, vendidos FROM libros WHERE id = ?');
+    $stv->execute([$idv]);
+    $rowv = $stv->fetch();
+    $isAjax = (($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'XMLHttpRequest');
+    if ($isAjax) {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['ok' => true, 'id' => $idv, 'stock' => (int)$rowv['stock'], 'vendidos' => (int)$rowv['vendidos']], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
     header('Location: ./?' . http_build_query(array_merge($_GET, ['ok'=>'vendido']))); exit;
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['accion'] ?? '') === 'reset') {
@@ -144,12 +154,12 @@ site_header('../');
     <tbody>
     <?php foreach ($libros as $l): ?>
       <tr>
-        <td><?php if (!empty($l['imagen'])): ?><img src="<?= e($l['imagen']) ?>" alt="" style="width:36px;height:50px;object-fit:cover;border-radius:4px"><?php else: ?><span style="display:inline-block;width:36px;height:50px;background:hsl(<?= (int)$l['tono'] ?> 60% 80%)"></span><?php endif; ?></td>
+        <td><?php if (!empty($l['imagen'])): ?><img src="<?= e('../' . $l['imagen']) ?>" alt="" style="width:36px;height:50px;object-fit:cover;border-radius:4px"><?php else: ?><span style="display:inline-block;width:36px;height:50px;background:hsl(<?= (int)$l['tono'] ?> 60% 80%)"></span><?php endif; ?></td>
         <td><?= (int)$l['id'] ?></td>
         <td><b><?= e($l['titulo']) ?></b><br><small style="color:var(--mut)"><?= e($l['autor']) ?></small></td>
         <td><?= money(precio_final($l)) ?><?= $l['oferta'] ? ' <small>(−'.(int)$l['oferta'].'%)</small>' : '' ?></td>
-        <td class="<?= $l['stock'] < 1 ? 'rojo' : '' ?>"><?= (int)$l['stock'] ?></td>
-        <td><?= (int)$l['vendidos'] ?></td>
+        <td class="td-stock <?= $l['stock'] < 1 ? 'rojo' : '' ?>" data-id="<?= (int)$l['id'] ?>"><?= (int)$l['stock'] ?></td>
+        <td class="td-vendidos"><?= (int)$l['vendidos'] ?></td>
         <td><?= (int)$l['oferta'] ?>%</td>
         <td class="acc">
           <form method="post" style="display:inline">
@@ -177,4 +187,37 @@ site_header('../');
   </nav>
   <?php endif; ?>
 </main>
+<script>
+(function(){
+  document.addEventListener('submit', async function(e){
+    const form = e.target;
+    if (!form || !form.closest('.acc')) return;
+    const btn = e.submitter;
+    if (!btn || btn.value !== 'vendido') return;
+    e.preventDefault();
+    const fd = new FormData(form);
+    if (!fd.has('accion')) fd.append('accion','vendido');
+    try {
+      const res = await fetch('./', { method:'POST', body: fd, headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+      const data = await res.json();
+      if (!data.ok) throw new Error('error');
+      const row = form.closest('tr');
+      const stockTd = row.querySelector('.td-stock');
+      const vendTd = row.querySelector('.td-vendidos');
+      stockTd.textContent = data.stock;
+      vendTd.textContent = data.vendidos;
+      stockTd.classList.toggle('rojo', data.stock < 1);
+      const btnV = form.querySelector('button[value="vendido"]');
+      if (btnV) btnV.disabled = data.stock < 1;
+      const msg = document.createElement('span');
+      msg.textContent = '✓ venta registrada';
+      msg.style.cssText = 'color:var(--acc-dark);font-size:12px;margin-left:6px';
+      btnV.insertAdjacentElement('afterend', msg);
+      setTimeout(() => msg.remove(), 1800);
+    } catch (err) {
+      form.submit();
+    }
+  });
+})();
+</script>
 <?php site_footer();
