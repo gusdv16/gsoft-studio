@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Interbalnearios — Intercambia tu casa de playa en Uruguay</title>
 <meta name="description" content="Interbalnearios: el sitio para intercambiar alquileres de balneario en Uruguay. Demo de Gsoft Studio.">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 <div class="demo-bar">Demo de Gsoft Studio · reescritura moderna de un proyecto de 2013 · <a href="/">Volver al portfolio</a></div>
@@ -17,7 +17,7 @@
       <a href="#como">Cómo funciona</a>
       <a href="#resultados">Propiedades</a>
       <a href="#intercambios">Mis intercambios</a>
-      <a href="#publicar">Publicar</a>
+      <button class="favb open-pub" type="button">Publicar</button>
       <button class="favb" id="verFavs" type="button" aria-pressed="false">♥ Favoritos <span id="favCount">0</span></button>
       <button class="favb" id="verPerfil" type="button">👤 <span id="userName">Mi perfil</span></button>
     </nav>
@@ -78,8 +78,32 @@
     </div>
   </section>
 
-  <section id="publicar" class="wrap sec pub">
-    <div><h2>Publica tu propiedad</h2><p>Es gratis. Crea la publicación en 3 pasos y empieza a recibir propuestas.</p></div>
+  <section id="publicar" class="wrap sec cta">
+    <div>
+      <h2>Publica tu propiedad</h2>
+      <p>Es gratis. Crea la publicación en 3 pasos y empieza a recibir propuestas de intercambio.</p>
+      <button class="btn open-pub" type="button">Publicar mi casa</button>
+    </div>
+  </section>
+</main>
+
+<footer class="foot"><div class="wrap">
+  <div><h4>Asistencia</h4><ul><li><a href="#como">Cómo funciona</a></li><li><a href="#resultados">Propiedades</a></li><li><a href="#publicar">Publicar</a></li></ul></div>
+  <div><h4>Modo anfitrión</h4><ul><li><a href="#publicar">Pon tu casa en intercambio</a></li><li><a href="#resultados">Explorar propiedades</a></li></ul></div>
+  <div><h4>Interbalnearios</h4><ul><li><a href="/">Volver al portfolio</a></li><li><a href="#inicio">Inicio</a></li></ul></div>
+  <div class="copy"><span>© 2026 Interbalnearios · Demo de Gsoft Studio. Las propiedades son datos de ejemplo, sin servidor.</span><span>Español · UYU</span></div>
+</div></footer>
+
+<dialog id="modal" aria-labelledby="m-titulo">
+  <form method="dialog"><button class="cerrar" aria-label="Cerrar">✕</button></form>
+  <div id="m-body"></div>
+</dialog>
+
+<dialog id="pubModal" aria-labelledby="pubm-titulo">
+  <form method="dialog"><button class="cerrar" aria-label="Cerrar">✕</button></form>
+  <div class="m-in">
+    <h2 id="pubm-titulo">Publica tu propiedad</h2>
+    <p class="mut">Es gratis. Completá los 3 pasos.</p>
     <form class="form" id="pubForm" novalidate>
       <div class="steps">
         <span class="step on" data-step="1">1. Básico</span>
@@ -139,19 +163,7 @@
 
       <p class="ok" id="pubOk" role="status" hidden></p>
     </form>
-  </section>
-</main>
-
-<footer class="foot"><div class="wrap">
-  <div><h4>Asistencia</h4><ul><li><a href="#como">Cómo funciona</a></li><li><a href="#resultados">Propiedades</a></li><li><a href="#publicar">Publicar</a></li></ul></div>
-  <div><h4>Modo anfitrión</h4><ul><li><a href="#publicar">Pon tu casa en intercambio</a></li><li><a href="#resultados">Explorar propiedades</a></li></ul></div>
-  <div><h4>Interbalnearios</h4><ul><li><a href="/">Volver al portfolio</a></li><li><a href="#inicio">Inicio</a></li></ul></div>
-  <div class="copy"><span>© 2026 Interbalnearios · Demo de Gsoft Studio. Las propiedades son datos de ejemplo, sin servidor.</span><span>Español · UYU</span></div>
-</div></footer>
-
-<dialog id="modal" aria-labelledby="m-titulo">
-  <form method="dialog"><button class="cerrar" aria-label="Cerrar">✕</button></form>
-  <div id="m-body"></div>
+  </div>
 </dialog>
 
 <dialog id="perfilModal" aria-labelledby="pm-titulo">
@@ -165,6 +177,6 @@
   </div>
 </dialog>
 
-<script src="app.js?v=4"></script>
+<script src="app.js?v=5"></script>
 </body>
 </html>

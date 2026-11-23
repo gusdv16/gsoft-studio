@@ -167,6 +167,15 @@
     $('#countProp').textContent = (currentTab === 'mias' ? userProps.length : proposals.length) + ' registro(s)';
   }
 
+  // Publish modal open
+  var pubModal = $('#pubModal');
+  document.querySelectorAll('.open-pub').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (pubModal.showModal) pubModal.showModal(); else pubModal.setAttribute('open', '');
+    });
+  });
+  if (pubModal) pubModal.addEventListener('click', function (e) { if (e.target === pubModal) pubModal.close(); });
+
   // Publish wizard
   var pf = $('#pubForm');
   function showStep(n) {
@@ -247,6 +256,7 @@
       pf.reset();
       showStep(1);
       render();
+      setTimeout(function () { if (pubModal && pubModal.close) pubModal.close(); }, 1200);
       location.hash = '#resultados';
     };
     if (fotoInput && fotoInput.files && fotoInput.files[0]) {

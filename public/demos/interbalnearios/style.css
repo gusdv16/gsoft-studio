@@ -72,6 +72,7 @@ a{color:inherit;text-decoration:none}
 
 /* Publish */
 .pub{display:grid;grid-template-columns:1fr;gap:24px;align-items:start;text-align:center}.pub h2{margin-top:0;font-size:26px;font-weight:700}.pub > div{max-width:640px;margin:0 auto}.form{max-width:640px;margin:0 auto}
+.cta{text-align:center;padding:48px 0}.cta h2{font-size:26px;font-weight:700;margin:0 0 8px}.cta p{color:var(--mut);margin:0 0 20px}
 .form{display:grid;gap:20px;background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--rausch);border-radius:var(--r-xl);padding:32px;box-shadow:var(--sh2)}
 .form label{display:grid;gap:8px;font-size:14px;color:var(--ink);font-weight:500}
 .form input,.form select{padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--paper);color:var(--ink);font:inherit;font-size:15px;transition:border-color .15s}
