@@ -93,8 +93,12 @@ a{color:inherit;text-decoration:none}
 .foot .copy{grid-column:1/-1;border-top:1px solid var(--line);padding-top:16px;margin-top:8px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:13px}
 
 /* Modal */
-dialog{border:0;border-radius:var(--r-xl);padding:0;max-width:560px;width:calc(100% - 32px);max-height:90vh;overflow:auto;background:var(--paper);color:var(--ink);box-shadow:var(--sh3)}
-dialog::backdrop{background:rgba(0,0,0,.5)}
+dialog{border:0;border-radius:var(--r-xl);padding:0;max-width:560px;width:calc(100% - 32px);max-height:90vh;overflow:auto;background:var(--paper);color:var(--ink);box-shadow:var(--sh3);opacity:0;transform:scale(.96) translateY(8px);transition:opacity .22s ease,transform .22s ease,display .22s allow-discrete,overlay .22s allow-discrete}
+dialog[open]{opacity:1;transform:scale(1) translateY(0)}
+@starting-style{dialog[open]{opacity:0;transform:scale(.96) translateY(8px)}}
+dialog::backdrop{background:rgba(0,0,0,0);transition:background .22s ease,display .22s allow-discrete,overlay .22s allow-discrete}
+dialog[open]::backdrop{background:rgba(0,0,0,.5)}
+@starting-style{dialog[open]::backdrop{background:rgba(0,0,0,0)}}
 .cerrar{position:absolute;top:12px;right:12px;width:32px;height:32px;border:0;border-radius:50%;background:var(--paper);color:var(--ink);font-size:16px;cursor:pointer;z-index:1;box-shadow:var(--sh1)}
 .m-in{padding:20px 24px 24px}.m-in h2{margin:4px 0 8px;font-size:22px;font-weight:700}
 .m-in h3{margin:20px 0 8px;font-size:14px;color:var(--mut);font-weight:600;text-transform:none;letter-spacing:0}
