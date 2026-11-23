@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'stock' => max(0, (int)($_POST['stock'] ?? 0)),
         'oferta' => min(90, max(0, (int)($_POST['oferta'] ?? 0))),
         'tono' => (int)($l['tono'] ?? 20),
+    'imagen' => trim((string)($_POST['imagen'] ?? '')),
     ];
     if ($d['titulo'] === '' || mb_strlen($d['titulo']) > 150) $errores[] = 'El título es obligatorio (máx. 150 caracteres).';
     if ($d['autor'] === '') $errores[] = 'El autor es obligatorio.';
@@ -35,10 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $l = array_merge($l, $d);
     if (!$errores) {
         if ($id) {
-            $sql = 'UPDATE libros SET titulo=:titulo, autor=:autor, genero=:genero, descripcion=:descripcion, editorial=:editorial, anio=:anio, paginas=:paginas, precio=:precio, stock=:stock, oferta=:oferta WHERE id=:id';
+            $sql = 'UPDATE libros SET titulo=:titulo, autor=:autor, genero=:genero, descripcion=:descripcion, editorial=:editorial, anio=:anio, paginas=:paginas, precio=:precio, stock=:stock, oferta=:oferta, imagen=:imagen WHERE id=:id';
             $d['id'] = $id; unset($d['tono']);
         } else {
-            $sql = 'INSERT INTO libros (titulo,autor,genero,descripcion,editorial,anio,paginas,precio,stock,oferta,tono) VALUES (:titulo,:autor,:genero,:descripcion,:editorial,:anio,:paginas,:precio,:stock,:oferta,:tono)';
+            $sql = 'INSERT INTO libros (titulo,autor,genero,descripcion,editorial,anio,paginas,precio,stock,oferta,tono,imagen) VALUES (:titulo,:autor,:genero,:descripcion,:editorial,:anio,:paginas,:precio,:stock,:oferta,:tono,:imagen)';
         }
         db()->prepare($sql)->execute($d);
         header('Location: ./?ok=guardado'); exit;
@@ -65,6 +66,7 @@ site_header('../');
     <label>Precio ($) <input name="precio" type="number" min="1" value="<?= e((string)$l['precio']) ?>" required></label>
     <label>Stock <input name="stock" type="number" min="0" value="<?= e((string)$l['stock']) ?>"></label>
     <label>Descuento (%) <input name="oferta" type="number" min="0" max="90" value="<?= e((string)$l['oferta']) ?>"></label>
+<label class="full">URL de portada (imagen) <input name="imagen" type="url" value="<?= e((string)($l['imagen'] ?? '')) ?>" placeholder="https://...jpg"><small class="err"></small></label>
     <label class="full">Descripción <textarea name="descripcion" rows="5" maxlength="1500"><?= e((string)$l['descripcion']) ?></textarea></label>
     <div class="full"><button class="btn">Guardar</button> <a class="btn ghost" href="./">Cancelar</a></div>
   </form>
