@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Interbalnearios — Intercambia tu casa de playa en Uruguay</title>
 <meta name="description" content="Interbalnearios: el sitio para intercambiar alquileres de balneario en Uruguay. Demo de Gsoft Studio.">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 <div class="demo-bar">Demo de Gsoft Studio · reescritura moderna de un proyecto de 2013 · <a href="/">Volver al portfolio</a></div>
@@ -16,8 +16,10 @@
     <nav class="nav" aria-label="Principal">
       <a href="#como">Cómo funciona</a>
       <a href="#resultados">Propiedades</a>
+      <a href="#intercambios">Mis intercambios</a>
       <a href="#publicar">Publicar</a>
       <button class="favb" id="verFavs" type="button" aria-pressed="false">♥ Favoritos <span id="favCount">0</span></button>
+      <button class="favb" id="verPerfil" type="button">👤 <span id="userName">Mi perfil</span></button>
     </nav>
   </div>
 </header>
@@ -49,6 +51,16 @@
     <ul class="grid" id="grid"></ul>
   </section>
 
+  <section id="intercambios" class="wrap sec">
+    <div class="sec-head"><h2>Mis intercambios</h2><p class="count" id="countProp"></p></div>
+    <div class="tabs">
+      <button class="tab on" data-tab="enviadas">Propuestas enviadas</button>
+      <button class="tab" data-tab="recibidas">Propuestas recibidas</button>
+      <button class="tab" data-tab="mias">Mis publicaciones</button>
+    </div>
+    <ul class="list" id="listaIntercambios"></ul>
+  </section>
+
   <section id="como" class="band">
     <div class="wrap sec">
       <h2>Cómo funciona</h2>
@@ -67,12 +79,64 @@
   </section>
 
   <section id="publicar" class="wrap sec pub">
-    <div><h2>Publica tu propiedad</h2><p>Es gratis. Crea la publicación en un minuto y empieza a recibir propuestas.</p></div>
+    <div><h2>Publica tu propiedad</h2><p>Es gratis. Crea la publicación en 3 pasos y empieza a recibir propuestas.</p></div>
     <form class="form" id="pubForm" novalidate>
-      <label>Título <input name="titulo" required minlength="6" placeholder="Monoambiente en Playa Hermosa"><small class="err"></small></label>
-      <label>Lugar <select name="lugar" id="pubLugar" required><option value="">Elegir…</option></select><small class="err"></small></label>
-      <label>Habitaciones <input name="hab" type="number" min="1" max="10" required><small class="err"></small></label>
-      <button class="btn">Publicar</button>
+      <div class="steps">
+        <span class="step on" data-step="1">1. Básico</span>
+        <span class="step" data-step="2">2. Detalles</span>
+        <span class="step" data-step="3">3. Fotos</span>
+      </div>
+
+      <div class="step-pane" data-step="1">
+        <label>Título <input name="titulo" required minlength="6" placeholder="Monoambiente en Playa Hermosa"><small class="err"></small></label>
+        <label>Tipo
+          <select name="tipo" required>
+            <option value="">Elegir…</option><option>Casa</option><option>Apartamento</option><option>Cabaña</option>
+          </select><small class="err"></small></label>
+        <label>Lugar
+          <select name="lugar" id="pubLugar" required><option value="">Elegir…</option></select><small class="err"></small></label>
+        <label>Habitaciones <input name="hab" type="number" min="1" max="10" required><small class="err"></small></label>
+        <label>Baños <input name="ban" type="number" min="1" max="10" required><small class="err"></small></label>
+        <label>Camas <input name="cam" type="number" min="1" max="20" required><small class="err"></small></label>
+        <div class="navbtns"><button type="button" class="btn" data-next="2">Siguiente</button></div>
+      </div>
+
+      <div class="step-pane" data-step="2" hidden>
+        <label>Distancia al mar (m) <input name="dist" type="number" min="0" max="5000" required><small class="err"></small></label>
+        <label>Diferencia de valor (U$S, 0 = intercambio puro) <input name="pagar" type="number" min="0" value="0"><small class="err"></small></label>
+        <fieldset class="fs">
+          <legend>Meses disponibles</legend>
+          <label class="chk"><input type="checkbox" name="mes" value="0"> Diciembre</label>
+          <label class="chk"><input type="checkbox" name="mes" value="1"> Enero</label>
+          <label class="chk"><input type="checkbox" name="mes" value="2"> Febrero</label>
+          <label class="chk"><input type="checkbox" name="mes" value="3"> Marzo</label>
+          <label class="chk"><input type="checkbox" name="mes" value="4"> Semana de Turismo</label>
+        </fieldset>
+        <fieldset class="fs">
+          <legend>Servicios</legend>
+          <label class="chk"><input type="checkbox" name="serv" value="Wi-Fi"> Wi-Fi</label>
+          <label class="chk"><input type="checkbox" name="serv" value="Parrillero"> Parrillero</label>
+          <label class="chk"><input type="checkbox" name="serv" value="Garage"> Garage</label>
+          <label class="chk"><input type="checkbox" name="serv" value="Lavarropas"> Lavarropas</label>
+          <label class="chk"><input type="checkbox" name="serv" value="Pet friendly"> Pet friendly</label>
+          <label class="chk"><input type="checkbox" name="serv" value="Piscina"> Piscina</label>
+        </fieldset>
+        <label>Descripción <textarea name="desc" rows="3" placeholder="Contá sobre tu casa..."></textarea><small class="err"></small></label>
+        <div class="navbtns">
+          <button type="button" class="btn ghost" data-prev="1">Atrás</button>
+          <button type="button" class="btn" data-next="3">Siguiente</button>
+        </div>
+      </div>
+
+      <div class="step-pane" data-step="3" hidden>
+        <label>Foto (opcional) <input name="foto" type="file" accept="image/*"><small class="err"></small></label>
+        <p class="mut">Si no subís foto, se usará una imagen genérica.</p>
+        <div class="navbtns">
+          <button type="button" class="btn ghost" data-prev="2">Atrás</button>
+          <button type="submit" class="btn">Publicar</button>
+        </div>
+      </div>
+
       <p class="ok" id="pubOk" role="status" hidden></p>
     </form>
   </section>
@@ -89,6 +153,18 @@
   <form method="dialog"><button class="cerrar" aria-label="Cerrar">✕</button></form>
   <div id="m-body"></div>
 </dialog>
-<script src="app.js"></script>
+
+<dialog id="perfilModal" aria-labelledby="pm-titulo">
+  <form method="dialog"><button class="cerrar" aria-label="Cerrar">✕</button></form>
+  <div class="m-in">
+    <h2 id="pm-titulo">Mi perfil</h2>
+    <label>Nombre <input id="pmNombre" type="text" placeholder="Tu nombre"></label>
+    <label>Email <input id="pmEmail" type="email" placeholder="tu@email.com"></label>
+    <button class="btn" id="pmGuardar" type="button">Guardar</button>
+    <p class="ok" id="pmOk" role="status" hidden>Guardado.</p>
+  </div>
+</dialog>
+
+<script src="app.js?v=3"></script>
 </body>
 </html>
