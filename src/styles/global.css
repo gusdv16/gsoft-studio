@@ -118,11 +118,15 @@ html:not(.anim) .steps .bar{transform:none}
 }
 
 /* projects */
+/* Cada tarjeta se renderiza solo cuando entra al viewport (evita el parpadeo
+   de renderizar/descartar toda la seccion de una vez con content-visibility). */
+.proj{content-visibility:auto;contain-intrinsic-size:auto 490px}
+@media(min-width:760px){.proj{contain-intrinsic-size:auto 562px}}
 .pgrid{display:grid;gap:22px;margin-top:44px}
 .proj{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;transition:border-color .25s,transform .25s}
 .proj:hover{border-color:#3a4268;transform:translateY(-4px)}
 .media{position:relative;aspect-ratio:16/10;overflow:hidden;background:linear-gradient(145deg,#151a2e,#0c0f1a);display:flex;align-items:center;justify-content:center}
-.media img{width:100%;height:100%;object-fit:cover;object-position:top;will-change:transform}
+.media img{width:100%;height:100%;object-fit:cover;object-position:top;will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .media.contain img{width:auto;height:88%;object-fit:contain;border-radius:12px}
 .media picture{display:contents}
 .media.shot img{object-fit:contain;object-position:center}
@@ -222,7 +226,7 @@ html.anim [data-r]{opacity:0;transform:translate3d(0,26px,0)}
 .dpts li.dh::before{display:none}
 .dlg{width:min(900px,94vw);max-height:90vh;padding:0;border:1px solid var(--line);border-radius:24px;background:var(--card);color:var(--text);overflow:hidden}
 .dlg[open]{animation:dpop .28s cubic-bezier(.2,.8,.2,1)}
-.dlg::backdrop{background:rgba(3,4,8,.8)}
+.dlg::backdrop{background:rgba(3,4,8,.8);backdrop-filter:blur(4px)}
 .dscroll{max-height:90vh;overflow:auto;overscroll-behavior:contain}
 .dlg .media{aspect-ratio:16/9;min-height:0}
 .dlg .proj{all:unset}
@@ -249,12 +253,13 @@ html:has(dialog[open]){overflow:hidden}
 .proj{position:relative}
 .proj:hover,.proj:focus-within{border-color:rgba(124,140,255,.6);box-shadow:0 22px 56px -26px rgba(124,140,255,.6)}
 .proj .media{cursor:pointer}
+.proj .media:focus-visible{outline:2px solid var(--b);outline-offset:-2px}
 .media>picture>img{transition:transform .7s cubic-bezier(.2,.8,.2,1)}
 .proj:hover .media>picture>img{transform:scale(1.05)}
 .proj h3{transition:color .25s}
 .proj:hover h3{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .mview{position:absolute;right:14px;top:14px;z-index:4;font-size:.8rem;font-weight:700;color:#07080d;background:var(--grad);padding:8px 14px;border-radius:999px;opacity:0;transform:translate3d(0,-6px,0);transition:opacity .25s,transform .25s;pointer-events:none}
-.proj:hover .mview{opacity:1;transform:none}
+.proj:hover .mview,.proj:focus-within .mview{opacity:1;transform:none}
 @media(hover:none){.mview{display:none}}
 @media(prefers-reduced-motion:reduce){.media>picture>img,.mview{transition:none}.proj:hover .media>picture>img{transform:none}}
 

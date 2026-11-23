@@ -265,7 +265,7 @@ const icons = {
       </div>
     </section>
 
-    <section id="proyectos" class="cv" style="--m:6600px;--d:3500px">
+    <section id="proyectos">
       <div class="wrap">
         <p class="kick" data-r>{t.projects.kicker}</p>
         <h2 data-r>{t.projects.title}</h2>
@@ -280,7 +280,7 @@ const icons = {
             <Fragment>
               {groupOf[p.id] && groupOf[p.id] !== groupOf[sorted[i - 1]?.id] && <h3 class="ghead" data-r>{t.projects.groups[groupOf[p.id]]}</h3>}
             <article class:list={['proj', { feat: featIds.includes(p.id) }]} data-r="card" data-cat={catOf[p.id]}>
-              <div class:list={['media', mediaClass[p.id]]}>
+              <div class:list={['media', mediaClass[p.id]]} tabindex="0" role="button" aria-label={t.projects.detail}>
                 {p.id === 'easy-pdf-free' ? (
                   <>
                     <Picture src={eps1} formats={["avif", "webp"]} fallbackFormat="webp" widths={[240, 360]} sizes="(min-width:760px) 180px, 40vw" alt={isEn ? 'Easy PDF Free home screen' : 'Pantalla de inicio de Easy PDF Free'} data-par />
@@ -491,13 +491,21 @@ const icons = {
         const media = card.querySelector('.media').cloneNode(true);
         media.querySelectorAll('source,img').forEach((x) => { x.sizes = '(min-width:900px) 860px, 96vw'; if (x.loading) x.loading = 'eager'; });
         const body = card.querySelector('.pbody').cloneNode(true);
-        body.querySelector('[data-open]').remove();
+        body.querySelector('[data-open]')?.remove();
         const pts = body.querySelector('.dpts');
-        pts.hidden = false;
+        if (pts) pts.hidden = false;
         dm.replaceChildren(media);
         db.replaceChildren(...body.childNodes);
         dlg.showModal();
         dlg.querySelector('.dscroll').scrollTop = 0;
+        dlg.querySelector('[data-close]')?.focus();
+      });
+      grid.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        const media = e.target.closest('.media');
+        if (!media) return;
+        e.preventDefault();
+        media.closest('article')?.querySelector('[data-open]')?.click();
       });
       dlg.addEventListener('click', (e) => { if (e.target === dlg || e.target.closest('[data-close]')) dlg.close(); });
     }
