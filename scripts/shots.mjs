@@ -13,6 +13,7 @@ const jobs = [
   ...['ofertas/', 'ofertas/hilo-y-aguja/', 'ofertas/?cat=tecnologia'].map((p, i) => ({ url: `${gh}/buscador-replica/${p}`, out: `${G}/buscador-replica/${i + 1}.webp` })),
   ...[350, 950].map((y, i) => ({ url: 'https://gustavobentancor.com/gletir/', scroll: y, out: `${G}/gletir-tracker/${i + 1}.webp` })),
   { url: 'https://urugol.uy/', out: `${W}/urugol.webp` },
+  { url: 'https://eventosanime.uy/', out: `${W}/eventosanime.webp` },
   { url: 'https://www.auf.org.uy/home/', out: `${W}/auf.webp` },
   { url: 'https://beneficios.brou.com.uy/', out: `${W}/brou-beneficios.webp` },
   { url: 'https://asistencia.brou.com.uy/', out: `${W}/brou-asistencia.webp` },

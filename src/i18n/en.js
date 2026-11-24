@@ -281,6 +281,7 @@ export default {
     view: 'View demo',
     items: [
       { type: 'News portal', title: 'Urugol', img: 'urugol', text: 'News portal about Uruguayan and international football, built from scratch on WordPress.', role: 'Full portal development', link: 'https://urugol.uy/' },
+      { type: 'Events portal', title: 'Eventos Anime Uruguay', img: 'eventosanime', text: 'Agenda of anime conventions, fairs, K-pop, cosplay and video game events in Uruguay: calendar, map, upcoming events feed and email alerts.', role: 'Design and development', link: 'https://eventosanime.uy/' },
       { type: 'Institutional', title: 'AUF', img: 'auf', text: 'Website of the Uruguayan Football Association, the governing body of football in Uruguay. Migration of the previous site and development of the current front end.', role: 'Migration and front end', link: 'https://www.auf.org.uy/home/' },
       { type: 'Freelance', title: 'Sites for BROU', img: 'brou-asistencia', text: 'Three websites: Beneficios, Asistencia and MiBROU, developed as a freelance programmer.', role: 'Web development', links: [{ label: 'Beneficios', url: 'https://beneficios.brou.com.uy/' }, { label: 'Asistencia', url: 'https://asistencia.brou.com.uy/' }, { label: 'MiBROU', url: 'https://mi.brou.com.uy/' }] },
       { type: 'Digital marketing', title: 'HTML5 banners for Google Ads', img: 'banners', text: 'Five responsive ads built in Google Web Designer for a financial planning campaign (2020), ready for 300×250, 300×600 and 728×90.', role: 'Ad design and development', link: '/demos/banners/' },
