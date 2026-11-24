@@ -426,6 +426,9 @@ export default {
   chat: {
     open: 'Ask the AI',
     title: 'AI assistant',
+    sub: 'Ask about Gustavo and his projects',
+    reset: 'New',
+    suggestLabel: 'Frequently asked:',
     close: 'Close',
     note: 'This is an AI that answers using the information on this site and can make mistakes. For specific matters, use the contact form.',
     placeholder: 'Ask about Gustavo or his projects…',

@@ -12,24 +12,34 @@ const ENDPOINT = import.meta.env.PUBLIC_CHAT_ENDPOINT ?? 'https://portfolio-chat
 .aic-fab{position:fixed;right:16px;bottom:16px;z-index:60;display:inline-flex;align-items:center;gap:8px;font:600 .88rem/1 var(--font);color:#07080d;background:var(--grad);border:0;border-radius:999px;padding:13px 18px;min-height:44px;cursor:pointer;box-shadow:0 8px 28px -10px rgba(54,226,192,.6)}
 .aic-fab:hover{transform:translateY(-2px)}
 .aic-fab[hidden]{display:none}
-.aic{position:fixed;right:16px;bottom:16px;z-index:70;width:min(380px,calc(100vw - 32px));height:min(540px,calc(100dvh - 32px));display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 24px 60px -20px rgba(0,0,0,.8);overflow:hidden}
+.aic{position:fixed;right:16px;bottom:16px;z-index:70;width:min(400px,calc(100vw - 32px));height:min(620px,calc(100dvh - 32px));display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 28px 70px -20px rgba(0,0,0,.85);overflow:hidden;font-family:var(--font)}
 .aic[hidden]{display:none}
-.aic-h{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--line);font-weight:700}
-.aic-x{background:none;border:0;color:var(--muted);font-size:1.4rem;line-height:1;cursor:pointer;min-width:36px;min-height:36px}
-.aic-log{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;font-size:.92rem}
-.aic-m{max-width:88%;padding:10px 13px;border-radius:14px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.5}
-.aic-m.a{background:var(--bg2);border:1px solid var(--line);align-self:flex-start}
-.aic-m.u{background:var(--a);color:#07080d;align-self:flex-end}
+.aic-h{display:flex;align-items:center;gap:10px;padding:12px 12px 12px 14px;background:var(--bg2);border-bottom:1px solid var(--line)}
+.aic-av{flex:none;width:38px;height:38px;border-radius:50%;background:var(--grad);color:#07080d;display:grid;place-items:center}
+.aic-ti{flex:1;min-width:0;line-height:1.25}
+.aic-ti b{display:block;font-size:.98rem}
+.aic-ti span{display:block;font-size:.76rem;color:var(--muted)}
+.aic-new{font:600 .78rem var(--font);color:var(--text);background:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer}
+.aic-new:hover{border-color:var(--a)}
+.aic-x{flex:none;background:none;border:0;color:var(--muted);font-size:1.5rem;line-height:1;cursor:pointer;width:36px;height:36px;border-radius:50%}
+.aic-x:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.aic-log{flex:1;min-height:0;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:12px;font-size:.94rem;scrollbar-width:thin}
+.aic-m{max-width:88%;padding:11px 14px;border-radius:16px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.55}
+.aic-m.a{background:var(--bg2);border:1px solid var(--line);border-bottom-left-radius:5px;align-self:flex-start}
+.aic-m.u{background:var(--grad);color:#07080d;font-weight:500;border-bottom-right-radius:5px;align-self:flex-end}
+.aic-m.w{color:var(--muted);font-style:italic}
 .aic-m.e{color:#ff9b9b;border-color:#5a2a2a}
-.aic-s{display:flex;flex-wrap:wrap;gap:6px}
-.aic-s button{font:500 .8rem var(--font);color:var(--text);background:none;border:1px solid var(--line);border-radius:999px;padding:7px 11px;cursor:pointer}
-.aic-s button:hover{border-color:var(--a)}
-.aic-note{font-size:.72rem;color:var(--muted);padding:0 14px 8px;line-height:1.4}
-.aic-f{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line)}
-.aic-f input{flex:1;min-width:0;font:inherit;font-size:.92rem;color:var(--text);background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
-.aic-f button{font:600 .88rem var(--font);color:#07080d;background:var(--grad);border:0;border-radius:10px;padding:0 14px;min-height:40px;cursor:pointer}
-.aic-f button:disabled{opacity:.5;cursor:default}
-@media (max-width:480px){.aic{right:8px;bottom:8px;width:calc(100vw - 16px)}}
+.aic-lbl{font-size:.76rem;color:var(--muted);margin:4px 2px -4px}
+.aic-s{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.aic-s button{font:500 .86rem/1.3 var(--font);text-align:left;color:var(--a);background:none;border:1px solid color-mix(in srgb,var(--a) 45%,transparent);border-radius:999px;padding:9px 14px;cursor:pointer}
+.aic-s button:hover{background:color-mix(in srgb,var(--a) 12%,transparent)}
+.aic-f{display:flex;align-items:center;gap:8px;margin:0 12px;padding:5px 5px 5px 14px;background:var(--bg2);border:1px solid var(--line);border-radius:999px}
+.aic-f:focus-within{border-color:var(--a)}
+.aic-f input{flex:1;min-width:0;font:inherit;font-size:.94rem;color:var(--text);background:none;border:0;outline:0;padding:8px 0}
+.aic-f button{flex:none;width:38px;height:38px;border-radius:50%;border:0;background:var(--grad);color:#07080d;display:grid;place-items:center;cursor:pointer}
+.aic-f button:disabled{opacity:.45;cursor:default}
+.aic-note{font-size:.7rem;color:var(--muted);text-align:center;padding:8px 16px 12px;line-height:1.4;margin:0}
+@media (max-width:480px){.aic{right:8px;bottom:8px;width:calc(100vw - 16px);height:calc(100dvh - 16px)}}
 </style>
 <script>
   // Carga perezosa: nada se construye hasta el primer clic en el boton.
@@ -38,7 +48,7 @@ const ENDPOINT = import.meta.env.PUBLIC_CHAT_ENDPOINT ?? 'https://portfolio-chat
     const ENDPOINT = fab.dataset.endpoint;
     const c = JSON.parse(fab.dataset.msg);
     let box, log, input, sendBtn, sugg;
-    const history = [];
+    let history = [];
     let busy = false;
 
     const add = (cls, text) => {
@@ -57,32 +67,46 @@ const ENDPOINT = import.meta.env.PUBLIC_CHAT_ENDPOINT ?? 'https://portfolio-chat
       if (sugg) { sugg.remove(); sugg = null; }
       add('u', text);
       history.push({ role: 'user', content: text });
-      const wait = add('a', c.thinking);
+      const wait = add('a w', c.thinking);
       if (window.gtag) gtag('event', 'ai_chat_message');
       try {
         const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: history }) });
         if (r.status === 429) { wait.className = 'aic-m a e'; wait.textContent = c.errRate; history.pop(); }
         else if (!r.ok) throw new Error('http ' + r.status);
-        else { const j = await r.json(); wait.textContent = j.reply.replace(/\*\*|__|`/g, ''); history.push({ role: 'assistant', content: j.reply }); }
+        else { const j = await r.json(); wait.className = 'aic-m a'; wait.textContent = j.reply.replace(/\*\*|__|`/g, ''); history.push({ role: 'assistant', content: j.reply }); }
       } catch (e) {
         wait.className = 'aic-m a e'; wait.textContent = c.errGeneric; history.pop();
       }
       busy = false; sendBtn.disabled = false; input.focus(); log.scrollTop = log.scrollHeight;
     };
 
+    // Conversacion inicial: saludo + preguntas sugeridas. "Nueva" vuelve aqui.
+    const start = () => {
+      history = [];
+      log.textContent = '';
+      add('a', c.hello);
+      const l = document.createElement('p'); l.className = 'aic-lbl'; l.textContent = c.suggestLabel; log.appendChild(l);
+      sugg = document.createElement('div'); sugg.className = 'aic-s';
+      c.suggestions.forEach((s) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = s; b.onclick = () => { l.remove(); ask(s); }; sugg.appendChild(b); });
+      log.appendChild(sugg);
+    };
+
     const build = () => {
-      box = document.createElement('section');
+      box = document.createElement('div');
       box.className = 'aic'; box.id = 'aic'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', c.title);
-      box.innerHTML = '<div class="aic-h"><span></span><button class="aic-x" type="button"></button></div><div class="aic-log" aria-live="polite"></div><p class="aic-note"></p><form class="aic-f"><input type="text" maxlength="500" autocomplete="off"><button type="submit"></button></form>';
-      box.querySelector('.aic-h span').textContent = c.title;
+      box.innerHTML =
+        '<div class="aic-h"><span class="aic-av" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></span><div class="aic-ti"><b></b><span></span></div><button class="aic-new" type="button"></button><button class="aic-x" type="button"></button></div>' +
+        '<div class="aic-log" aria-live="polite"></div>' +
+        '<form class="aic-f"><input type="text" maxlength="500" autocomplete="off"><button type="submit"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form>' +
+        '<p class="aic-note"></p>';
+      box.querySelector('.aic-ti b').textContent = c.title;
+      box.querySelector('.aic-ti span').textContent = c.sub;
+      const nb = box.querySelector('.aic-new'); nb.textContent = c.reset; nb.onclick = () => { if (!busy) { start(); input.focus(); } };
       const x = box.querySelector('.aic-x'); x.textContent = '×'; x.setAttribute('aria-label', c.close);
       box.querySelector('.aic-note').textContent = c.note;
       log = box.querySelector('.aic-log'); input = box.querySelector('input'); sendBtn = box.querySelector('.aic-f button');
-      input.placeholder = c.placeholder; input.setAttribute('aria-label', c.placeholder); sendBtn.textContent = c.send;
-      add('a', c.hello);
-      sugg = document.createElement('div'); sugg.className = 'aic-s';
-      c.suggestions.forEach((s) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = s; b.onclick = () => ask(s); sugg.appendChild(b); });
-      log.appendChild(sugg);
+      input.placeholder = c.placeholder; input.setAttribute('aria-label', c.placeholder); sendBtn.setAttribute('aria-label', c.send);
+      start();
       box.querySelector('form').onsubmit = (e) => { e.preventDefault(); const v = input.value; input.value = ''; ask(v); };
       const hide = () => { box.hidden = true; fab.hidden = false; fab.focus(); };
       x.onclick = hide;

@@ -426,6 +426,9 @@ export default {
   chat: {
     open: 'Pregúntale a la IA',
     title: 'Asistente de IA',
+    sub: 'Responde sobre Gustavo y sus proyectos',
+    reset: 'Nueva',
+    suggestLabel: 'Preguntas frecuentes:',
     close: 'Cerrar',
     note: 'Es una IA que responde con la información de este sitio y puede equivocarse. Para temas concretos, usa el formulario de contacto.',
     placeholder: 'Pregunta sobre Gustavo o sus proyectos…',
