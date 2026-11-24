@@ -272,6 +272,22 @@ export default {
       },
     ],
   },
+  experience: {
+    kicker: 'Background',
+    title: 'Experience and education',
+    jobsTitle: 'Experience',
+    eduTitle: 'Education',
+    now: 'Current',
+    items: [
+      { role: 'Web development', org: 'Self-employed', kind: 'Freelance', date: 'Jan 2014 – present', current: true },
+      { role: 'Web Developer', org: 'Infragistics Uruguay', kind: 'Full-time', date: 'Apr 2022 – Jul 2026', place: 'Montevideo, Uruguay · Hybrid' },
+      { role: 'Web developer', org: 'NICESTREAM', kind: 'Part-time', date: 'Feb 2021 – Jan 2023', place: 'Montevideo, Uruguay' },
+      { role: 'Website designer', org: 'i2es - ideas to e-solutions', kind: 'Web page implementer', date: 'Mar 2014 – Sep 2019' },
+    ],
+    education: [
+      { title: 'Programmer Analyst', org: 'Universidad ORT Uruguay', date: '2017 – 2020' },
+    ],
+  },
   work: {
     kicker: 'Work in production',
     title: 'Live sites I worked on',

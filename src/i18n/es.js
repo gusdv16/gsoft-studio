@@ -272,6 +272,22 @@ export default {
       },
     ],
   },
+  experience: {
+    kicker: 'Trayectoria',
+    title: 'Experiencia y formación',
+    jobsTitle: 'Experiencia',
+    eduTitle: 'Formación',
+    now: 'Actualidad',
+    items: [
+      { role: 'Desarrollo web', org: 'Autónomo', kind: 'Freelance', date: 'ene. 2014 – actualidad', current: true },
+      { role: 'Web Developer', org: 'Infragistics Uruguay', kind: 'Jornada completa', date: 'abr. 2022 – jul. 2026', place: 'Montevideo, Uruguay · Híbrido' },
+      { role: 'Desarrollador web', org: 'NICESTREAM', kind: 'Jornada parcial', date: 'feb. 2021 – ene. 2023', place: 'Montevideo, Uruguay' },
+      { role: 'Diseñador de sitios web', org: 'i2es - ideas to e-solutions', kind: 'Implementador de páginas web', date: 'mar. 2014 – sept. 2019' },
+    ],
+    education: [
+      { title: 'Analista Programador', org: 'Universidad ORT Uruguay', date: '2017 – 2020' },
+    ],
+  },
   work: {
     kicker: 'Trabajo en producción',
     title: 'Sitios en línea en los que trabajé',

@@ -62,6 +62,7 @@ const ld = {
       image: `${CANON}/og.png`,
       address: { '@type': 'PostalAddress', addressLocality: 'Montevideo', addressCountry: 'UY' },
       worksFor: { '@id': `${CANON}/#org` },
+      alumniOf: { '@type': 'CollegeOrUniversity', name: 'Universidad ORT Uruguay' },
       knowsAbout: ['Web development', 'Technical SEO', 'Core Web Vitals', 'Astro', 'JavaScript', 'PHP', 'Chrome extensions', 'Progressive web apps'],
       subjectOf: { '@type': 'DigitalDocument', name: t.cv.download, url: `${CANON}/${t.cv.file}`, encodingFormat: 'application/pdf' },
       sameAs: [t.github, t.linkedin],
@@ -251,6 +252,39 @@ const icons = {
               ))}</ul>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="experiencia" class="cv" style="--m:760px;--d:560px">
+      <div class="wrap">
+        <p class="kick" data-r>{t.experience.kicker}</p>
+        <h2 data-r>{t.experience.title}</h2>
+        <div class="xp">
+          <div>
+            <h3 data-r>{t.experience.jobsTitle}</h3>
+            <ol class="tl">
+              {t.experience.items.map((x) => (
+                <li data-r>
+                  <h4>{x.role}{x.current && <span class="cur">{t.experience.now}</span>}</h4>
+                  <p class="org">{x.org} · {x.kind}</p>
+                  <p class="when">{x.date}{x.place && ' · ' + x.place}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div>
+            <h3 data-r>{t.experience.eduTitle}</h3>
+            <ol class="tl">
+              {t.experience.education.map((x) => (
+                <li data-r>
+                  <h4>{x.title}</h4>
+                  <p class="org">{x.org}</p>
+                  <p class="when">{x.date}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </div>
     </section>
