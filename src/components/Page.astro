@@ -20,6 +20,7 @@ import heroBg from '../assets/hero/fondo.webp';
 import heroMan from '../assets/hero/gustavo-recorte.webp';
 import heroDown from '../assets/hero/gustavo-mirando-abajo.webp';
 import heroCode from '../assets/hero/gustavo-programando.webp';
+import heroSauron from '../assets/hero/gustavo-sauron.webp';
 
 // Galerias por proyecto (assets/proyectos/galeria/<id>/N.webp) y capturas de sitios en linea (assets/trabajo/<id>.webp)
 const galFiles = import.meta.glob('../assets/proyectos/galeria/*/*.webp', { eager: true, import: 'default' });
@@ -202,14 +203,25 @@ const icons = {
         <figure class="foto" data-egg={JSON.stringify(t.egg)}>
           <div class="stage" data-stage>
             <div class="layer bg"><Image src={heroBg} width={520} format="webp" quality={70} alt="" loading="eager" /></div>
+              <svg class="eye" viewBox="0 0 200 120" aria-hidden="true" focusable="false">
+                <defs>
+                  <radialGradient id="eg" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#fff3a0"/><stop offset=".35" stop-color="#ffb300"/><stop offset=".75" stop-color="#ff3d00"/><stop offset="1" stop-color="#7a0900"/></radialGradient>
+                  <filter id="eglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+                </defs>
+                <path d="M6 60 Q100 -14 194 60 Q100 134 6 60Z" fill="#ff3d00" filter="url(#eglow)" opacity=".85"/>
+                <path d="M6 60 Q100 -14 194 60 Q100 134 6 60Z" fill="url(#eg)" stroke="#2a0300" stroke-width="3"/>
+                <ellipse cx="100" cy="60" rx="8" ry="40" fill="#120100"/>
+              </svg>
             <div class="layer man">
               <div class="pose">
                 <Picture src={heroMan} formats={["avif", "webp"]} fallbackFormat="webp" widths={[320, 480, 640]} sizes="(min-width:900px) 340px, 66vw" alt="Gustavo Bentancor" loading="eager" fetchpriority="high" />
                 <Picture src={heroDown} formats={["avif", "webp"]} fallbackFormat="webp" widths={[320, 480, 640]} sizes="(min-width:900px) 340px, 66vw" alt="" loading="lazy" />
                 <Picture src={heroCode} formats={["avif", "webp"]} fallbackFormat="webp" widths={[360, 540, 720]} sizes="(min-width:900px) 340px, 66vw" alt="" loading="lazy" />
+                <Picture src={heroSauron} formats={["avif", "webp"]} fallbackFormat="webp" widths={[320, 480, 640]} sizes="(min-width:900px) 340px, 66vw" alt="" loading="lazy" />
               </div>
             </div>
           </div>
+          <div class="embers" aria-hidden="true"><i style="--l:47%;--d:3.03s;--t:3.39s;--s:3px"></i><i style="--l:15%;--d:2.63s;--t:2.79s;--s:3px"></i><i style="--l:70%;--d:0.69s;--t:2.77s;--s:6px"></i><i style="--l:14%;--d:0.77s;--t:3.70s;--s:3px"></i><i style="--l:78%;--d:0.40s;--t:3.05s;--s:3px"></i><i style="--l:79%;--d:1.87s;--t:2.70s;--s:4px"></i><i style="--l:11%;--d:1.78s;--t:2.87s;--s:6px"></i><i style="--l:24%;--d:1.73s;--t:3.74s;--s:4px"></i><i style="--l:19%;--d:1.86s;--t:3.88s;--s:5px"></i><i style="--l:18%;--d:1.75s;--t:2.73s;--s:3px"></i><i style="--l:85%;--d:0.66s;--t:3.96s;--s:6px"></i><i style="--l:46%;--d:1.49s;--t:4.45s;--s:5px"></i><i style="--l:44%;--d:0.79s;--t:2.96s;--s:4px"></i><i style="--l:16%;--d:1.84s;--t:3.65s;--s:5px"></i></div>
           <div class="hpcard" aria-hidden="true">
             <span class="no">{t.idle.card.no}</span>
             <div class="win"><i class="sp s1">✦</i><i class="sp s2">✧</i><i class="sp s3">✦</i><div class="sign"><i class="rope r1"></i><i class="rope r2"></i><div class="board"><b>{t.idle.card.signTitle}</b><span>{t.idle.card.sign}</span><small>{t.idle.card.back}</small></div></div></div>
@@ -223,15 +235,6 @@ const icons = {
             <g class="lg"><circle cx="150" cy="74" r="14" fill="none" stroke="#7c8cff" stroke-width="3" opacity=".85"/><path d="M143 74 l5 6 l10 -12" fill="none" stroke="#36e2c0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
           </svg>
           <div class="zzz" aria-hidden="true"><i>Z</i><i>z</i><i>z</i></div>
-          <svg class="eye" viewBox="0 0 200 120" aria-hidden="true" focusable="false">
-            <defs>
-              <radialGradient id="eg" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#fff3a0"/><stop offset=".35" stop-color="#ffb300"/><stop offset=".75" stop-color="#ff3d00"/><stop offset="1" stop-color="#7a0900"/></radialGradient>
-              <filter id="eglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
-            </defs>
-            <path d="M6 60 Q100 -14 194 60 Q100 134 6 60Z" fill="#ff3d00" filter="url(#eglow)" opacity=".85"/>
-            <path d="M6 60 Q100 -14 194 60 Q100 134 6 60Z" fill="url(#eg)" stroke="#2a0300" stroke-width="3"/>
-            <ellipse cx="100" cy="60" rx="8" ry="40" fill="#120100"/>
-          </svg>
         </figure>
         <p class="egg-msg" role="status" aria-live="polite" data-egg-msg></p>
         <div class="hid">
@@ -779,6 +782,21 @@ const icons = {
           aim(clamp(((e.clientX - r.left) / r.width - 0.5) * 2), clamp(((e.clientY - r.top) / r.height - 0.5) * 2));
         }, { passive: true });
         heroSec.addEventListener('pointerleave', () => aim(0, 0));
+      }
+      // Celular: el parallax sigue la inclinacion del telefono (en iOS se pide permiso con el primer toque)
+      if (!matchMedia('(hover:hover) and (pointer:fine)').matches && 'DeviceOrientationEvent' in window) {
+        let base = null;
+        const onTilt = (e) => {
+          if (e.gamma == null || e.beta == null || document.documentElement.classList.contains('mordor') || fig.dataset.mood) return;
+          if (base === null) base = e.beta;
+          base += (e.beta - base) * 0.02;
+          aim(clamp(e.gamma / 22), clamp((e.beta - base) / 22));
+        };
+        const listen = () => addEventListener('deviceorientation', onTilt, { passive: true });
+        const DOE = window.DeviceOrientationEvent;
+        if (typeof DOE.requestPermission === 'function') {
+          addEventListener('pointerdown', () => { DOE.requestPermission().then((r) => { if (r === 'granted') listen(); }).catch(() => {}); }, { once: true });
+        } else listen();
       }
       // Escenas de reposo
       const scenes = ['sleep', 'away', 'code'];

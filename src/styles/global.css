@@ -512,9 +512,6 @@ body{padding-bottom:84px}
 .foto .man img{width:100%;height:auto;object-fit:contain;object-position:50% 0;filter:drop-shadow(-10px 12px 14px rgba(0,0,0,.5)) drop-shadow(-26px 22px 32px rgba(0,0,0,.4))}
 .foto .eye{z-index:2}
 .foto::after{z-index:3}
-@keyframes sway{from{--px:-.7;--py:-.15}to{--px:.7;--py:.2}}
-@media(hover:none),(pointer:coarse){.foto{animation:sway 7s ease-in-out infinite alternate}}
-@media(prefers-reduced-motion:reduce){.foto{animation:none}}
 
 
 /* ---- escenas del retrato (reposo) ---- */
@@ -597,3 +594,27 @@ body{padding-bottom:84px}
 .foto[data-mood=code] .laptop .lg{animation:lgp 2.4s ease-in-out infinite}
 @keyframes lgp{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
 @media(prefers-reduced-motion:reduce){.foto .laptop{transition:none}.foto .laptop .lg{animation:none!important}}
+
+
+/* modo Sauron: el casco cae sobre la cabeza, tiembla el marco y suben brasas */
+html.mordor .foto .stage{animation:thud .5s ease .85s}
+@keyframes thud{0%,100%{transform:none}20%{transform:translate(-3px,4px)}40%{transform:translate(3px,-2px)}60%{transform:translate(-2px,2px)}80%{transform:translate(2px,-1px)}}
+.foto .eye{z-index:1;top:-7%;width:70%}
+.foto .embers{position:absolute;inset:0;z-index:4;overflow:hidden;pointer-events:none}
+.foto .embers i{position:absolute;bottom:-4%;left:var(--l);width:var(--s);height:var(--s);border-radius:50%;background:#ffb257;box-shadow:0 0 8px 2px rgba(255,110,0,.9);opacity:0}
+html.mordor .foto .embers i{animation:ember var(--t) ease-in var(--d) infinite}
+@keyframes ember{0%{opacity:0;transform:translate(0,0) scale(1)}15%{opacity:1}100%{opacity:0;transform:translate(24px,-440px) scale(.3)}}
+@media(prefers-reduced-motion:reduce){html.mordor .foto .stage,html.mordor .foto .embers i,html.mordor .foto .pose{animation:none}}
+
+/* el ojo de Sauron queda de fondo: grande, difuso y detras de la figura */
+.foto .stage .eye{position:absolute;left:50%;top:-6%;width:150%;z-index:0;transform:translateX(-50%) scale(.7);opacity:0;filter:blur(1.5px) drop-shadow(0 0 30px rgba(255,80,0,.8))}
+html.mordor .foto .stage .eye{opacity:.5;transform:translateX(-50%) scale(1);animation:eyebg 3.4s ease-in-out infinite}
+@keyframes eyebg{0%,100%{opacity:.36;filter:blur(1.5px) drop-shadow(0 0 30px rgba(255,80,0,.7))}50%{opacity:.62;filter:blur(1.5px) drop-shadow(0 0 48px rgba(255,120,0,.95))}}
+@media(prefers-reduced-motion:reduce){html.mordor .foto .stage .eye{animation:none}}
+
+/* modo Sauron: foto con el casco puesto, con destello al aparecer */
+.foto .pose picture:nth-of-type(4){position:absolute;left:0;top:0;width:100%;opacity:0;transition:opacity .35s ease}
+html.mordor .foto .pose picture:nth-of-type(4){opacity:1}
+html.mordor .foto .pose picture:nth-of-type(-n+3){opacity:0}
+html.mordor .foto .pose{animation:sauronin .9s ease-out both}
+@keyframes sauronin{0%{transform:scale(1.07);filter:brightness(2.2)}100%{transform:none;filter:none}}
