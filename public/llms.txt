@@ -1,4 +1,4 @@
-# Gsoft Studio
+# Gustavo Bentancor
 
 > Estudio de Gustavo Bentancor (Uruguay): desarrollo web rápido, SEO técnico, extensiones de Chrome, apps y automatización con IA para negocios. Trabajo directo con quien diseña y programa, con rendimiento medido (Lighthouse, Core Web Vitals) y código documentado.
 
@@ -26,5 +26,5 @@
 
 ## Contacto
 
-- Email: info@gustavobentancor.com
+- Contacto: formulario en https://gustavobentancor.com/#contacto
 - Formulario en la sección de contacto de la página principal.

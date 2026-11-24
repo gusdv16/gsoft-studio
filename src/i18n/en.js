@@ -1,11 +1,11 @@
 export default {
   lang: 'en',
   htmlLang: 'en',
-  brand: 'Gsoft Studio',
+  brand: 'Gustavo Bentancor',
   meta: {
-    title: 'Gsoft Studio · Fast web development, SEO, apps and extensions',
+    title: 'Gustavo Bentancor · Freelance web developer in Uruguay',
     description:
-      'I build fast websites, custom apps and extensions, with technical SEO and green Core Web Vitals. See my published projects.',
+      "I'm Gustavo, a freelance web developer. I build fast websites, custom apps and extensions, with technical SEO and green Core Web Vitals. See my published projects.",
   },
   skip: 'Skip to content',
   nav: {
@@ -18,10 +18,10 @@ export default {
     other: { label: 'ES', href: '../', title: 'Leer en español' },
   },
   hero: {
-    badge: 'Custom web development',
+    badge: 'Freelance web developer',
     title: ['Fast websites', 'that look good', 'and get found on Google'],
     lead:
-      'I design and build fast websites, apps and extensions made for mobile and search engines. From problem to something working.',
+      "I'm Gustavo, a freelance web developer. I design and build fast websites, apps and extensions made for mobile and search engines. You work directly with me, from problem to something working.",
     primary: 'Tell me your problem',
     secondary: 'See projects',
     flow: ['Your idea', 'Design + code', 'Live website'],
@@ -35,7 +35,7 @@ export default {
     ],
   },
   stats: {
-    label: 'Studio facts',
+    label: 'My experience in numbers',
     items: [
       { n: '12+', label: 'Years building web solutions' },
       { n: '500+', label: 'Pages built' },
@@ -51,21 +51,25 @@ export default {
         icon: 'bolt',
         title: 'Fast web development',
         text: 'Static sites that load instantly, built for mobile, Core Web Vitals and search engines.',
+        slug: 'desarrollo-web-rapido',
       },
       {
         icon: 'box',
         title: 'Custom extensions and apps',
         text: 'Chrome extensions, PWAs and Android apps to solve the specific problem you have.',
+        slug: 'extensiones-chrome',
       },
       {
         icon: 'spark',
         title: 'AI in your workflows',
         text: 'I plug assistants and AI models into the tools you already use: classify, summarize, draft or extract data.',
+        slug: 'automatizacion-ia',
       },
       {
         icon: 'cog',
         title: 'Custom tools for your business',
         text: 'Spreadsheets, alerts and reports that save manual work, when the project calls for it.',
+        slug: 'apps-pwa',
       },
     ],
   },
@@ -120,19 +124,20 @@ export default {
     items: [
       {
         id: 'gletir-tracker',
+        shots: ["Video demo and how it works", "How it works and Free vs PRO plans"],
         type: 'product',
         title: 'Gletir Tracker',
         text: 'Chrome extension that reads your account statement on the Gletir platform when you sign in and builds your history: balance, daily evolution and annualized return (XIRR), plus volatility, drawdown, diversification, rebalancing and projection. Exports to PDF, CSV and JSON and syncs across computers with your own Google Sheet. Data is stored only in your browser, with no server of my own and no trackers.',
-        price: 'Free, with a one-time PRO upgrade of US$ 9 (license via Gumroad).',
+        price: 'Free, with a one-time PRO upgrade of US$ 9 (paid with Mercado Pago).',
         note: 'Independent project, unofficial and not affiliated with Gletir. Screenshots use sample data.',
         points: [
           'Captures your account statement when you sign in to Gletir and builds your history day by day.',
           'Free: total balance, charts by asset type and export to PDF, CSV and JSON.',
           'PRO: annualized return (XIRR), risk analysis, diversification, rebalancing, projection and Google Sheets sync.',
           'Your data is stored only in your browser: no server of my own and no trackers.',
-          'One-time PRO license through Gumroad, valid for up to 3 computers.',
+          'One-time PRO license paid with Mercado Pago, with my own license server (Cloudflare Workers), valid for up to 3 computers.',
         ],
-        tags: ['JavaScript', 'Chrome MV3', 'Chart.js', 'jsPDF', 'Google Apps Script', 'Gumroad'],
+        tags: ['JavaScript', 'Chrome MV3', 'Chart.js', 'jsPDF', 'Google Apps Script', 'Mercado Pago', 'Cloudflare Workers'],
         store: 'https://chromewebstore.google.com/detail/jiegdchlfegkgidgjhiikilcgngicoim',
         landing: 'https://gustavobentancor.com/gletir/',
       },
@@ -201,6 +206,7 @@ export default {
       },
       {
         id: 'web-performance',
+        shots: ["Performance techniques explained", "Lab: the same page before and after", "Real case measured with Lighthouse", "Example landings with no JavaScript"],
         type: 'showcase',
         title: 'Web Performance Showcase',
         text: 'Astro site with 0 bytes of client JavaScript that explains performance techniques and compares the same page unoptimized and optimized, measured with Lighthouse.',
@@ -233,6 +239,7 @@ export default {
       },
       {
         id: 'insight-demo',
+        shots: ["Product page", "Plans and pricing", "Resources and cases"],
         type: 'design',
         title: 'Insight Demo',
         text: 'Design replica of an AI analytics SaaS landing page (fictional brand): menus, hero with dashboard, sections, FAQ and responsive layout, with custom CSS and SVG illustrations.',
@@ -248,6 +255,7 @@ export default {
       },
       {
         id: 'buscador-replica',
+        shots: ["Listing with filters and sorting", "Offer detail page", "Category filter"],
         type: 'design',
         title: 'Offers search',
         text: 'Replica of the experience of a catalog with search: filters, sorting, listing and detail page, with state in the URL. Fictional offers and brand.',
@@ -272,14 +280,14 @@ export default {
     visit: 'Visit site',
     view: 'View demo',
     items: [
-      { type: 'News portal', title: 'Urugol', text: 'News portal about Uruguayan and international football, built from scratch on WordPress.', role: 'Full portal development', link: 'https://urugol.uy/' },
-      { type: 'Institutional', title: 'AUF', text: 'Website of the Uruguayan Football Association, the governing body of football in Uruguay. Migration of the previous site and development of the current front end.', role: 'Migration and front end', link: 'https://www.auf.org.uy/home/' },
-      { type: 'Freelance', title: 'Sites for BROU', text: 'Three websites: Beneficios, Asistencia and MiBROU, developed as a freelance programmer.', role: 'Web development', links: [{ label: 'Beneficios', url: 'https://beneficios.brou.com.uy/' }, { label: 'Asistencia', url: 'https://asistencia.brou.com.uy/' }, { label: 'MiBROU', url: 'https://mi.brou.com.uy/' }] },
-      { type: 'Digital marketing', title: 'HTML5 banners for Google Ads', text: 'Five responsive ads built in Google Web Designer for a financial planning campaign (2020), ready for 300×250, 300×600 and 728×90.', role: 'Ad design and development', link: '/demos/banners/' },
-      { type: 'Website · Demo', title: 'Museo Celeste', text: 'A virtual museum where fans share a photo of their jersey and their story: a listing with team and region filters, a form with photo upload and email validation, and an admin panel. The demo uses fictional data and photos and saves nothing.', role: 'Web development in PHP and MySQL', link: 'https://gustavobentancor.com/gsoft-studio/pielceleste/', linkLabel: 'View demo' },
-      { type: 'Website · Demo', title: 'El Arcón', text: 'A 2013 online bookstore rebuilt with PHP 8: catalog with search, genres and sorting, book pages and an admin panel with inventory. Safe queries, CSRF protection and a self-resetting SQLite database. Covers and prices are real data taken from Buscalibre Uruguay.', role: 'Web development in PHP and SQLite', link: '/demos/elarcon/', linkLabel: 'View demo' },
-      { type: 'Website · Demo', title: 'El Rincón del Chef', text: 'A 2013 recipes and restaurants site, redesigned: category and difficulty filters, ingredient search, step-by-step recipes, favorites saved in the browser and a validated sign-up form.', role: 'Design and front end', link: '/demos/rincon/', linkLabel: 'View demo' },
-      { type: 'Website · Demo', title: 'Interbalnearios', text: 'A platform for swapping beach-house rentals in Uruguay (2013), redesigned: filtered search, listings with amenities and availability, favorites and a form to publish a property.', role: 'Design and front end', link: '/demos/interbalnearios/', linkLabel: 'View demo' },
+      { type: 'News portal', title: 'Urugol', img: 'urugol', text: 'News portal about Uruguayan and international football, built from scratch on WordPress.', role: 'Full portal development', link: 'https://urugol.uy/' },
+      { type: 'Institutional', title: 'AUF', img: 'auf', text: 'Website of the Uruguayan Football Association, the governing body of football in Uruguay. Migration of the previous site and development of the current front end.', role: 'Migration and front end', link: 'https://www.auf.org.uy/home/' },
+      { type: 'Freelance', title: 'Sites for BROU', img: 'brou-asistencia', text: 'Three websites: Beneficios, Asistencia and MiBROU, developed as a freelance programmer.', role: 'Web development', links: [{ label: 'Beneficios', url: 'https://beneficios.brou.com.uy/' }, { label: 'Asistencia', url: 'https://asistencia.brou.com.uy/' }, { label: 'MiBROU', url: 'https://mi.brou.com.uy/' }] },
+      { type: 'Digital marketing', title: 'HTML5 banners for Google Ads', img: 'banners', text: 'Five responsive ads built in Google Web Designer for a financial planning campaign (2020), ready for 300×250, 300×600 and 728×90.', role: 'Ad design and development', link: '/demos/banners/' },
+      { type: 'Website · Demo', title: 'Museo Celeste', img: 'museo-celeste', text: 'A virtual museum where fans share a photo of their jersey and their story: a listing with team and region filters, a form with photo upload and email validation, and an admin panel. The demo uses fictional data and photos and saves nothing.', role: 'Web development in PHP and MySQL', link: 'https://gustavobentancor.com/gsoft-studio/pielceleste/', linkLabel: 'View demo' },
+      { type: 'Website · Demo', title: 'El Arcón', img: 'elarcon', text: 'A 2013 online bookstore rebuilt with PHP 8: catalog with search, genres and sorting, book pages and an admin panel with inventory. Safe queries, CSRF protection and a self-resetting SQLite database. Covers and prices are real data taken from Buscalibre Uruguay.', role: 'Web development in PHP and SQLite', link: '/demos/elarcon/', linkLabel: 'View demo' },
+      { type: 'Website · Demo', title: 'El Rincón del Chef', img: 'rincon', text: 'A 2013 recipes and restaurants site, redesigned: category and difficulty filters, ingredient search, step-by-step recipes, favorites saved in the browser and a validated sign-up form.', role: 'Design and front end', link: '/demos/rincon/', linkLabel: 'View demo' },
+      { type: 'Website · Demo', title: 'Interbalnearios', img: 'interbalnearios', text: 'A platform for swapping beach-house rentals in Uruguay (2013), redesigned: filtered search, listings with amenities and availability, favorites and a form to publish a property.', role: 'Design and front end', link: '/demos/interbalnearios/', linkLabel: 'View demo' },
     ],
     note: 'Names and trademarks belong to their respective owners and are mentioned only as a reference to the work done, with no affiliation or endorsement.',
   },
@@ -287,9 +295,9 @@ export default {
   about: {
     kicker: 'About',
     title: "Hi, I'm Gustavo",
+    role: 'Full-Stack Developer · Product Engineer',
     paragraphs: [
-      "I'm Gustavo Bentancor, a web developer and the person behind Gsoft Studio. I like solving concrete problems: a tool that saves time, a site that loads fast, an extension that saves you from checking something by hand.",
-      'I come from marketing, and it shows in how I build: every site is made to be found on Google and to turn visits into inquiries, not just to look good.',
+      "I'm Gustavo Bentancor, a freelance full-stack developer. Since 2014 I build web solutions with PHP, MySQL and JavaScript, turning business requirements into code that works: a tool that saves time, a site that loads fast, an extension that saves you from checking something by hand. I come from marketing, so every site is made to be found on Google and to turn visits into inquiries, not just to look good.",
       'I use AI as a work tool to speed up the repetitive parts, and I review and test everything before delivering. What you see on this page are real projects you can open and, for almost all, read on GitHub.',
     ],
     points: ['Fast sites, measured with Lighthouse', 'Clean, documented code', 'Direct communication, no middlemen'],
@@ -312,16 +320,163 @@ export default {
       name: 'Name', email: 'Email', phone: 'Phone or WhatsApp', hint: 'Either email or phone is enough.', need_contact: 'Leave an email or a phone number so I can reply.', phone_bad: "That phone number doesn't look valid.", message: 'Tell me what you need', send: 'Send message',
       sending: 'Sending…', ok: 'Thank you! I got your message and will reply soon.',
       invalid: 'Please check the fields: a name and a message of at least 10 characters are required.', email_bad: "That email doesn't look valid.",
-      rate: 'Too many submissions in a row. Try later or write to info@gustavobentancor.com.',
+      rate: 'Too many submissions in a row. Try later or use the button to copy my email.',
       captcha: "I couldn't verify you are a person. Reload and try again.",
-      err: 'Could not send. Please write to me directly at info@gustavobentancor.com.',
-      or: 'Or write directly to',
+      err: 'Could not send. Use the button to copy my email and write to me directly.',
+      or: 'Or write to me directly:',
     },
-    emailLabel: 'info@gustavobentancor.com',
-    subject: 'Inquiry from the Gsoft Studio site',
+    copyEmail: 'Copy my email', copiedEmail: 'Email copied', openMail: 'Open in my mail app', mailAria: 'Copy my email address',
+    subject: 'Inquiry from the Gustavo Bentancor site',
   },
-  footer: '© 2026 Gsoft Studio',
-  email: 'info@gustavobentancor.com',
+  servicePages: [
+    {
+      slug: 'desarrollo-web-rapido',
+      title: 'Fast web development in Uruguay | Gustavo Bentancor',
+      description:
+        'Fast websites built with Astro, with technical SEO and green Core Web Vitals. No intermediaries, documented code. For SMEs and businesses in Uruguay.',
+      h1: 'Fast web development for your business in Uruguay',
+      lead:
+        'I build static sites that load instantly, designed for mobile, Core Web Vitals and search engines. You talk directly to the person who designs and codes.',
+      problems: [
+        'Your site is slow and visitors leave before seeing it.',
+        'You do not show up on Google when people search for your service in Uruguay.',
+        'You depend on an agency or freelancer who disappears after delivery.',
+        'Your site looks good on desktop but bad on mobile.',
+      ],
+      solution: [
+        'Static sites with Astro: pure HTML, no unnecessary JavaScript, loading in under 1 second.',
+        'Technical SEO from day one: meta tags, structured data, sitemap, hreflang and green Core Web Vitals.',
+        'Mobile-first design: mobile first, since that is where people search for you.',
+        'You get the code and documentation so you do not depend on me.',
+      ],
+      related: ['web-performance', 'insight-demo', 'buscador-replica'],
+      priceRange: 'From USD 350',
+      faq: [
+        { q: 'How much does a fast website cost in Uruguay?', a: 'It depends on size and features. A landing from USD 350, a site of up to 5 pages from USD 500. I give you a fixed quote before starting.' },
+        { q: 'How long until it is ready?', a: 'Between 1 and 3 weeks from when you send me the material (texts, photos and logo). Having the material ready from the start is what speeds up the project the most.' },
+        { q: 'Will my site show up on Google?', a: 'The site ships ready for Google: titles, descriptions, sitemap and structured data. Nobody can guarantee first place, but I can guarantee your site is well built so Google can find it.' },
+        { q: 'Do you only work with businesses in Montevideo?', a: 'No. I work from Montevideo with businesses across Uruguay and abroad. The whole process is done online, by WhatsApp or email.' },
+      ],
+    },
+    {
+      slug: 'extensiones-chrome',
+      title: 'Custom Chrome extensions | Gustavo Bentancor',
+      description:
+        'Custom Chrome extension development (Manifest V3): automation, data extraction, API integration. Uruguay and LATAM.',
+      h1: 'Custom Chrome extensions for your business',
+      lead:
+        'I build Chrome extensions that solve a specific problem: automating repetitive tasks, extracting data from a site or integrating your system with the browser.',
+      problems: [
+        'Your team repeats manual tasks in the browser every day.',
+        'You need to extract data from a site that has no API.',
+        'You want to integrate your CRM or system with Chrome without complex backend development.',
+        'You want a tool that runs only in your browser, with no server.',
+      ],
+      solution: [
+        'Extensions on Manifest V3 (Chrome current standard), with service workers and minimal permissions.',
+        'No mandatory backend: configuration can live in chrome.storage.local.',
+        'Publishing on the Chrome Web Store or private install for your company.',
+        'Documented code and one-time payment license if it is a product.',
+      ],
+      related: ['gletir-tracker', 'moova-tracker-extension', 'img-generator'],
+      priceRange: 'Quote on request',
+      faq: [
+        { q: 'How much does it cost to develop a Chrome extension?', a: 'It depends on complexity: from a simple automation extension to one with backend and sync. I give a fixed quote per project.' },
+        { q: 'Can it be published on the Chrome Web Store?', a: 'Yes. I handle development, testing and publishing, including Manifest V3 requirements and permission review.' },
+        { q: 'Does it work without a server?', a: 'Yes, many extensions run only in the browser using chrome.storage.local. If you need sync across devices, a simple backend can be added.' },
+        { q: 'What is Manifest V3?', a: 'It is Chrome current extension standard. Manifest V2 extensions are disabled since Chrome 138 (July 2025). Everything I build already complies with MV3.' },
+      ],
+    },
+    {
+      slug: 'automatizacion-ia',
+      title: 'AI automation for your business | Gustavo Bentancor',
+      description:
+        'Automate processes with artificial intelligence: WhatsApp agents, classification, data extraction and workflows. Uruguay and LATAM.',
+      h1: 'AI automation for your business',
+      lead:
+        'I integrate assistants and AI models where you already work: classify, summarize, draft or extract data. So your team stops doing repetitive tasks.',
+      problems: [
+        'Your team wastes hours copying data between spreadsheets, emails and WhatsApp.',
+        'Customer inquiries on WhatsApp pile up and nobody replies on time.',
+        'You process invoices or orders by hand and make mistakes.',
+        'You want to use AI but do not know where to start or what is worth it.',
+      ],
+      solution: [
+        'Free diagnosis: I identify which processes are worth automating and which are not.',
+        'AI agents for WhatsApp and web: they reply, classify and hand off to a person when needed.',
+        'Automation of repetitive tasks: reading invoices, data entry, reports.',
+        'The system is yours, with no endless monthly fees.',
+      ],
+      related: ['tracker-habits', 'moova-tracker-extension'],
+      priceRange: 'Quote on request',
+      faq: [
+        { q: 'How much does AI automation cost?', a: 'It depends on scope. Quoted with a fixed price in writing before starting, no extra hours. You can start with one small process.' },
+        { q: 'Which processes can be automated?', a: 'Sales and support (WhatsApp replies, lead qualification), admin (invoice reading, data entry), operations (system sync, alerts).' },
+        { q: 'Is my data safe?', a: 'Yes. The model runs in an environment dedicated to your company. Your data does not train third-party models.' },
+        { q: 'Do I need to change my current systems?', a: 'No. I work on the systems you already use (WhatsApp, spreadsheets, ERP). I do not ask you to change anything.' },
+      ],
+    },
+    {
+      slug: 'apps-pwa',
+      title: 'Apps and PWA for your business | Gustavo Bentancor',
+      description:
+        'Progressive web apps (PWA) and Android apps with Capacitor: installable, offline and fast. For SMEs in Uruguay and LATAM.',
+      h1: 'Apps and PWA for your business in Uruguay',
+      lead:
+        'Progressive web apps and Android apps that install, work offline and load fast. So your business has its own app without native development costs.',
+      problems: [
+        'Your business needs an app but native development is too expensive.',
+        'Your customers or staff need to use the app without connectivity.',
+        'You want the app to install from the browser without going through stores.',
+        'You need an app that works on Android and web with one codebase.',
+      ],
+      solution: [
+        'PWA: installs from the browser, works offline and receives push notifications.',
+        'Android with Capacitor: one web codebase compiled to a native app.',
+        'Firebase for data sync and authentication.',
+        'Real examples: Easy PDF Free (PDF reader) and Habit Tracker (PWA with Firebase).',
+      ],
+      related: ['easy-pdf-free', 'tracker-habits', 'kiosko'],
+      priceRange: 'From USD 900',
+      faq: [
+        { q: 'What is a PWA?', a: 'A Progressive Web App is a website that can be installed as an app, works offline and can receive push notifications. It does not need to go through app stores.' },
+        { q: 'Can I have an Android and iOS app with the same code?', a: 'With Capacitor, web code compiles to a native Android app. iOS requires a Mac and an Apple developer account.' },
+        { q: 'How much does a PWA cost?', a: 'It depends on complexity. A simple PWA from USD 900, an app with backend and sync is quoted on request.' },
+        { q: 'Does it work without internet?', a: 'Yes, PWAs can work offline with caching. Features that need a server (sync, payments) require connectivity.' },
+      ],
+    },
+    {
+      slug: 'seo-tecnico',
+      title: 'Technical SEO for SMEs in Uruguay | Gustavo Bentancor',
+      description:
+        'Technical SEO audit, Core Web Vitals, performance and structured data so your site shows up on Google. Uruguay and LATAM.',
+      h1: 'Technical SEO so your site shows up on Google',
+      lead:
+        'Technical audit and optimization: speed, Core Web Vitals, structure, structured data and optimized content so Google understands and ranks your site.',
+      problems: [
+        'Your site does not show up on Google when people search for your service.',
+        'Your site is slow and Google penalizes it in rankings.',
+        'You have no structured data (schema) and miss rich results.',
+        'Your site is not optimized for mobile and you lose visits.',
+      ],
+      solution: [
+        'Full audit: Lighthouse, Core Web Vitals, URL structure, meta tags, schema.',
+        'Image optimization: WebP/AVIF, srcset, lazy loading.',
+        'Structured data (JSON-LD): ProfessionalService, FAQPage, Service, etc.',
+        'XML sitemap with hreflang and lastmod. Optimized robots.txt.',
+      ],
+      related: ['web-performance', 'insight-demo'],
+      priceRange: 'From USD 200',
+      faq: [
+        { q: 'What is technical SEO?', a: 'It is optimizing your site infrastructure so Google can crawl, understand and rank it: speed, structure, meta tags, structured data and Core Web Vitals.' },
+        { q: 'How long until results show?', a: 'Technical changes are implemented in days. Results on Google usually show in 2-8 weeks, depending on competition and domain authority.' },
+        { q: 'Do I need a blog to rank?', a: 'Not mandatory, but it helps a lot. Technical SEO is the base; content (blog, landings) is what attracts traffic long term.' },
+        { q: 'What are Core Web Vitals?', a: 'Google metrics measuring user experience: loading speed (LCP), interactivity (INP) and visual stability (CLS). They directly affect ranking.' },
+      ],
+    },
+  ],
+  footer: '© 2026 Gustavo Bentancor',
+  emailEnc: 'aW5mb0BndXN0YXZvYmVudGFuY29yLmNvbQ==',
   github: 'https://github.com/gusdv16',
   linkedin: 'https://www.linkedin.com/in/gustavo-bentancor-896205198/',
 };

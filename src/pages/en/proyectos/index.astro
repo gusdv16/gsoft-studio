@@ -1,0 +1,39 @@
+---
+import '../../../styles/global.css';
+import en from '../../../i18n/en.js';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const CANON = 'https://gustavobentancor.com';
+const title = 'Projects | Gustavo Bentancor';
+const description = 'Gustavo Bentancor projects: Chrome extensions, PWA, Android apps, fast websites and tools.';
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta name="theme-color" content="#07080d">
+  <link rel="canonical" href={`${CANON}/en/proyectos/`}>
+  <meta name="robots" content="index,follow">
+  <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`}>
+  <style is:inline>{`@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("${base}/fonts/inter-latin-wght-normal.woff2") format("woff2")}`}</style>
+</head>
+<body>
+  <main id="main" style="max-width:900px;margin:0 auto;padding:60px 24px">
+    <h1>Projects</h1>
+    <p style="margin:12px 0 32px;color:var(--muted)">What I have already built.</p>
+    <ul style="list-style:none;padding:0;display:grid;gap:16px">
+      {en.projects.items.map((p) => (
+        <li>
+          <a href={`${base}/en/proyectos/${p.id}/`} style="display:block;padding:18px 20px;border:1px solid #1f2434;border-radius:12px;text-decoration:none">
+            <strong>{p.title}</strong>
+            <p style="margin:6px 0 0;color:var(--muted);font-size:.95rem">{p.text.slice(0, 120)}…</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p style="margin-top:32px"><a href={`${base}/en/`}>← Back to home</a></p>
+  </main>
+</body>
+</html>

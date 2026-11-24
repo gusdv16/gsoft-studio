@@ -1,0 +1,200 @@
+---
+import '../styles/global.css';
+import { Picture, Image } from 'astro:assets';
+import { tagIcon } from '../icons.js';
+import eps1 from '../assets/proyectos/easy-pdf-inicio.png';
+import eps2 from '../assets/proyectos/easy-pdf-lector.jpg';
+import moova from '../assets/proyectos/moova-popup.png';
+import imgGen from '../assets/proyectos/img-generator.png';
+import perf from '../assets/proyectos/web-performance.png';
+import insight from '../assets/proyectos/insight-demo.png';
+import buscador from '../assets/proyectos/buscador-replica.png';
+import gletir from '../assets/proyectos/gletir-tracker.png';
+import kiosko from '../assets/proyectos/kiosko.png';
+import habit from '../assets/proyectos/tracker-habits.png';
+
+const { t, project, lang } = Astro.props;
+const isEn = lang === 'en';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const CANON = 'https://gustavobentancor.com';
+const slug = project.id;
+const path = isEn ? `/en/proyectos/${slug}/` : `/proyectos/${slug}/`;
+const canonical = `${CANON}${path}`;
+const altPath = isEn ? `/proyectos/${slug}/` : `/en/proyectos/${slug}/`;
+const alt = `${CANON}${altPath}`;
+const other = isEn ? `${base}/proyectos/${slug}/` : `${base}/en/proyectos/${slug}/`;
+const homePath = isEn ? '/en/' : '/';
+const servicesBase = isEn ? '/en/servicios/' : '/servicios/';
+
+const galFiles = import.meta.glob('../assets/proyectos/galeria/*/*.webp', { eager: true, import: 'default' });
+const gallery = Object.entries(galFiles).filter(([p]) => p.includes(`/galeria/${slug}/`)).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true })).map(([, img]) => img);
+const images = { 'gletir-tracker': gletir, 'easy-pdf-free': null, 'tracker-habits': habit, 'moova-tracker-extension': moova, 'img-generator': imgGen, 'web-performance': perf, 'insight-demo': insight, 'buscador-replica': buscador, 'kiosko': kiosko };
+
+const title = `${project.title} | ${t.brand}`;
+const description = project.text.slice(0, 155);
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CreativeWork',
+      '@id': `${canonical}#project`,
+      name: project.title,
+      description: project.text,
+      url: canonical,
+      author: { '@id': `${CANON}/#person` },
+      keywords: (project.tags || []).join(', '),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: t.brand, item: `${CANON}${isEn ? '/en/' : '/'}` },
+        { '@type': 'ListItem', position: 2, name: t.projects.title, item: `${CANON}${isEn ? '/en/' : '/'}#proyectos` },
+        { '@type': 'ListItem', position: 3, name: project.title, item: canonical },
+      ],
+    },
+  ],
+};
+
+const fontCss = `@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("${base}/fonts/inter-latin-wght-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}`;
+---
+<!doctype html>
+<html lang={t.htmlLang}>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta name="theme-color" content="#07080d">
+  <link rel="canonical" href={canonical}>
+  <link rel="alternate" hreflang="es" href={isEn ? alt : canonical}>
+  <link rel="alternate" hreflang="en" href={isEn ? canonical : alt}>
+  <link rel="alternate" hreflang="x-default" href={isEn ? alt : canonical}>
+  <meta property="og:type" content="article">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={canonical}>
+  <meta property="og:site_name" content={t.brand}>
+  <meta property="og:locale" content={isEn ? 'en_US' : 'es_ES'}>
+  <meta property="og:image" content={`${CANON}/og.png`}>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={`${CANON}/og.png`}>
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="sitemap" type="application/xml" href={`${base}/sitemap.xml`}>
+  <script type="application/ld+json" set:html={JSON.stringify(ld)}></script>
+  <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`}>
+  <link rel="preload" href={`${base}/fonts/inter-latin-wght-normal.woff2`} as="font" type="font/woff2" crossorigin>
+  <style is:inline set:html={fontCss}></style>
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-TEFWE35W1K"></script>
+  <script is:inline>
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+    gtag('js',new Date());gtag('config','G-TEFWE35W1K');
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">{t.skip}</a>
+  <header class="hd">
+    <div class="wrap">
+      <a class="logo" href={`${base}${homePath}`} aria-label={t.brand}>
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#10131e" stroke="#1f2434"/><path d="M9 21l5-10 4 7 2-4 3 7" fill="none" stroke="#7c8cff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        {t.brand}
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href={`${base}${homePath}#sobre-mi`}>{t.nav.about}</a>
+        <a href={`${base}${homePath}#proyectos`}>{t.nav.projects}</a>
+        <a href={`${base}${homePath}#servicios`}>{t.nav.services}</a>
+        <a href={`${base}${homePath}#contacto`}>{t.nav.contact}</a>
+      </nav>
+      <a class="lang" href={other} hreflang={isEn ? 'es' : 'en'} title={t.nav.other.title}>{t.nav.other.label}</a>
+      <a class="btn btn-p" href={`${base}${homePath}#contacto`}>{t.nav.cta}</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" data-hero style="min-height:auto;padding:80px 0 40px">
+      <div class="wrap">
+        <div>
+          <span class="badge"><i></i>{t.projects.types[project.type]}</span>
+          <h1 style="font-size:clamp(2rem,5vw,3.2rem);line-height:1.05;margin:14px 0 16px">{project.title}</h1>
+          <p class="lead">{project.text}</p>
+          {project.price && <p style="margin-top:14px;font-size:.95rem"><strong>{project.price}</strong></p>}
+          {project.note && <p style="margin-top:8px;font-size:.9rem;color:var(--muted)">{project.note}</p>}
+          <div class="cta" style="margin-top:18px">
+            {project.store && <a class="btn btn-p" href={project.store} target="_blank" rel="noopener">{t.projects.store} ↗</a>}
+            {project.demo && <a class="btn btn-p" href={project.demo} target="_blank" rel="noopener">{t.projects.demo} ↗</a>}
+            {project.landing && <a class="btn btn-s" href={project.landing} target="_blank" rel="noopener">{t.projects.more} ↗</a>}
+            {project.code && <a class="btn btn-s" href={project.code} target="_blank" rel="noopener">{t.projects.code} ↗</a>}
+          </div>
+        </div>
+        {images[project.id] && (
+          <div style="margin-top:30px">
+            <Picture src={images[project.id]} formats={["avif","webp"]} fallbackFormat="webp" widths={[480,720,960]} sizes="(min-width:900px) 600px, 90vw" alt={isEn ? `Screenshot of ${project.title}` : `Captura de ${project.title}`} />
+          </div>
+        )}
+      </div>
+    </section>
+
+    {gallery.length > 0 && (
+      <section class="cv" style="--m:900px;--d:600px">
+        <div class="wrap">
+          <p class="kick" data-r>{isEn ? 'Screenshots' : 'Capturas'}</p>
+          <h2 data-r>{isEn ? 'See it in action' : 'Mira cómo funciona'}</h2>
+          <div style="display:grid;gap:18px;margin-top:24px">
+            {gallery.map((img, i) => (
+              <figure style="margin:0">
+                <Image src={img} width={1100} format="webp" quality={80} loading="lazy" style="width:100%;height:auto;border-radius:14px;border:1px solid var(--line)" alt={`${project.title}: ${project.shots?.[i] ?? ''}`} />
+                {project.shots?.[i] && <figcaption style="margin-top:8px;font-size:.88rem;color:var(--muted)">{project.shots[i]}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    {project.points && project.points.length > 0 && (
+      <section class="cv" style="--m:900px;--d:600px">
+        <div class="wrap">
+          <p class="kick" data-r>{t.projects.highlights}</p>
+          <h2 data-r>{isEn ? 'What it includes' : 'Qué incluye'}</h2>
+          <ul style="margin:20px 0 0;padding-left:20px;line-height:1.8">
+            {project.points.map((p) => <li data-r>{p}</li>)}
+          </ul>
+        </div>
+      </section>
+    )}
+
+    {project.tags && project.tags.length > 0 && (
+      <section class="alt cv" style="--m:900px;--d:600px">
+        <div class="wrap">
+          <p class="kick" data-r>{isEn ? 'Tech stack' : 'Tecnologías'}</p>
+          <h2 data-r>{isEn ? 'Built with' : 'Construido con'}</h2>
+          <ul class="tags sk" style="margin-top:18px">
+            {project.tags.map((g) => <li>{tagIcon[g] && <svg aria-hidden="true"><use href={`${base}/icons.svg#${tagIcon[g]}`} /></svg>}{g}</li>)}
+          </ul>
+        </div>
+      </section>
+    )}
+
+    <section id="contacto" class="contact cv" style="--m:540px;--d:650px">
+      <div class="wrap">
+        <div class="box" data-r>
+          <p class="kick">{t.contact.kicker}</p>
+          <h2>{isEn ? 'Want something similar?' : '¿Quieres algo similar?'}</h2>
+          <p class="sub">{t.contact.text}</p>
+          <a class="btn btn-p" href={`${base}${homePath}#contacto`}>{t.hero.primary}</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>{t.footer}</span>
+      <span class="flinks"><a href={t.linkedin} target="_blank" rel="noopener">LinkedIn</a><a href={t.github} target="_blank" rel="noopener">GitHub</a><a href={`${base}/${t.cv.file}`} download={t.cv.name} data-cv>CV</a></span>
+    </div>
+  </footer>
+</body>
+</html>
+---

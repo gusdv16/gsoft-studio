@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
-import { Picture } from 'astro:assets';
-import { brand, gen } from '../icons.js';
+import { Picture, Image } from 'astro:assets';
+import { brand, gen, tagIcon } from '../icons.js';
 import eps1 from '../assets/proyectos/easy-pdf-inicio.png';
 import eps2 from '../assets/proyectos/easy-pdf-lector.jpg';
 import moova from '../assets/proyectos/moova-popup.png';
@@ -17,6 +17,13 @@ import mInsight from '../assets/proyectos/m-insight-demo.png';
 import mBuscador from '../assets/proyectos/m-buscador-replica.png';
 import foto from '../assets/gustavo.jpg';
 
+// Galerias por proyecto (assets/proyectos/galeria/<id>/N.webp) y capturas de sitios en linea (assets/trabajo/<id>.webp)
+const galFiles = import.meta.glob('../assets/proyectos/galeria/*/*.webp', { eager: true, import: 'default' });
+const gallery = {};
+for (const [p, img] of Object.entries(galFiles)) { const m = p.match(/galeria\/([^/]+)\/(\d+)\.webp$/); (gallery[m[1]] ??= [])[Number(m[2]) - 1] = img; }
+const workFiles = import.meta.glob('../assets/trabajo/*.webp', { eager: true, import: 'default' });
+const workImg = Object.fromEntries(Object.entries(workFiles).map(([p, img]) => [p.match(/([^/]+)\.webp$/)[1], img]));
+
 const { t } = Astro.props;
 const ENDPOINT = 'https://gustavobentancor.com/gsoft-studio/contact.php';
 const SITEKEY = import.meta.env.PUBLIC_TURNSTILE_SITEKEY ?? '';
@@ -27,7 +34,7 @@ const path = isEn ? '/en/' : '/';
 const CANON = 'https://gustavobentancor.com';
 const canonical = `${CANON}${path}`;
 const alt = `${CANON}${isEn ? '/' : '/en/'}`;
-const ogAlt = isEn ? 'Gsoft Studio: fast websites, SEO and custom apps' : 'Gsoft Studio: webs rápidas, SEO y apps a medida';
+const ogAlt = isEn ? 'Gustavo Bentancor: fast websites, SEO and custom apps' : 'Gustavo Bentancor: webs rápidas, SEO y apps a medida';
 const ld = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -36,7 +43,6 @@ const ld = {
       '@id': `${CANON}/#org`,
       name: t.brand,
       url: `${CANON}/`,
-      email: t.email,
       description: t.meta.description,
       image: `${CANON}/og.png`,
       founder: { '@id': `${CANON}/#person` },
@@ -54,7 +60,6 @@ const ld = {
       jobTitle: 'Full-Stack Developer & Product Engineer',
       url: `${CANON}/`,
       image: `${CANON}/og.png`,
-      email: t.email,
       address: { '@type': 'PostalAddress', addressLocality: 'Montevideo', addressCountry: 'UY' },
       worksFor: { '@id': `${CANON}/#org` },
       knowsAbout: ['Web development', 'Technical SEO', 'Core Web Vitals', 'Astro', 'JavaScript', 'PHP', 'Chrome extensions', 'Progressive web apps'],
@@ -150,20 +155,20 @@ const icons = {
         {t.brand}
       </a>
       <nav class="nav" aria-label="Principal">
+        <a href="#sobre-mi">{t.nav.about}</a>
+        <a href="#proyectos">{t.nav.projects}</a>
         <a href="#servicios">{t.nav.services}</a>
         <a href="#proceso">{t.nav.process}</a>
-        <a href="#proyectos">{t.nav.projects}</a>
-        <a href="#sobre-mi">{t.nav.about}</a>
       </nav>
       <a class="lang" href={other} hreflang={isEn ? 'es' : 'en'} title={t.nav.other.title}>{t.nav.other.label}</a>
       <a class="btn btn-p" href="#contacto">{t.nav.cta}</a>
       <details class="menu">
         <summary aria-label="Menu"><span class="ic"></span></summary>
         <nav aria-label="Menu">
+          <a href="#sobre-mi">{t.nav.about}</a>
+          <a href="#proyectos">{t.nav.projects}</a>
           <a href="#servicios">{t.nav.services}</a>
           <a href="#proceso">{t.nav.process}</a>
-          <a href="#proyectos">{t.nav.projects}</a>
-          <a href="#sobre-mi">{t.nav.about}</a>
           <a href="#contacto">{t.nav.contact}</a>
         </nav>
       </details>
@@ -202,6 +207,54 @@ const icons = {
       </div>
     </section>
 
+    <section id="sobre-mi" class="alt cv" style="--m:1500px;--d:1000px">
+      <div class="wrap about">
+        <figure class="foto" data-r="card" data-egg={JSON.stringify(t.egg)}>
+          <Picture src={foto} formats={["avif", "webp"]} fallbackFormat="webp" widths={[280, 420, 560]} sizes="(min-width:900px) 320px, 70vw" alt="Gustavo Bentancor" />
+          <svg class="eye" viewBox="0 0 200 120" aria-hidden="true" focusable="false">
+            <defs>
+              <radialGradient id="eg" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#fff3a0"/><stop offset=".35" stop-color="#ffb300"/><stop offset=".75" stop-color="#ff3d00"/><stop offset="1" stop-color="#7a0900"/></radialGradient>
+              <filter id="eglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+            </defs>
+            <path d="M6 60 Q100 -14 194 60 Q100 134 6 60Z" fill="#ff3d00" filter="url(#eglow)" opacity=".85"/>
+            <path d="M6 60 Q100 -14 194 60 Q100 134 6 60Z" fill="url(#eg)" stroke="#2a0300" stroke-width="3"/>
+            <ellipse cx="100" cy="60" rx="8" ry="40" fill="#120100"/>
+          </svg>
+        </figure>
+        <p class="egg-msg" role="status" aria-live="polite" data-egg-msg></p>
+        <div class="txt">
+          <p class="kick" data-r>{t.about.kicker}</p>
+          <h2 data-r>{t.about.title}</h2>
+          <p class="role" data-r>{t.about.role}</p>
+          <div class="bio" data-r>
+            {t.about.paragraphs.map((p) => <p>{p}</p>)}
+            <a class="ghl" href={t.github} target="_blank" rel="noopener">{t.about.github} ↗</a>
+            <a class="ghl" href={t.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a class="ghl" href={`${base}/${t.cv.file}`} download={t.cv.name} data-cv>{t.cv.download} ↓</a>
+          </div>
+        </div>
+        <ul class="pts">
+          {t.about.points.map((p) => <li data-r="card">{p}</li>)}
+        </ul>
+      </div>
+      <div class="wrap skills">
+        <h3 data-r>{t.about.skillsTitle}</h3>
+        <div class="sgrid">
+          {t.about.skills.map((g) => (
+            <div class="sgroup" data-r="card">
+              <h4>{g.title}</h4>
+              <ul class="tags sk">{g.items.map(([label, key]) => (
+                <li>
+                  <svg aria-hidden="true"><use href={`${base}/icons.svg#${key}`} /></svg>
+                  {label}
+                </li>
+              ))}</ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <div class="stats">
       <div class="wrap">
         <ul class="sgr" aria-label={t.stats.label}>
@@ -218,6 +271,106 @@ const icons = {
       </ul>
     </div>
 
+    <section id="proyectos">
+      <div class="wrap">
+        <p class="kick" data-r>{t.projects.kicker}</p>
+        <h2 data-r>{t.projects.title}</h2>
+        <p class="sub" data-r>{t.projects.lead}</p>
+        <div class="filters" role="group" aria-label={t.projects.filterLabel} data-filters hidden>
+          {['all', 'web', 'apps', 'ext'].map((k) => (
+            <button type="button" class="chip" data-f={k} aria-pressed={k === 'all' ? 'true' : 'false'}>{t.projects.filters[k]}</button>
+          ))}
+        </div>
+        <div class="pgrid">
+          {sorted.map((p, i) => (
+            <Fragment>
+              {groupOf[p.id] && groupOf[p.id] !== groupOf[sorted[i - 1]?.id] && <h3 class="ghead" data-r>{t.projects.groups[groupOf[p.id]]}</h3>}
+            <article class:list={['proj', { feat: featIds.includes(p.id) }]} data-r="card" data-cat={catOf[p.id]}>
+              <div class:list={['media', mediaClass[p.id]]} tabindex="0" role="button" aria-label={t.projects.detail}>
+                {p.id === 'easy-pdf-free' ? (
+                  <>
+                    <Picture src={eps1} formats={["avif", "webp"]} fallbackFormat="webp" widths={[240, 360]} sizes="(min-width:760px) 180px, 40vw" alt={isEn ? 'Easy PDF Free home screen' : 'Pantalla de inicio de Easy PDF Free'} data-par />
+                    <Picture src={eps2} formats={["avif", "webp"]} fallbackFormat="webp" widths={[240, 360]} sizes="(min-width:760px) 180px, 40vw" alt={isEn ? 'Reader with large controls' : 'Lector con controles grandes'} data-par />
+                  </>
+                ) : (
+                  <Picture
+                    src={images[p.id]}
+                    formats={["avif", "webp"]} fallbackFormat="webp"
+                    widths={mediaClass[p.id] && p.id !== 'gletir-tracker' ? [400, 600] : [480, 720, 960, 1200]}
+                    sizes={mediaClass[p.id] && p.id !== 'gletir-tracker' ? '(min-width:760px) 300px, 70vw' : p.id === 'gletir-tracker' ? '(min-width:1120px) 580px, (min-width:760px) 55vw, 92vw' : '(min-width:1120px) 540px, (min-width:760px) 46vw, 92vw'}
+                    alt={isEn ? `Screenshot of ${p.title}` : `Captura de ${p.title}`}
+                    data-par
+                  />
+                )}
+                <span class="mview" aria-hidden="true">{t.projects.detail} ↗</span>
+                {gallery[p.id] && <span class="gcount" aria-hidden="true">{gallery[p.id].length + 1} {isEn ? 'screens' : 'capturas'}</span>}
+                {mobile[p.id] && (
+                  <>
+                    <div class="phone">
+                      <i class="notch" aria-hidden="true"></i>
+                      <Picture src={mobile[p.id]} formats={["avif", "webp"]} fallbackFormat="webp" widths={[200, 300]} sizes="130px" alt={isEn ? `${p.title} on mobile` : `${p.title} en móvil`} />
+                    </div>
+                  </>
+                )}
+              </div>
+              <div class="pbody">
+                <span class="type">{t.projects.types[p.type]}</span>
+                <h3>{p.title}</h3>
+                <p>{p.text}</p>
+                {p.price && <p class="price"><strong>{p.price}</strong></p>}
+                {p.note && <p class="pnote">{p.note}</p>}
+                {gallery[p.id] && (
+                  <div class="gal" hidden>
+                    {gallery[p.id].map((img, i) => (
+                      <figure>
+                        <Image src={img} width={1100} format="webp" quality={80} loading="lazy" alt={`${p.title}: ${p.shots?.[i] ?? ''}`} />
+                        <figcaption>{p.shots?.[i]}</figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                )}
+                <ul class="dpts" hidden>
+                  <li class="dh">{t.projects.highlights}</li>
+                  {p.points.map((x) => <li>{x}</li>)}
+                </ul>
+                <ul class="tags sk">{p.tags.map((g) => <li>{tagIcon[g] && <svg aria-hidden="true"><use href={`${base}/icons.svg#${tagIcon[g]}`} /></svg>}{g}</li>)}</ul>
+                <div class="links">
+                  {p.store && <a class="btn btn-p" href={p.store} target="_blank" rel="noopener">{t.projects.store} ↗</a>}
+                  {p.landing && <a class="btn btn-s" href={p.landing} target="_blank" rel="noopener">{t.projects.more} ↗</a>}
+                  {p.demo && <a class="btn btn-p" href={p.demo} target="_blank" rel="noopener">{t.projects.demo} ↗</a>}
+                  {p.code && <a class="btn btn-s" href={p.code} target="_blank" rel="noopener">{t.projects.code} ↗</a>}
+                  <button type="button" class="btn btn-s" data-open aria-haspopup="dialog">{t.projects.detail}</button>
+                </div>
+              </div>
+            </article>
+            </Fragment>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="trabajo" class="cv" style="--m:1500px;--d:620px">
+      <div class="wrap">
+        <p class="kick" data-r>{t.work.kicker}</p>
+        <h2 data-r>{t.work.title}</h2>
+        <p class="sub" data-r>{t.work.lead}</p>
+        <div class="wgrid">
+          {t.work.items.map((w) => (
+            <article class="card wcard" data-r="card">
+              {workImg[w.img] && <Image class="wshot" src={workImg[w.img]} width={720} format="webp" quality={80} loading="lazy" alt={isEn ? `Screenshot of ${w.title}` : `Captura de ${w.title}`} />}
+              <span class="type">{w.type}</span>
+              <h3>{w.title}</h3>
+              <p>{w.text}</p>
+              <p class="wrole"><b>{t.work.role}:</b> {w.role}</p>
+              {w.link && <a class="btn btn-s" href={w.link.startsWith('/') ? base + w.link : w.link} target="_blank" rel="noopener">{w.linkLabel ?? (w.link.startsWith('/') ? t.work.view : t.work.visit)} ↗</a>}
+              {w.links && <div class="wlinks">{w.links.map((k) => <a class="btn btn-s" href={k.url} target="_blank" rel="noopener">{k.label} ↗</a>)}</div>}
+            </article>
+          ))}
+        </div>
+        <p class="wnote" data-r>{t.work.note} {isEn ? 'Screenshots taken in November 2026.' : 'Capturas tomadas en noviembre de 2026.'}</p>
+      </div>
+    </section>
+
     <section id="servicios" class="cv" style="--m:1230px;--d:700px">
       <div class="wrap">
         <p class="kick" data-r>{t.services.kicker}</p>
@@ -228,6 +381,7 @@ const icons = {
               <div class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={icons[s.icon]}/></svg></div>
               <h3>{s.title}</h3>
               <p>{s.text}</p>
+              {s.slug && <a class="svc-more" href={isEn ? `${base}/en/servicios/${s.slug}/` : `${base}/servicios/${s.slug}/`} style="display:inline-block;margin-top:10px;font-size:.9rem;color:var(--a);text-decoration:none">{isEn ? 'Learn more →' : 'Ver más →'}</a>}
             </article>
           ))}
         </div>
@@ -265,94 +419,6 @@ const icons = {
       </div>
     </section>
 
-    <section id="proyectos">
-      <div class="wrap">
-        <p class="kick" data-r>{t.projects.kicker}</p>
-        <h2 data-r>{t.projects.title}</h2>
-        <p class="sub" data-r>{t.projects.lead}</p>
-        <div class="filters" role="group" aria-label={t.projects.filterLabel} data-filters hidden>
-          {['all', 'web', 'apps', 'ext'].map((k) => (
-            <button type="button" class="chip" data-f={k} aria-pressed={k === 'all' ? 'true' : 'false'}>{t.projects.filters[k]}</button>
-          ))}
-        </div>
-        <div class="pgrid">
-          {sorted.map((p, i) => (
-            <Fragment>
-              {groupOf[p.id] && groupOf[p.id] !== groupOf[sorted[i - 1]?.id] && <h3 class="ghead" data-r>{t.projects.groups[groupOf[p.id]]}</h3>}
-            <article class:list={['proj', { feat: featIds.includes(p.id) }]} data-r="card" data-cat={catOf[p.id]}>
-              <div class:list={['media', mediaClass[p.id]]} tabindex="0" role="button" aria-label={t.projects.detail}>
-                {p.id === 'easy-pdf-free' ? (
-                  <>
-                    <Picture src={eps1} formats={["avif", "webp"]} fallbackFormat="webp" widths={[240, 360]} sizes="(min-width:760px) 180px, 40vw" alt={isEn ? 'Easy PDF Free home screen' : 'Pantalla de inicio de Easy PDF Free'} data-par />
-                    <Picture src={eps2} formats={["avif", "webp"]} fallbackFormat="webp" widths={[240, 360]} sizes="(min-width:760px) 180px, 40vw" alt={isEn ? 'Reader with large controls' : 'Lector con controles grandes'} data-par />
-                  </>
-                ) : (
-                  <Picture
-                    src={images[p.id]}
-                    formats={["avif", "webp"]} fallbackFormat="webp"
-                    widths={mediaClass[p.id] && p.id !== 'gletir-tracker' ? [400, 600] : [480, 720, 960, 1200]}
-                    sizes={mediaClass[p.id] && p.id !== 'gletir-tracker' ? '(min-width:760px) 300px, 70vw' : p.id === 'gletir-tracker' ? '(min-width:1120px) 580px, (min-width:760px) 55vw, 92vw' : '(min-width:1120px) 540px, (min-width:760px) 46vw, 92vw'}
-                    alt={isEn ? `Screenshot of ${p.title}` : `Captura de ${p.title}`}
-                    data-par
-                  />
-                )}
-                <span class="mview" aria-hidden="true">{t.projects.detail} ↗</span>
-                {mobile[p.id] && (
-                  <>
-                    <div class="phone">
-                      <i class="notch" aria-hidden="true"></i>
-                      <Picture src={mobile[p.id]} formats={["avif", "webp"]} fallbackFormat="webp" widths={[200, 300]} sizes="130px" alt={isEn ? `${p.title} on mobile` : `${p.title} en móvil`} />
-                    </div>
-                  </>
-                )}
-              </div>
-              <div class="pbody">
-                <span class="type">{t.projects.types[p.type]}</span>
-                <h3>{p.title}</h3>
-                <p>{p.text}</p>
-                {p.price && <p class="price"><strong>{p.price}</strong></p>}
-                {p.note && <p class="pnote">{p.note}</p>}
-                <ul class="dpts" hidden>
-                  <li class="dh">{t.projects.highlights}</li>
-                  {p.points.map((x) => <li>{x}</li>)}
-                </ul>
-                <ul class="tags">{p.tags.map((g) => <li>{g}</li>)}</ul>
-                <div class="links">
-                  {p.store && <a class="btn btn-p" href={p.store} target="_blank" rel="noopener">{t.projects.store} ↗</a>}
-                  {p.landing && <a class="btn btn-s" href={p.landing} target="_blank" rel="noopener">{t.projects.more} ↗</a>}
-                  {p.demo && <a class="btn btn-p" href={p.demo} target="_blank" rel="noopener">{t.projects.demo} ↗</a>}
-                  {p.code && <a class="btn btn-s" href={p.code} target="_blank" rel="noopener">{t.projects.code} ↗</a>}
-                  <button type="button" class="btn btn-s" data-open aria-haspopup="dialog">{t.projects.detail}</button>
-                </div>
-              </div>
-            </article>
-            </Fragment>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section id="trabajo" class="cv" style="--m:1500px;--d:620px">
-      <div class="wrap">
-        <p class="kick" data-r>{t.work.kicker}</p>
-        <h2 data-r>{t.work.title}</h2>
-        <p class="sub" data-r>{t.work.lead}</p>
-        <div class="wgrid">
-          {t.work.items.map((w) => (
-            <article class="card wcard" data-r="card">
-              <span class="type">{w.type}</span>
-              <h3>{w.title}</h3>
-              <p>{w.text}</p>
-              <p class="wrole"><b>{t.work.role}:</b> {w.role}</p>
-              {w.link && <a class="btn btn-s" href={w.link.startsWith('/') ? base + w.link : w.link} target="_blank" rel="noopener">{w.linkLabel ?? (w.link.startsWith('/') ? t.work.view : t.work.visit)} ↗</a>}
-              {w.links && <div class="wlinks">{w.links.map((k) => <a class="btn btn-s" href={k.url} target="_blank" rel="noopener">{k.label} ↗</a>)}</div>}
-            </article>
-          ))}
-        </div>
-        <p class="wnote" data-r>{t.work.note}</p>
-      </div>
-    </section>
-
     <section id="industrias" class="cv" style="--m:700px;--d:500px">
       <div class="wrap">
         <p class="kick" data-r>{t.industries.kicker}</p>
@@ -364,53 +430,6 @@ const icons = {
               <h3>{x.title}</h3>
               <p>{x.text}</p>
             </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section id="sobre-mi" class="alt cv" style="--m:1500px;--d:1000px">
-      <div class="wrap about">
-        <figure class="foto" data-r="card" data-egg={JSON.stringify(t.egg)}>
-          <Picture src={foto} formats={["avif", "webp"]} fallbackFormat="webp" widths={[280, 420, 560]} sizes="(min-width:900px) 320px, 70vw" alt="Gustavo Bentancor" />
-          <svg class="eye" viewBox="0 0 200 120" aria-hidden="true" focusable="false">
-            <defs>
-              <radialGradient id="eg" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#fff3a0"/><stop offset=".35" stop-color="#ffb300"/><stop offset=".75" stop-color="#ff3d00"/><stop offset="1" stop-color="#7a0900"/></radialGradient>
-              <filter id="eglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
-            </defs>
-            <path d="M6 60 Q100 -14 194 60 Q100 134 6 60Z" fill="#ff3d00" filter="url(#eglow)" opacity=".85"/>
-            <path d="M6 60 Q100 -14 194 60 Q100 134 6 60Z" fill="url(#eg)" stroke="#2a0300" stroke-width="3"/>
-            <ellipse cx="100" cy="60" rx="8" ry="40" fill="#120100"/>
-          </svg>
-        </figure>
-        <p class="egg-msg" role="status" aria-live="polite" data-egg-msg></p>
-        <div class="txt">
-          <p class="kick" data-r>{t.about.kicker}</p>
-          <h2 data-r>{t.about.title}</h2>
-          <div data-r style="margin-top:20px">
-            {t.about.paragraphs.map((p) => <p>{p}</p>)}
-            <a class="ghl" href={t.github} target="_blank" rel="noopener">{t.about.github} ↗</a>
-            <a class="ghl" href={t.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
-            <a class="ghl" href={`${base}/${t.cv.file}`} download={t.cv.name} data-cv>{t.cv.download} ↓</a>
-          </div>
-        </div>
-        <ul class="pts">
-          {t.about.points.map((p) => <li data-r="card">{p}</li>)}
-        </ul>
-      </div>
-      <div class="wrap skills">
-        <h3 data-r>{t.about.skillsTitle}</h3>
-        <div class="sgrid">
-          {t.about.skills.map((g) => (
-            <div class="sgroup" data-r="card">
-              <h4>{g.title}</h4>
-              <ul class="tags sk">{g.items.map(([label, key]) => (
-                <li>
-                  <svg aria-hidden="true"><use href={`${base}/icons.svg#${key}`} /></svg>
-                  {label}
-                </li>
-              ))}</ul>
-            </div>
           ))}
         </div>
       </div>
@@ -433,7 +452,7 @@ const icons = {
             <button class="btn btn-p" type="submit">{t.contact.form.send}</button>
             <p class="fstat" role="status" aria-live="polite" data-status></p>
           </form>
-          <span class="mail">{t.contact.form.or} <a href={`mailto:${t.email}`}>{t.contact.emailLabel}</a> · <a href={t.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a></span>
+          <span class="mail">{t.contact.form.or} <button type="button" class="mailbtn" data-mail data-u={t.emailEnc} data-copied={t.contact.copiedEmail} data-open-label={t.contact.openMail} aria-label={t.contact.mailAria}><svg aria-hidden="true"><use href={`${base}/icons.svg#mail`} /></svg><span data-l>{t.contact.copyEmail}</span></button> · <a href={t.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a></span>
         </div>
       </div>
     </section>
@@ -453,6 +472,9 @@ const icons = {
 
   <a class="sticky-cta" href="#contacto" data-sticky aria-label={t.nav.cta}>{t.nav.cta}</a>
 
+  <script>
+    import '../scripts/mail.js';
+  </script>
   <script>
     // CTA fijo en movil: se muestra al pasar el hero y se oculta cuando el formulario esta a la vista.
     const stk = document.querySelector('[data-sticky]');
@@ -494,7 +516,50 @@ const icons = {
         body.querySelector('[data-open]')?.remove();
         const pts = body.querySelector('.dpts');
         if (pts) pts.hidden = false;
-        dm.replaceChildren(media);
+        const gal = body.querySelector('.gal');
+        gal?.remove();
+        if (gal && gal.children.length) {
+          // Carrusel: la imagen principal + las capturas de la galeria (deslizar, flechas o teclado)
+          const slides = [media, ...[...gal.children].map((f) => { f.querySelector('img').loading = 'eager'; return f; })];
+          const car = document.createElement('div');
+          car.className = 'car';
+          const tr = document.createElement('div');
+          tr.className = 'ctrack';
+          tr.tabIndex = 0;
+          tr.setAttribute('role', 'group');
+          tr.setAttribute('aria-roledescription', 'carousel');
+          slides.forEach((x) => { const sl = document.createElement('div'); sl.className = 'cslide'; sl.appendChild(x); tr.appendChild(sl); });
+          const en = document.documentElement.lang === 'en';
+          const prev = document.createElement('button');
+          const next = document.createElement('button');
+          prev.type = next.type = 'button';
+          prev.className = 'cbtn prev';
+          next.className = 'cbtn next';
+          prev.textContent = '‹';
+          next.textContent = '›';
+          prev.setAttribute('aria-label', en ? 'Previous' : 'Anterior');
+          next.setAttribute('aria-label', en ? 'Next' : 'Siguiente');
+          const cnt = document.createElement('span');
+          cnt.className = 'ccnt';
+          cnt.setAttribute('aria-live', 'polite');
+          const upd = () => {
+            const i = Math.round(tr.scrollLeft / (tr.clientWidth || 1));
+            cnt.textContent = (i + 1) + ' / ' + slides.length;
+            prev.disabled = i === 0;
+            next.disabled = i === slides.length - 1;
+          };
+          const go = (d) => tr.scrollBy({ left: d * tr.clientWidth, behavior: matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth' });
+          prev.onclick = () => go(-1);
+          next.onclick = () => go(1);
+          tr.addEventListener('scroll', upd, { passive: true });
+          tr.addEventListener('keydown', (ev) => {
+            if (ev.key === 'ArrowRight') { ev.preventDefault(); go(1); }
+            if (ev.key === 'ArrowLeft') { ev.preventDefault(); go(-1); }
+          });
+          car.append(tr, prev, next, cnt);
+          dm.replaceChildren(car);
+          upd();
+        } else dm.replaceChildren(media);
         db.replaceChildren(...body.childNodes);
         dlg.showModal();
         dlg.querySelector('.dscroll').scrollTop = 0;
