@@ -26,6 +26,8 @@ const other = isEn ? `${base}/proyectos/${slug}/` : `${base}/en/proyectos/${slug
 const homePath = isEn ? '/en/' : '/';
 const servicesBase = isEn ? '/en/servicios/' : '/servicios/';
 
+const workFiles = import.meta.glob('../assets/trabajo/*.webp', { eager: true, import: 'default' });
+const workCover = Object.entries(workFiles).find(([f]) => f.endsWith(`/${project.img ?? project.id}.webp`))?.[1];
 const galFiles = import.meta.glob('../assets/proyectos/galeria/*/*.webp', { eager: true, import: 'default' });
 const gallery = Object.entries(galFiles).filter(([p]) => p.includes(`/galeria/${slug}/`)).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true })).map(([, img]) => img);
 const images = { 'gletir-tracker': gletir, 'easy-pdf-free': null, 'tracker-habits': habit, 'moova-tracker-extension': moova, 'img-generator': imgGen, 'web-performance': perf, 'insight-demo': insight, 'buscador-replica': buscador, 'kiosko': kiosko };
@@ -116,21 +118,24 @@ const fontCss = `@font-face{font-family:"Inter";font-style:normal;font-weight:10
     <section class="hero" data-hero style="min-height:auto;padding:80px 0 40px">
       <div class="wrap">
         <div>
-          <span class="badge"><i></i>{t.projects.types[project.type]}</span>
+          <span class="badge"><i></i>{project.kind ?? t.projects.types[project.type]}</span>
           <h1 style="font-size:clamp(2rem,5vw,3.2rem);line-height:1.05;margin:14px 0 16px">{project.title}</h1>
           <p class="lead">{project.text}</p>
+          {project.role && <p style="margin-top:14px;font-size:.95rem;color:var(--muted)"><b style="color:var(--text)">{t.work.role}:</b> {project.role}</p>}
           {project.price && <p style="margin-top:14px;font-size:.95rem"><strong>{project.price}</strong></p>}
           {project.note && <p style="margin-top:8px;font-size:.9rem;color:var(--muted)">{project.note}</p>}
           <div class="cta" style="margin-top:18px">
             {project.store && <a class="btn btn-p" href={project.store} target="_blank" rel="noopener">{t.projects.store} ↗</a>}
+            {project.visit && <a class="btn btn-p" href={project.visit} target="_blank" rel="noopener">{t.work.visit} ↗</a>}
+            {project.links && project.links.map((k) => <a class="btn btn-s" href={k.url} target="_blank" rel="noopener">{k.label} ↗</a>)}
             {project.demo && <a class="btn btn-p" href={project.demo} target="_blank" rel="noopener">{t.projects.demo} ↗</a>}
             {project.landing && <a class="btn btn-s" href={project.landing} target="_blank" rel="noopener">{t.projects.more} ↗</a>}
             {project.code && <a class="btn btn-s" href={project.code} target="_blank" rel="noopener">{t.projects.code} ↗</a>}
           </div>
         </div>
-        {images[project.id] && (
+        {(images[project.id] ?? workCover) && (
           <div style="margin-top:30px">
-            <Picture src={images[project.id]} formats={["avif","webp"]} fallbackFormat="webp" widths={[480,720,960]} sizes="(min-width:900px) 600px, 90vw" alt={isEn ? `Screenshot of ${project.title}` : `Captura de ${project.title}`} />
+            <Picture src={images[project.id] ?? workCover} formats={["avif","webp"]} fallbackFormat="webp" widths={[480,720,960]} sizes="(min-width:900px) 600px, 90vw" alt={isEn ? `Screenshot of ${project.title}` : `Captura de ${project.title}`} />
           </div>
         )}
       </div>

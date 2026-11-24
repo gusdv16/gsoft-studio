@@ -375,3 +375,11 @@ html.mordor .box::before{background:radial-gradient(circle,rgba(255,70,0,.32) 0,
 .tl p{margin:0}
 .tl .org{margin-top:4px}
 .tl .when{margin-top:3px}
+
+/* Proyectos: vista colapsada, rol y boton "ver mas" */
+.pgrid.collapsed [data-extra]{display:none}
+.moreb{display:flex;justify-content:center;margin-top:30px}
+.moreb[hidden],.moreb:has([data-more][hidden]){display:none}
+.proj .wrole{font-size:.9rem;color:var(--muted)}
+.proj .wrole b{color:var(--text)}
+.proj .pbody h3+p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:5;line-clamp:5;overflow:hidden}

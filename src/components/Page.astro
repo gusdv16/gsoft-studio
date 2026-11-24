@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { Picture, Image } from 'astro:assets';
 import { brand, gen, tagIcon } from '../icons.js';
+import { allItems } from '../lib/projects.js';
 import eps1 from '../assets/proyectos/easy-pdf-inicio.png';
 import eps2 from '../assets/proyectos/easy-pdf-lector.jpg';
 import moova from '../assets/proyectos/moova-popup.png';
@@ -81,12 +82,25 @@ const other = isEn ? `${base}/` : `${base}/en/`;
 const fontCss = `@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("${base}/fonts/inter-latin-wght-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}`;
 const images = { 'gletir-tracker': gletir, 'easy-pdf-free': null, 'tracker-habits': habit, 'moova-tracker-extension': moova, 'img-generator': imgGen, 'web-performance': perf, 'insight-demo': insight, 'buscador-replica': buscador, 'kiosko': kiosko };
 // Orden: Gletir destacado, luego sitios web (con vista movil) y luego aplicaciones/herramientas propias
-const order = ['gletir-tracker', 'web-performance', 'insight-demo', 'buscador-replica', 'easy-pdf-free', 'tracker-habits', 'kiosko', 'moova-tracker-extension', 'img-generator'];
-const groupOf = { 'web-performance': 'web', 'insight-demo': 'web', 'buscador-replica': 'web', 'easy-pdf-free': 'own', 'tracker-habits': 'own', 'kiosko': 'own', 'moova-tracker-extension': 'own', 'img-generator': 'own' };
-const catOf = { 'web-performance': 'web', 'insight-demo': 'web', 'buscador-replica': 'web', 'easy-pdf-free': 'apps', 'tracker-habits': 'apps', 'kiosko': 'apps', 'gletir-tracker': 'ext', 'moova-tracker-extension': 'ext', 'img-generator': 'ext' };
-const featIds = ['gletir-tracker', 'web-performance'];
+// Trabajos para clientes y demos propias (t.work.items) se muestran como proyectos mas
+const all = allItems(t, base);
+// Orden por importancia: primero el front-end web (sitios reales y demos), despues apps, extensiones y herramientas
+const order = [
+  'urugol', 'auf', 'brou', 'eventosanime', 'web-performance', 'interbalnearios', 'elarcon', 'museo-celeste',
+  'rincon', 'nodo-corp', 'rumbo-sur', 'grano-sur', 'talento-sur', 'insight-demo', 'buscador-replica', 'banners',
+  'gletir-tracker', 'easy-pdf-free', 'kiosko', 'automatizaciones-pyme', 'tracker-habits', 'moova-tracker-extension', 'img-generator',
+];
+const ownIds = ['gletir-tracker', 'easy-pdf-free', 'kiosko', 'automatizaciones-pyme', 'tracker-habits', 'moova-tracker-extension', 'img-generator'];
+const groupOf = Object.fromEntries(order.map((id) => [id, ownIds.includes(id) ? 'own' : 'web']));
+const catOf = Object.fromEntries(order.map((id) => [id, 'web']));
+Object.assign(catOf, { 'easy-pdf-free': 'apps', 'tracker-habits': 'apps', 'kiosko': 'apps', 'automatizaciones-pyme': 'apps', 'gletir-tracker': 'ext', 'moova-tracker-extension': 'ext', 'img-generator': 'ext' });
 const mobile = { 'web-performance': mPerf, 'insight-demo': mInsight, 'buscador-replica': mBuscador };
-const sorted = order.map((id) => t.projects.items.find((x) => x.id === id));
+const sorted = order.map((id) => all.find((x) => x.id === id)).filter(Boolean);
+// En la vista "Todos" se muestran los primeros 8 de cada grupo; el resto se despliega con un boton
+const seen = {};
+const extra = new Set(sorted.filter((p) => (seen[groupOf[p.id]] = (seen[groupOf[p.id]] ?? 0) + 1) > 8).map((p) => p.id));
+const hiddenCount = extra.size;
+const cover = (p) => images[p.id] ?? workImg[p.img ?? p.id];
 const mediaClass = { 'gletir-tracker': 'shot', 'tracker-habits': 'logo', 'moova-tracker-extension': 'contain', 'easy-pdf-free': 'duo' };
 const icons = {
   cog: 'M12 15a3 3 0 100-6 3 3 0 000 6zm7.4-3a7.4 7.4 0 00-.1-1.2l2-1.6-2-3.4-2.4 1a7.5 7.5 0 00-2-1.2L14.5 3h-4l-.4 2.6a7.5 7.5 0 00-2 1.2l-2.4-1-2 3.4 2 1.6a7.4 7.4 0 000 2.4l-2 1.6 2 3.4 2.4-1a7.5 7.5 0 002 1.2l.4 2.6h4l.4-2.6a7.5 7.5 0 002-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z',
@@ -311,7 +325,7 @@ const icons = {
         <h2 data-r>{t.projects.title}</h2>
         <p class="sub" data-r>{t.projects.lead}</p>
         <div class="filters" role="group" aria-label={t.projects.filterLabel} data-filters hidden>
-          {['all', 'web', 'apps', 'ext'].map((k) => (
+          {['all', 'web', 'clients', 'apps', 'ext'].map((k) => (
             <button type="button" class="chip" data-f={k} aria-pressed={k === 'all' ? 'true' : 'false'}>{t.projects.filters[k]}</button>
           ))}
         </div>
@@ -319,7 +333,7 @@ const icons = {
           {sorted.map((p, i) => (
             <Fragment>
               {groupOf[p.id] && groupOf[p.id] !== groupOf[sorted[i - 1]?.id] && <h3 class="ghead" data-r>{t.projects.groups[groupOf[p.id]]}</h3>}
-            <article class:list={['proj', { feat: featIds.includes(p.id) }]} data-r="card" data-cat={catOf[p.id]}>
+            <article class="proj" data-r="card" data-cat={catOf[p.id]} data-client={p.type === 'client' || p.id === 'banners' ? '1' : undefined} data-extra={extra.has(p.id) ? '' : undefined}>
               <div class:list={['media', mediaClass[p.id]]} tabindex="0" role="button" aria-label={t.projects.detail}>
                 {p.id === 'easy-pdf-free' ? (
                   <>
@@ -328,7 +342,7 @@ const icons = {
                   </>
                 ) : (
                   <Picture
-                    src={images[p.id]}
+                    src={cover(p)}
                     formats={["avif", "webp"]} fallbackFormat="webp"
                     widths={mediaClass[p.id] && p.id !== 'gletir-tracker' ? [400, 600] : [480, 720, 960, 1200]}
                     sizes={mediaClass[p.id] && p.id !== 'gletir-tracker' ? '(min-width:760px) 300px, 70vw' : p.id === 'gletir-tracker' ? '(min-width:1120px) 580px, (min-width:760px) 55vw, 92vw' : '(min-width:1120px) 540px, (min-width:760px) 46vw, 92vw'}
@@ -348,9 +362,10 @@ const icons = {
                 )}
               </div>
               <div class="pbody">
-                <span class="type">{t.projects.types[p.type]}</span>
+                <span class="type">{p.kind ?? t.projects.types[p.type]}</span>
                 <h3>{p.title}</h3>
                 <p>{p.text}</p>
+                {p.role && <p class="wrole"><b>{t.work.role}:</b> {p.role}</p>}
                 {p.price && <p class="price"><strong>{p.price}</strong></p>}
                 {p.note && <p class="pnote">{p.note}</p>}
                 {gallery[p.id] && (
@@ -363,14 +378,18 @@ const icons = {
                     ))}
                   </div>
                 )}
-                <ul class="dpts" hidden>
-                  <li class="dh">{t.projects.highlights}</li>
-                  {p.points.map((x) => <li>{x}</li>)}
-                </ul>
-                <ul class="tags sk">{p.tags.map((g) => <li>{tagIcon[g] && <svg aria-hidden="true"><use href={`${base}/icons.svg#${tagIcon[g]}`} /></svg>}{g}</li>)}</ul>
+                {p.points && p.points.length > 0 && (
+                  <ul class="dpts" hidden>
+                    <li class="dh">{t.projects.highlights}</li>
+                    {p.points.map((x) => <li>{x}</li>)}
+                  </ul>
+                )}
+                {p.tags && p.tags.length > 0 && <ul class="tags sk">{p.tags.map((g) => <li>{tagIcon[g] && <svg aria-hidden="true"><use href={`${base}/icons.svg#${tagIcon[g]}`} /></svg>}{g}</li>)}</ul>}
                 <div class="links">
                   {p.store && <a class="btn btn-p" href={p.store} target="_blank" rel="noopener">{t.projects.store} ↗</a>}
                   {p.landing && <a class="btn btn-s" href={p.landing} target="_blank" rel="noopener">{t.projects.more} ↗</a>}
+                  {p.visit && <a class="btn btn-p" href={p.visit} target="_blank" rel="noopener">{t.work.visit} ↗</a>}
+                  {p.links && p.links.map((k) => <a class="btn btn-s" href={k.url} target="_blank" rel="noopener">{k.label} ↗</a>)}
                   {p.demo && <a class="btn btn-p" href={p.demo} target="_blank" rel="noopener">{t.projects.demo} ↗</a>}
                   {p.code && <a class="btn btn-s" href={p.code} target="_blank" rel="noopener">{t.projects.code} ↗</a>}
                   <button type="button" class="btn btn-s" data-open aria-haspopup="dialog">{t.projects.detail}</button>
@@ -380,28 +399,8 @@ const icons = {
             </Fragment>
           ))}
         </div>
-      </div>
-    </section>
-
-    <section id="trabajo" class="cv" style="--m:1500px;--d:620px">
-      <div class="wrap">
-        <p class="kick" data-r>{t.work.kicker}</p>
-        <h2 data-r>{t.work.title}</h2>
-        <p class="sub" data-r>{t.work.lead}</p>
-        <div class="wgrid">
-          {t.work.items.map((w) => (
-            <article class="card wcard" data-r="card">
-              {workImg[w.img] && <Image class="wshot" src={workImg[w.img]} width={720} format="webp" quality={80} loading="lazy" alt={isEn ? `Screenshot of ${w.title}` : `Captura de ${w.title}`} />}
-              <span class="type">{w.type}</span>
-              <h3>{w.title}</h3>
-              <p>{w.text}</p>
-              <p class="wrole"><b>{t.work.role}:</b> {w.role}</p>
-              {w.link && <a class="btn btn-s" href={w.link.startsWith('/') ? base + w.link : w.link} target="_blank" rel="noopener">{w.linkLabel ?? (w.link.startsWith('/') ? t.work.view : t.work.visit)} ↗</a>}
-              {w.links && <div class="wlinks">{w.links.map((k) => <a class="btn btn-s" href={k.url} target="_blank" rel="noopener">{k.label} ↗</a>)}</div>}
-            </article>
-          ))}
-        </div>
-        <p class="wnote" data-r>{t.work.note} {isEn ? 'Screenshots taken in November 2026.' : 'Capturas tomadas en noviembre de 2026.'}</p>
+        {hiddenCount > 0 && <div class="moreb"><button type="button" class="btn btn-s" data-more hidden>{isEn ? `Show ${hiddenCount} more projects` : `Ver ${hiddenCount} proyectos más`}</button></div>}
+        <p class="wnote" data-r>{t.work.note} {isEn ? 'Screenshots of live sites taken in November 2026.' : 'Capturas de sitios en línea tomadas en noviembre de 2026.'}</p>
       </div>
     </section>
 
@@ -526,6 +525,12 @@ const icons = {
     const grid = document.querySelector('.pgrid');
     const bar = document.querySelector('[data-filters]');
     const dlg = document.querySelector('[data-dlg]');
+    const moreBtn = document.querySelector('[data-more]');
+    if (grid && moreBtn) {
+      grid.classList.add('collapsed');
+      moreBtn.hidden = false;
+      moreBtn.addEventListener('click', () => { grid.classList.remove('collapsed'); moreBtn.hidden = true; });
+    }
     if (grid && bar) {
       bar.hidden = false;
       bar.addEventListener('click', (e) => {
@@ -533,8 +538,9 @@ const icons = {
         if (!b) return;
         const f = b.dataset.f;
         bar.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-        grid.querySelectorAll('article[data-cat]').forEach((a) => { a.hidden = f !== 'all' && a.dataset.cat !== f; });
+        grid.querySelectorAll('article[data-cat]').forEach((a) => { a.hidden = f !== 'all' && (f === 'clients' ? !a.dataset.client : a.dataset.cat !== f); });
         grid.querySelectorAll('.ghead').forEach((h) => { h.hidden = f !== 'all'; });
+        if (f !== 'all') { grid.classList.remove('collapsed'); moreBtn && (moreBtn.hidden = true); }
       });
     }
     if (grid && dlg) {

@@ -1,11 +1,10 @@
 // Sitemap con alternates hreflang. La URL canonica es el dominio propio.
+import es from '../i18n/es.js';
+import { allItems } from '../lib/projects.js';
 const CANON = 'https://gustavobentancor.com';
 const slugs = {
   services: ['desarrollo-web-rapido', 'extensiones-chrome', 'automatizacion-ia', 'apps-pwa', 'seo-tecnico'],
-  projects: [
-    'gletir-tracker', 'easy-pdf-free', 'tracker-habits', 'moova-tracker-extension',
-    'img-generator', 'web-performance', 'kiosko', 'insight-demo', 'buscador-replica',
-  ],
+  projects: allItems(es).map((p) => p.id),
 };
 
 export function GET() {

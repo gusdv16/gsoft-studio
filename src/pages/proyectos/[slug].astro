@@ -1,9 +1,10 @@
 ---
+import { allItems } from '../../lib/projects.js';
 import ProjectPage from '../../components/ProjectPage.astro';
 import es from '../../i18n/es.js';
 
 export function getStaticPaths() {
-  return es.projects.items.map((p) => ({ params: { slug: p.id }, props: { project: p } }));
+  return allItems(es, import.meta.env.BASE_URL.replace(/\/$/, '')).map((p) => ({ params: { slug: p.id }, props: { project: p } }));
 }
 
 const { project } = Astro.props;

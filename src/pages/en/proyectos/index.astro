@@ -1,4 +1,5 @@
 ---
+import { allItems } from '../../../lib/projects.js';
 import '../../../styles/global.css';
 import en from '../../../i18n/en.js';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -24,7 +25,7 @@ const description = 'Gustavo Bentancor projects: Chrome extensions, PWA, Android
     <h1>Projects</h1>
     <p style="margin:12px 0 32px;color:var(--muted)">What I have already built.</p>
     <ul style="list-style:none;padding:0;display:grid;gap:16px">
-      {en.projects.items.map((p) => (
+      {allItems(en).map((p) => (
         <li>
           <a href={`${base}/en/proyectos/${p.id}/`} style="display:block;padding:18px 20px;border:1px solid #1f2434;border-radius:12px;text-decoration:none">
             <strong>{p.title}</strong>

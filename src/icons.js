@@ -1,7 +1,7 @@
 // Iconos de habilidades: logos de simple-icons (se resuelven en el build) e iconos genericos propios.
-import { siHtml5, siCss, siJavascript, siAstro, siGreensock, siLighthouse, siGooglesearchconsole, siGooglechrome, siPwa, siAndroid, siFirebase, siChartdotjs, siMozilla, siPhp, siMysql, siGoogleappsscript, siGithub, siGithubactions, siClaude, siMercadopago, siCloudflareworkers, siCapacitor, siSvg, siNtfy } from 'simple-icons';
+import { siHtml5, siCss, siJavascript, siAstro, siGreensock, siLighthouse, siGooglesearchconsole, siGooglechrome, siPwa, siAndroid, siFirebase, siChartdotjs, siMozilla, siPhp, siMysql, siGoogleappsscript, siGithub, siGithubactions, siClaude, siMercadopago, siCloudflareworkers, siCapacitor, siSvg, siNtfy, siWordpress, siSqlite } from 'simple-icons';
 
-export const brand = { siHtml5, siCss, siJavascript, siAstro, siGreensock, siLighthouse, siGooglesearchconsole, siGooglechrome, siPwa, siAndroid, siFirebase, siChartdotjs, siMozilla, siPhp, siMysql, siGoogleappsscript, siGithub, siGithubactions, siClaude, siMercadopago, siCloudflareworkers, siCapacitor, siSvg, siNtfy };
+export const brand = { siHtml5, siCss, siJavascript, siAstro, siGreensock, siLighthouse, siGooglesearchconsole, siGooglechrome, siPwa, siAndroid, siFirebase, siChartdotjs, siMozilla, siPhp, siMysql, siGoogleappsscript, siGithub, siGithubactions, siClaude, siMercadopago, siCloudflareworkers, siCapacitor, siSvg, siNtfy, siWordpress, siSqlite };
 
 export const gen = {
   phone: '<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18h2"/>',
@@ -30,5 +30,5 @@ export const tagIcon = {
   'PDF.js': 'siMozilla', 'Capacitor': 'siCapacitor', 'Android': 'siAndroid', 'PWA': 'siPwa', 'Firebase': 'siFirebase',
   'Push': 'bell', 'Service worker': 'cog', 'ntfy': 'siNtfy', 'EmailJS': 'mail',
   'srcset': 'image', 'WebP / AVIF': 'image', 'Astro': 'siAstro', 'Core Web Vitals': 'gauge', 'Lighthouse': 'siLighthouse',
-  'PHP': 'siPhp', 'MySQL': 'siMysql', 'Web scraping': 'code', 'CSS': 'siCss', 'SVG': 'siSvg', 'UX': 'spark',
+  'PHP': 'siPhp', 'WordPress': 'siWordpress', 'SQLite': 'siSqlite', 'HTML5': 'siHtml5', 'Google Web Designer': 'code', 'MySQL': 'siMysql', 'Web scraping': 'code', 'CSS': 'siCss', 'SVG': 'siSvg', 'UX': 'spark',
 };
