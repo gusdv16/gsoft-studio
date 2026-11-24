@@ -1,0 +1,98 @@
+---
+// Chat de IA del portfolio. El panel y su JS no pesan en la carga: solo se monta al pulsar el boton.
+const { t } = Astro.props;
+const c = t.chat;
+const ENDPOINT = import.meta.env.PUBLIC_CHAT_ENDPOINT ?? 'https://portfolio-chat.gusdv16.workers.dev/chat';
+---
+<button class="aic-fab" type="button" data-aic-open aria-haspopup="dialog" aria-controls="aic" data-endpoint={ENDPOINT} data-msg={JSON.stringify(c)}>
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5z"/></svg>
+  <span>{c.open}</span>
+</button>
+<style is:global>
+.aic-fab{position:fixed;right:16px;bottom:16px;z-index:60;display:inline-flex;align-items:center;gap:8px;font:600 .88rem/1 var(--font);color:#07080d;background:var(--grad);border:0;border-radius:999px;padding:13px 18px;min-height:44px;cursor:pointer;box-shadow:0 8px 28px -10px rgba(54,226,192,.6)}
+.aic-fab:hover{transform:translateY(-2px)}
+.aic-fab[hidden]{display:none}
+.aic{position:fixed;right:16px;bottom:16px;z-index:70;width:min(380px,calc(100vw - 32px));height:min(540px,calc(100dvh - 32px));display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 24px 60px -20px rgba(0,0,0,.8);overflow:hidden}
+.aic[hidden]{display:none}
+.aic-h{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--line);font-weight:700}
+.aic-x{background:none;border:0;color:var(--muted);font-size:1.4rem;line-height:1;cursor:pointer;min-width:36px;min-height:36px}
+.aic-log{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;font-size:.92rem}
+.aic-m{max-width:88%;padding:10px 13px;border-radius:14px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.5}
+.aic-m.a{background:var(--bg2);border:1px solid var(--line);align-self:flex-start}
+.aic-m.u{background:var(--a);color:#07080d;align-self:flex-end}
+.aic-m.e{color:#ff9b9b;border-color:#5a2a2a}
+.aic-s{display:flex;flex-wrap:wrap;gap:6px}
+.aic-s button{font:500 .8rem var(--font);color:var(--text);background:none;border:1px solid var(--line);border-radius:999px;padding:7px 11px;cursor:pointer}
+.aic-s button:hover{border-color:var(--a)}
+.aic-note{font-size:.72rem;color:var(--muted);padding:0 14px 8px;line-height:1.4}
+.aic-f{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line)}
+.aic-f input{flex:1;min-width:0;font:inherit;font-size:.92rem;color:var(--text);background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.aic-f button{font:600 .88rem var(--font);color:#07080d;background:var(--grad);border:0;border-radius:10px;padding:0 14px;min-height:40px;cursor:pointer}
+.aic-f button:disabled{opacity:.5;cursor:default}
+@media (max-width:480px){.aic{right:8px;bottom:8px;width:calc(100vw - 16px)}}
+</style>
+<script>
+  // Carga perezosa: nada se construye hasta el primer clic en el boton.
+  const fab = document.querySelector('[data-aic-open]');
+  if (fab) {
+    const ENDPOINT = fab.dataset.endpoint;
+    const c = JSON.parse(fab.dataset.msg);
+    let box, log, input, sendBtn, sugg;
+    const history = [];
+    let busy = false;
+
+    const add = (cls, text) => {
+      const d = document.createElement('div');
+      d.className = 'aic-m ' + cls;
+      d.textContent = text;
+      log.appendChild(d);
+      log.scrollTop = log.scrollHeight;
+      return d;
+    };
+
+    const ask = async (text) => {
+      text = text.trim().slice(0, 500);
+      if (!text || busy) return;
+      busy = true; sendBtn.disabled = true;
+      if (sugg) { sugg.remove(); sugg = null; }
+      add('u', text);
+      history.push({ role: 'user', content: text });
+      const wait = add('a', c.thinking);
+      if (window.gtag) gtag('event', 'ai_chat_message');
+      try {
+        const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: history }) });
+        if (r.status === 429) { wait.className = 'aic-m a e'; wait.textContent = c.errRate; history.pop(); }
+        else if (!r.ok) throw new Error('http ' + r.status);
+        else { const j = await r.json(); wait.textContent = j.reply; history.push({ role: 'assistant', content: j.reply }); }
+      } catch (e) {
+        wait.className = 'aic-m a e'; wait.textContent = c.errGeneric; history.pop();
+      }
+      busy = false; sendBtn.disabled = false; input.focus(); log.scrollTop = log.scrollHeight;
+    };
+
+    const build = () => {
+      box = document.createElement('section');
+      box.className = 'aic'; box.id = 'aic'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', c.title);
+      box.innerHTML = '<div class="aic-h"><span></span><button class="aic-x" type="button"></button></div><div class="aic-log" aria-live="polite"></div><p class="aic-note"></p><form class="aic-f"><input type="text" maxlength="500" autocomplete="off"><button type="submit"></button></form>';
+      box.querySelector('.aic-h span').textContent = c.title;
+      const x = box.querySelector('.aic-x'); x.textContent = '×'; x.setAttribute('aria-label', c.close);
+      box.querySelector('.aic-note').textContent = c.note;
+      log = box.querySelector('.aic-log'); input = box.querySelector('input'); sendBtn = box.querySelector('.aic-f button');
+      input.placeholder = c.placeholder; input.setAttribute('aria-label', c.placeholder); sendBtn.textContent = c.send;
+      add('a', c.hello);
+      sugg = document.createElement('div'); sugg.className = 'aic-s';
+      c.suggestions.forEach((s) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = s; b.onclick = () => ask(s); sugg.appendChild(b); });
+      log.appendChild(sugg);
+      box.querySelector('form').onsubmit = (e) => { e.preventDefault(); const v = input.value; input.value = ''; ask(v); };
+      const hide = () => { box.hidden = true; fab.hidden = false; fab.focus(); };
+      x.onclick = hide;
+      box.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
+      document.body.appendChild(box);
+    };
+
+    fab.addEventListener('click', () => {
+      if (!box) build();
+      box.hidden = false; fab.hidden = true; input.focus();
+    });
+  }
+</script>

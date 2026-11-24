@@ -1,0 +1,15 @@
+name = "portfolio-chat"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+workers_dev = true
+preview_urls = false
+
+[vars]
+ALLOWED_ORIGINS = "https://gustavobentancor.com,https://www.gustavobentancor.com,https://gusdv16.github.io"
+LIMIT_PER_IP = "15"
+LIMIT_GLOBAL = "300"
+
+# Crear con: npx.cmd wrangler kv namespace create CHAT  y pegar el id aca.
+[[kv_namespaces]]
+binding = "CHAT"
+id = "c0be3a5ef3874e3f97edf9d04a1dc521"
