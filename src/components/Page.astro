@@ -85,23 +85,24 @@ const images = { 'gletir-tracker': gletir, 'easy-pdf-free': null, 'tracker-habit
 // Trabajos para clientes y demos propias (t.work.items) se muestran como proyectos mas
 const all = allItems(t, base);
 // Orden por importancia: primero el front-end web (sitios reales y demos), despues apps, extensiones y herramientas
-const order = [
-  'urugol', 'auf', 'brou', 'eventosanime', 'web-performance', 'insight-demo', 'interbalnearios', 'elarcon', 'museo-celeste',
-  'rincon', 'nodo-corp', 'rumbo-sur', 'grano-sur', 'talento-sur', 'buscador-replica', 'banners',
-  'kiosko', 'gletir-tracker', 'easy-pdf-free', 'automatizaciones-pyme', 'tracker-habits', 'moova-tracker-extension', 'img-generator',
-];
-const ownIds = ['gletir-tracker', 'easy-pdf-free', 'kiosko', 'automatizaciones-pyme', 'tracker-habits', 'moova-tracker-extension', 'img-generator'];
-const groupOf = Object.fromEntries(order.map((id) => [id, ownIds.includes(id) ? 'own' : 'web']));
-const catOf = Object.fromEntries(order.map((id) => [id, 'web']));
-Object.assign(catOf, { 'easy-pdf-free': 'apps', 'tracker-habits': 'apps', 'kiosko': 'apps', 'automatizaciones-pyme': 'apps', 'gletir-tracker': 'ext', 'moova-tracker-extension': 'ext', 'img-generator': 'ext' });
-const mobile = { 'web-performance': mPerf, 'insight-demo': mInsight, 'buscador-replica': mBuscador };
-const sorted = order.map((id) => all.find((x) => x.id === id)).filter(Boolean);
-// En la vista "Todos" se muestran 6 sitios web y 3 apps (filas completas de 3); el resto se despliega con un boton
-const limitOf = { web: 6, own: 3 };
-const seen = {};
-const extra = new Set(sorted.filter((p) => (seen[groupOf[p.id]] = (seen[groupOf[p.id]] ?? 0) + 1) > limitOf[groupOf[p.id]]).map((p) => p.id));
-const hiddenCount = extra.size;
 const cover = (p) => images[p.id] ?? workImg[p.img ?? p.id];
+// Orden por importancia (prioridad de Gustavo): sitios BROU, demos de front-end, apps propias y al final extensiones y herramientas
+const order = [
+  'brou-mibrou', 'brou-beneficios', 'brou-asistencia', 'insight-demo', 'nodo-corp', 'talento-sur', 'buscador-replica', 'grano-sur',
+  'eventosanime', 'kiosko', 'automatizaciones-pyme', 'entradas-eventos', 'mesalista', 'urugol',
+  'auf', 'web-performance', 'interbalnearios', 'elarcon', 'museo-celeste', 'rincon', 'rumbo-sur', 'banners',
+  'easy-pdf-free', 'gletir-tracker', 'tracker-habits', 'moova-tracker-extension', 'img-generator',
+];
+const catOf = Object.fromEntries(order.map((id) => [id, 'web']));
+Object.assign(catOf, { 'easy-pdf-free': 'apps', 'tracker-habits': 'apps', 'kiosko': 'apps', 'automatizaciones-pyme': 'apps', 'entradas-eventos': 'apps', 'mesalista': 'apps', 'gletir-tracker': 'ext', 'moova-tracker-extension': 'ext', 'img-generator': 'ext' });
+const mobile = { 'web-performance': mPerf, 'insight-demo': mInsight, 'buscador-replica': mBuscador };
+// Un proyecto sin captura todavia no se muestra (aparece solo cuando existe su imagen)
+const sorted = order.map((id) => all.find((x) => x.id === id)).filter((p) => p && (p.id === 'easy-pdf-free' || cover(p)));
+// Vista "Todos": 15 tarjetas en escritorio (5 filas de 3) y 6 en celular; el resto se despliega con un boton
+const LIMIT = 15, LIMIT_M = 6;
+const extra = new Set(sorted.slice(LIMIT).map((p) => p.id));
+const extraM = new Set(sorted.slice(LIMIT_M).map((p) => p.id));
+const hiddenCount = extra.size;
 const mediaClass = { 'gletir-tracker': 'shot', 'tracker-habits': 'logo', 'moova-tracker-extension': 'contain', 'easy-pdf-free': 'duo' };
 const icons = {
   cog: 'M12 15a3 3 0 100-6 3 3 0 000 6zm7.4-3a7.4 7.4 0 00-.1-1.2l2-1.6-2-3.4-2.4 1a7.5 7.5 0 00-2-1.2L14.5 3h-4l-.4 2.6a7.5 7.5 0 00-2 1.2l-2.4-1-2 3.4 2 1.6a7.4 7.4 0 000 2.4l-2 1.6 2 3.4 2.4-1a7.5 7.5 0 002 1.2l.4 2.6h4l.4-2.6a7.5 7.5 0 002-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z',
@@ -172,24 +173,23 @@ const icons = {
       </a>
       <nav class="nav" aria-label="Principal">
         <a href="#sobre-mi">{t.nav.about}</a>
+        <a href="#habilidades">{t.nav.skills}</a>
         <a href="#proyectos">{t.nav.projects}</a>
         <a href="#servicios">{t.nav.services}</a>
         <a href="#proceso">{t.nav.process}</a>
       </nav>
       <a class="lang" href={other} hreflang={isEn ? 'es' : 'en'} title={t.nav.other.title}>{t.nav.other.label}</a>
       <a class="btn btn-p" href="#contacto">{t.nav.cta}</a>
-      <details class="menu">
-        <summary aria-label="Menu"><span class="ic"></span></summary>
-        <nav aria-label="Menu">
-          <a href="#sobre-mi">{t.nav.about}</a>
-          <a href="#proyectos">{t.nav.projects}</a>
-          <a href="#servicios">{t.nav.services}</a>
-          <a href="#proceso">{t.nav.process}</a>
-          <a href="#contacto">{t.nav.contact}</a>
-        </nav>
-      </details>
     </div>
   </header>
+
+  <nav class="dock" aria-label={t.nav.dock} data-dock>
+    <a href="#sobre-mi" data-dk="sobre-mi"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span>{t.nav.story}</span></a>
+    <a href="#habilidades" data-dk="habilidades"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg><span>{t.nav.skills}</span></a>
+    <a href="#proyectos" data-dk="proyectos"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.8"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.8"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.8"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.8"/></svg><span>{t.nav.projects}</span></a>
+    <a href="#servicios" data-dk="servicios"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2.2"/><path d="M9 7V5.2A1.7 1.7 0 0110.7 3.5h2.6A1.7 1.7 0 0115 5.2V7M3 13h18"/></svg><span>{t.nav.services}</span></a>
+    <a href="#contacto" data-dk="contacto"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.2"/><path d="M3.5 7.5L12 13.2l8.5-5.7"/></svg><span>{t.nav.contact}</span></a>
+  </nav>
 
   <main id="main">
     <section class="hero" data-hero>
@@ -226,8 +226,14 @@ const icons = {
             <a class="btn btn-s" href={`${base}/${t.cv.file}`} download={t.cv.name} data-cv>{t.cv.download}</a>
           </div>
           <p class="hlinks">
-            <a class="ghl" href={t.github} target="_blank" rel="noopener">{t.about.github} ↗</a>
-            <a class="ghl" href={t.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a class="ibtn" href={t.github} target="_blank" rel="noopener" aria-label={isEn ? 'GitHub, opens in a new tab' : 'GitHub, se abre en otra pestaña'} title="GitHub">
+              <svg class="gi" aria-hidden="true"><use href={`${base}/icons.svg#siGithub`} /></svg>
+              <svg class="ar" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg>
+            </a>
+            <a class="ibtn" href={t.linkedin} target="_blank" rel="noopener" aria-label={isEn ? 'LinkedIn, opens in a new tab' : 'LinkedIn, se abre en otra pestaña'} title="LinkedIn">
+              <svg class="gi" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4V21H3V9.75zM9.5 9.75h3.8v1.6h.06c.53-1 1.82-2.05 3.75-2.05 4 0 4.74 2.6 4.74 6V21h-4v-4.9c0-1.2-.02-2.7-1.7-2.7s-1.9 1.3-1.9 2.6V21h-4V9.75z"/></svg>
+              <svg class="ar" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg>
+            </a>
           </p>
         </div>
       </div>
@@ -292,14 +298,14 @@ const icons = {
         </div>
         <div class="pgrid">
           {sorted.map((p, i) => (
-            <Fragment>
-              {groupOf[p.id] && groupOf[p.id] !== groupOf[sorted[i - 1]?.id] && <h3 class="ghead" data-r>{t.projects.groups[groupOf[p.id]]}</h3>}
-            <article class="proj" data-r="card" data-cat={catOf[p.id]} data-client={p.type === 'client' || p.id === 'banners' ? '1' : undefined} data-extra={extra.has(p.id) ? '' : undefined}>
+            <article class="proj" data-r="card" data-cat={catOf[p.id]} data-client={p.type === 'client' || p.id === 'banners' ? '1' : undefined} data-extra={extra.has(p.id) ? '' : undefined} data-m={extraM.has(p.id) ? '' : undefined}>
               <div class:list={['media', mediaClass[p.id]]} tabindex="0" role="button" aria-label={t.projects.detail}>
+                <div class="mscroll">
+                  <div class="mslide">
                 {p.id === 'easy-pdf-free' ? (
                   <>
-                    <Picture src={eps1} formats={["avif", "webp"]} fallbackFormat="webp" widths={[240, 360]} sizes="(min-width:760px) 180px, 40vw" alt={isEn ? 'Easy PDF Free home screen' : 'Pantalla de inicio de Easy PDF Free'} data-par />
-                    <Picture src={eps2} formats={["avif", "webp"]} fallbackFormat="webp" widths={[240, 360]} sizes="(min-width:760px) 180px, 40vw" alt={isEn ? 'Reader with large controls' : 'Lector con controles grandes'} data-par />
+                    <Picture src={eps1} formats={["avif", "webp"]} fallbackFormat="webp" widths={[240, 360]} sizes="(min-width:760px) 180px, 40vw" alt={isEn ? 'Easy PDF Free home screen' : 'Pantalla de inicio de Easy PDF Free'} />
+                    <Picture src={eps2} formats={["avif", "webp"]} fallbackFormat="webp" widths={[240, 360]} sizes="(min-width:760px) 180px, 40vw" alt={isEn ? 'Reader with large controls' : 'Lector con controles grandes'} />
                   </>
                 ) : (
                   <Picture
@@ -308,11 +314,15 @@ const icons = {
                     widths={mediaClass[p.id] && p.id !== 'gletir-tracker' ? [400, 600] : [480, 720, 960, 1200]}
                     sizes={mediaClass[p.id] && p.id !== 'gletir-tracker' ? '(min-width:760px) 300px, 70vw' : p.id === 'gletir-tracker' ? '(min-width:1120px) 580px, (min-width:760px) 55vw, 92vw' : '(min-width:1120px) 540px, (min-width:760px) 46vw, 92vw'}
                     alt={isEn ? `Screenshot of ${p.title}` : `Captura de ${p.title}`}
-                    data-par
                   />
                 )}
+                  </div>
+                  {gallery[p.id] && gallery[p.id].map((img, k) => (
+                    <div class="mslide"><Image src={img} width={720} format="webp" quality={75} loading="lazy" alt={`${p.title}: ${p.shots?.[k] ?? ''}`} /></div>
+                  ))}
+                </div>
                 <span class="mview" aria-hidden="true">{t.projects.detail} ↗</span>
-                {gallery[p.id] && <span class="gcount" aria-hidden="true">{gallery[p.id].length + 1} {isEn ? 'screens' : 'capturas'}</span>}
+                {gallery[p.id] && <span class="gcount" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="8" y="3" width="13" height="13" rx="2.5"/><path d="M5.5 7.5A2.5 2.5 0 003 10v8.5A2.5 2.5 0 005.5 21H14a2.5 2.5 0 002.5-2.5"/></svg>{gallery[p.id].length + 1}</span>}
                 {mobile[p.id] && (
                   <>
                     <div class="phone">
@@ -358,10 +368,9 @@ const icons = {
                 </div>
               </div>
             </article>
-            </Fragment>
           ))}
         </div>
-        {hiddenCount > 0 && <div class="moreb"><button type="button" class="btn btn-s" data-more hidden>{isEn ? `Show ${hiddenCount} more projects` : `Ver ${hiddenCount} proyectos más`}</button></div>}
+        {hiddenCount > 0 && <div class="moreb"><button type="button" class="btn btn-s" data-more data-t={isEn ? 'Show {n} more projects' : 'Ver {n} proyectos más'} hidden>{isEn ? `Show ${hiddenCount} more projects` : `Ver ${hiddenCount} proyectos más`}</button></div>}
         <p class="wnote" data-r>{t.work.note} {isEn ? 'Screenshots of live sites taken in November 2026.' : 'Capturas de sitios en línea tomadas en noviembre de 2026.'}</p>
       </div>
     </section>
@@ -498,21 +507,23 @@ const icons = {
     </div>
   </footer>
 
-  <a class="sticky-cta" href="#contacto" data-sticky aria-label={t.nav.cta}>{t.nav.cta}</a>
-
   <script>
     import '../scripts/mail.js';
   </script>
   <script>
-    // CTA fijo en movil: se muestra al pasar el hero y se oculta cuando el formulario esta a la vista.
-    const stk = document.querySelector('[data-sticky]');
-    const heroEl = document.querySelector('[data-hero]');
-    const contactEl = document.getElementById('contacto');
-    if (stk && heroEl && contactEl && 'IntersectionObserver' in window) {
-      let inHero = true, inContact = false;
-      const upd = () => stk.classList.toggle('show', !inHero && !inContact);
-      new IntersectionObserver((e) => { inHero = e[0].isIntersecting; upd(); }).observe(heroEl);
-      new IntersectionObserver((e) => { inContact = e[0].isIntersecting; upd(); }).observe(contactEl);
+    // Dock inferior (movil): resalta la seccion visible
+    const dock = document.querySelector('[data-dock]');
+    if (dock && 'IntersectionObserver' in window) {
+      const map = { 'sobre-mi': 'sobre-mi', experiencia: 'sobre-mi', habilidades: 'habilidades', proyectos: 'proyectos', servicios: 'servicios', 'por-que': 'servicios', proceso: 'servicios', industrias: 'servicios', contacto: 'contacto' };
+      const links = Object.fromEntries([...dock.querySelectorAll('a[data-dk]')].map((a) => [a.dataset.dk, a]));
+      const io = new IntersectionObserver((es) => {
+        es.forEach((e) => {
+          if (!e.isIntersecting) return;
+          const k = map[e.target.id];
+          Object.values(links).forEach((a) => (a === links[k] ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current')));
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      Object.keys(map).forEach((id) => { const el = document.getElementById(id); if (el) io.observe(el); });
     }
   </script>
   <script>
@@ -523,7 +534,9 @@ const icons = {
     const moreBtn = document.querySelector('[data-more]');
     if (grid && moreBtn) {
       grid.classList.add('collapsed');
-      moreBtn.hidden = false;
+      const hid = [...grid.querySelectorAll('article')].filter((a) => getComputedStyle(a).display === 'none').length;
+      moreBtn.textContent = moreBtn.dataset.t.replace('{n}', hid);
+      moreBtn.hidden = hid === 0;
       moreBtn.addEventListener('click', () => { grid.classList.remove('collapsed'); moreBtn.hidden = true; });
     }
     if (grid && bar) {
@@ -542,10 +555,15 @@ const icons = {
       const dm = dlg.querySelector('[data-dmedia]');
       const db = dlg.querySelector('[data-dbody]');
       grid.addEventListener('click', (e) => {
+        if (e.target.closest('.mnav')) return;
         const btn = e.target.closest('[data-open], .media');
         if (!btn) return;
         const card = btn.closest('article');
         const media = card.querySelector('.media').cloneNode(true);
+        // En el dialogo el carrusel lo arma el JS de abajo: se deja solo la portada
+        const ms = media.querySelector('.mscroll');
+        if (ms) ms.replaceWith(...ms.querySelector('.mslide').childNodes);
+        media.querySelectorAll('.mdots,.mnav,.gcount').forEach((x) => x.remove());
         media.querySelectorAll('source,img').forEach((x) => { x.sizes = '(min-width:900px) 860px, 96vw'; if (x.loading) x.loading = 'eager'; });
         const body = card.querySelector('.pbody').cloneNode(true);
         body.querySelector('[data-open]')?.remove();
@@ -609,6 +627,47 @@ const icons = {
       });
       dlg.addEventListener('click', (e) => { if (e.target === dlg || e.target.closest('[data-close]')) dlg.close(); });
     }
+  </script>
+  <script>
+    // Vista previa con varias capturas dentro de la tarjeta: deslizar, flechas y puntos; en escritorio avanza sola al pasar el mouse.
+    const calm = matchMedia('(prefers-reduced-motion:reduce)').matches;
+    const hov = matchMedia('(hover:hover) and (pointer:fine)').matches;
+    document.querySelectorAll('.proj .mscroll').forEach((tr) => {
+      const n = tr.children.length;
+      if (n < 2) return;
+      const media = tr.parentElement;
+      const dots = document.createElement('div');
+      dots.className = 'mdots';
+      dots.setAttribute('aria-hidden', 'true');
+      for (let k = 0; k < n; k++) dots.appendChild(document.createElement('i'));
+      const mk = (c, txt) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'mnav ' + c; b.tabIndex = -1; b.setAttribute('aria-hidden', 'true'); b.textContent = txt; return b; };
+      const prev = mk('prev', '‹');
+      const next = mk('next', '›');
+      const idx = () => Math.round(tr.scrollLeft / (tr.clientWidth || 1));
+      const upd = () => {
+        const i = idx();
+        [...dots.children].forEach((d, k) => d.classList.toggle('on', k === i));
+        prev.hidden = i === 0;
+        next.hidden = i === n - 1;
+      };
+      const go = (i, smooth = true) => tr.scrollTo({ left: i * tr.clientWidth, behavior: smooth && !calm ? 'smooth' : 'auto' });
+      let timer = 0, manual = false;
+      prev.addEventListener('click', (e) => { e.stopPropagation(); manual = true; go(idx() - 1); });
+      next.addEventListener('click', (e) => { e.stopPropagation(); manual = true; go(idx() + 1); });
+      tr.addEventListener('scroll', upd, { passive: true });
+      tr.addEventListener('touchstart', () => { manual = true; }, { passive: true });
+      media.append(dots, prev, next);
+      upd();
+      if (hov && !calm) {
+        media.addEventListener('mouseenter', () => {
+          tr.querySelectorAll('img').forEach((im) => { im.loading = 'eager'; });
+          manual = false;
+          clearInterval(timer);
+          timer = setInterval(() => { if (!manual) go((idx() + 1) % n); }, 1500);
+        });
+        media.addEventListener('mouseleave', () => { clearInterval(timer); if (!manual) go(0); });
+      }
+    });
   </script>
   <script>
     // Formulario: AJAX hacia contact.php. Turnstile (si hay site key) se carga solo al enfocar el formulario.

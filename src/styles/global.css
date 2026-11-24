@@ -445,3 +445,55 @@ html.mordor .box::before{background:radial-gradient(circle,rgba(255,70,0,.32) 0,
 .proj .links{gap:8px;padding-top:4px}
 .proj .links .btn{padding:9px 15px;font-size:.84rem;min-height:38px}
 .proj .links a:not(:first-of-type){display:none}
+
+
+/* ---- ronda 2: movil primero ---- */
+/* cabecera compacta con vidrio; el menu del movil es el dock inferior */
+.hd{background:rgba(7,8,13,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.hd .wrap{height:58px;gap:12px}
+.hd .btn{display:inline-flex;padding:9px 16px;min-height:38px;font-size:.86rem}
+@media(min-width:860px){.hd .wrap{height:64px;gap:20px}}
+
+.dock{position:fixed;z-index:55;left:12px;right:12px;bottom:max(10px,env(safe-area-inset-bottom));margin:0 auto;max-width:460px;display:flex;justify-content:space-between;gap:2px;padding:6px;border-radius:24px;background:rgba(16,19,30,.82);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.09);box-shadow:0 18px 40px -12px rgba(0,0,0,.8)}
+.dock a{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 2px 7px;border-radius:18px;color:var(--muted);text-decoration:none;font-size:.66rem;font-weight:600;letter-spacing:.01em;-webkit-tap-highlight-color:transparent;transition:color .25s,background .25s}
+.dock svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s}
+.dock a[aria-current]{color:var(--text);background:linear-gradient(160deg,rgba(124,140,255,.22),rgba(54,226,192,.16))}
+.dock a[aria-current] svg{transform:translateY(-1px) scale(1.08);stroke:var(--a)}
+.dock a:active svg{transform:scale(.9)}
+body{padding-bottom:84px}
+@media(min-width:860px){.dock{display:none}body{padding-bottom:0}}
+@media(max-width:859px){.aic-fab.aic-fab{bottom:88px}}
+
+/* enlaces externos como iconos */
+.hlinks{gap:12px}
+.ibtn{position:relative;width:48px;height:48px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--text);transition:border-color .2s,transform .2s,color .2s}
+.ibtn:hover{border-color:var(--a);color:var(--a);transform:translateY(-2px)}
+.ibtn .gi{width:22px;height:22px}
+.ibtn .ar{position:absolute;right:-3px;top:-3px;width:18px;height:18px;padding:3px;border-radius:50%;background:var(--bg);border:1px solid var(--line);fill:none;stroke:var(--muted);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ibtn:hover .ar{stroke:var(--a);border-color:var(--a)}
+
+/* tarjetas: sin salto al pasar el mouse (la tarjeta ya no se desplaza), carrusel de capturas */
+.proj:hover{transform:none}
+.proj:hover .phone{transform:none}
+.media img{will-change:auto}
+.mscroll{position:absolute;inset:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.mscroll::-webkit-scrollbar{display:none}
+.mslide{flex:0 0 100%;height:100%;display:flex;align-items:center;justify-content:center;scroll-snap-align:center;overflow:hidden}
+.media.duo .mslide{gap:18px}
+.mslide img{transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+@media(hover:hover){.proj:hover .mslide:first-child img{transform:scale(1.04)}}
+.media>picture>img,.proj:hover .media>picture>img{transform:none}
+.dlg .media .mscroll{position:static;display:contents}
+.gcount{display:inline-flex;align-items:center;gap:6px;padding:5px 11px 5px 9px;font-size:.78rem}
+.gcount svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mdots{position:absolute;z-index:3;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:5px;pointer-events:none}
+.mdots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4);transition:background .2s,transform .2s}
+.mdots i.on{background:#fff;transform:scale(1.25)}
+.mnav{position:absolute;z-index:4;top:50%;transform:translateY(-50%);width:34px;height:34px;display:none;place-items:center;border-radius:50%;border:0;background:rgba(7,8,13,.78);color:#fff;font-size:1.4rem;line-height:1;padding:0 0 3px;cursor:pointer}
+.mnav.prev{left:8px}.mnav.next{right:8px}
+.mnav[hidden]{display:none!important}
+@media(hover:hover) and (pointer:fine){.proj:hover .mnav{display:grid}}
+.pgrid.collapsed [data-extra]{display:none}
+@media(max-width:999px){.pgrid.collapsed [data-m]{display:none}}
+.logo{white-space:nowrap}
+@media(max-width:519px){.hd .btn{display:none}.logo{font-size:.95rem}}
