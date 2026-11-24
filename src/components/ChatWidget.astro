@@ -63,7 +63,7 @@ const ENDPOINT = import.meta.env.PUBLIC_CHAT_ENDPOINT ?? 'https://portfolio-chat
         const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: history }) });
         if (r.status === 429) { wait.className = 'aic-m a e'; wait.textContent = c.errRate; history.pop(); }
         else if (!r.ok) throw new Error('http ' + r.status);
-        else { const j = await r.json(); wait.textContent = j.reply; history.push({ role: 'assistant', content: j.reply }); }
+        else { const j = await r.json(); wait.textContent = j.reply.replace(/\*\*|__|`/g, ''); history.push({ role: 'assistant', content: j.reply }); }
       } catch (e) {
         wait.className = 'aic-m a e'; wait.textContent = c.errGeneric; history.pop();
       }
