@@ -383,3 +383,65 @@ html.mordor .box::before{background:radial-gradient(circle,rgba(255,70,0,.32) 0,
 .proj .wrole{font-size:.9rem;color:var(--muted)}
 .proj .wrole b{color:var(--text)}
 .proj .pbody h3+p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:5;line-clamp:5;overflow:hidden}
+
+/* ===== Rediseno: hero con foto, historia, habilidades en iconos y proyectos en 3 columnas ===== */
+.hero{padding:clamp(36px,6vw,84px) 0 clamp(44px,7vw,96px)}
+.hero .wrap{gap:34px;justify-items:center;text-align:center}
+.hero .foto{width:min(190px,50%);margin:0}
+@media(min-width:560px){.hero .foto{width:min(250px,64%)}}
+.hid{display:flex;flex-direction:column;align-items:center}
+.hero h1{font-size:clamp(2.7rem,11vw,4.6rem);line-height:1.02}
+.hero .badge{margin-bottom:18px}
+.hrole{margin-top:14px;font-size:clamp(1.05rem,3vw,1.3rem);font-weight:700;color:var(--b);letter-spacing:-.01em}
+.hero .lead{margin-top:16px;max-width:54ch}
+.facts{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 10px;margin-top:22px}
+.facts li{font-size:.86rem;font-weight:600;color:var(--text);border:1px solid var(--line);background:var(--card);padding:7px 14px;border-radius:999px}
+.hero .cta{justify-content:center;margin-top:26px}
+.hlinks{margin-top:14px;display:flex;gap:20px;justify-content:center}
+.hlinks .ghl{margin:0}
+@media(min-width:900px){
+ .hero .wrap{grid-template-columns:340px 1fr;gap:72px;justify-items:stretch;text-align:left}
+ .hero .foto{width:100%;max-width:340px}
+ .hid{align-items:flex-start}
+ .facts,.hero .cta,.hlinks{justify-content:flex-start}
+}
+
+/* historia */
+.story{display:grid;gap:38px;align-items:start}
+.prose{margin-top:22px;max-width:62ch}
+.prose p{color:var(--muted);font-size:1.04rem;line-height:1.8}
+.prose p+p{margin-top:16px}
+.prose .lede{color:var(--text);font-size:1.2rem;line-height:1.65;font-weight:500}
+.story .sgr{grid-template-columns:repeat(2,1fr);gap:14px}
+.story .sgr li{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px}
+.story .sgr b{font-size:clamp(2rem,6vw,2.8rem)}
+@media(min-width:900px){.story{grid-template-columns:1.4fr .6fr;gap:72px}.story .sgr{grid-template-columns:1fr;align-self:center}}
+
+/* habilidades */
+.skh{margin:44px 0 0;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--a)}
+.tiles{display:grid;gap:14px;margin-top:16px}
+.tiles li{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:26px 12px 22px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);font-weight:700;transition:border-color .25s,transform .25s}
+.tiles li:hover{border-color:var(--c,var(--a));transform:translateY(-3px)}
+.tiles svg{width:56px;height:56px;color:var(--c,var(--a));flex:none}
+.tiles.big{grid-template-columns:repeat(2,1fr)}
+.tiles.mid{grid-template-columns:repeat(2,1fr)}
+.tiles.mid li{flex-direction:row;justify-content:flex-start;gap:14px;text-align:left;padding:16px 18px;font-size:.98rem}
+.tiles.mid svg{width:34px;height:34px}
+@media(min-width:640px){.tiles.big{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:960px){.tiles.big{grid-template-columns:repeat(5,1fr)}.tiles.mid{grid-template-columns:repeat(4,1fr)}}
+#habilidades .tags.sk{margin-top:16px;gap:10px}
+#habilidades .tags li{font-size:.84rem;padding:7px 14px}
+
+/* proyectos: tarjetas compactas en 3 columnas; el detalle completo esta en el dialogo */
+.proj{contain-intrinsic-size:auto 380px}
+@media(min-width:760px){.proj{contain-intrinsic-size:auto 400px}}
+@media(min-width:1000px){.pgrid{grid-template-columns:repeat(3,1fr);gap:20px}}
+.proj .pbody{padding:18px 20px 20px;gap:8px}
+.proj h3{font-size:1.12rem}
+.proj .type{font-size:.68rem}
+.proj .pbody h3+p{-webkit-line-clamp:3;line-clamp:3}
+.proj .full,.proj .wrole,.proj .price,.proj .pnote,.proj .tags,.proj .dpts{display:none}
+.dlg .short{display:none}
+.proj .links{gap:8px;padding-top:4px}
+.proj .links .btn{padding:9px 15px;font-size:.84rem;min-height:38px}
+.proj .links a:not(:first-of-type){display:none}
