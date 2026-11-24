@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { Picture, Image } from 'astro:assets';
 import { brand, gen, tagIcon } from '../icons.js';
 import { allItems } from '../lib/projects.js';
+import ChatWidget from './ChatWidget.astro';
 import eps1 from '../assets/proyectos/easy-pdf-inicio.png';
 import eps2 from '../assets/proyectos/easy-pdf-lector.jpg';
 import moova from '../assets/proyectos/moova-popup.png';
@@ -820,5 +821,6 @@ const icons = {
       }, { once: true });
     }
   </script>
+  <ChatWidget t={t} />
 </body>
 </html>
