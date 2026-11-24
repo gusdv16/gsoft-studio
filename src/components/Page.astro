@@ -3,7 +3,6 @@ import '../styles/global.css';
 import { Picture, Image } from 'astro:assets';
 import { brand, gen, tagIcon } from '../icons.js';
 import { allItems } from '../lib/projects.js';
-import ChatWidget from './ChatWidget.astro';
 import eps1 from '../assets/proyectos/easy-pdf-inicio.png';
 import eps2 from '../assets/proyectos/easy-pdf-lector.jpg';
 import moova from '../assets/proyectos/moova-popup.png';
@@ -17,7 +16,10 @@ import habit from '../assets/proyectos/tracker-habits.png';
 import mPerf from '../assets/proyectos/m-web-performance.png';
 import mInsight from '../assets/proyectos/m-insight-demo.png';
 import mBuscador from '../assets/proyectos/m-buscador-replica.png';
-import foto from '../assets/gustavo.jpg';
+import heroBg from '../assets/hero/fondo.webp';
+import heroMan from '../assets/hero/gustavo-recorte.webp';
+import heroDown from '../assets/hero/gustavo-mirando-abajo.webp';
+import heroCode from '../assets/hero/gustavo-programando.webp';
 
 // Galerias por proyecto (assets/proyectos/galeria/<id>/N.webp) y capturas de sitios en linea (assets/trabajo/<id>.webp)
 const galFiles = import.meta.glob('../assets/proyectos/galeria/*/*.webp', { eager: true, import: 'default' });
@@ -198,7 +200,29 @@ const icons = {
       <div class="orb o2" data-orb="2"></div>
       <div class="wrap">
         <figure class="foto" data-egg={JSON.stringify(t.egg)}>
-          <Picture src={foto} formats={["avif", "webp"]} fallbackFormat="webp" widths={[280, 420, 560, 680]} sizes="(min-width:900px) 340px, 66vw" alt="Gustavo Bentancor" loading="eager" fetchpriority="high" />
+          <div class="stage" data-stage>
+            <div class="layer bg"><Image src={heroBg} width={520} format="webp" quality={70} alt="" loading="eager" /></div>
+            <div class="layer man">
+              <div class="pose">
+                <Picture src={heroMan} formats={["avif", "webp"]} fallbackFormat="webp" widths={[320, 480, 640]} sizes="(min-width:900px) 340px, 66vw" alt="Gustavo Bentancor" loading="eager" fetchpriority="high" />
+                <Picture src={heroDown} formats={["avif", "webp"]} fallbackFormat="webp" widths={[320, 480, 640]} sizes="(min-width:900px) 340px, 66vw" alt="" loading="lazy" />
+                <Picture src={heroCode} formats={["avif", "webp"]} fallbackFormat="webp" widths={[360, 540, 720]} sizes="(min-width:900px) 340px, 66vw" alt="" loading="lazy" />
+              </div>
+            </div>
+          </div>
+          <div class="hpcard" aria-hidden="true">
+            <span class="no">{t.idle.card.no}</span>
+            <div class="win"><i class="sp s1">✦</i><i class="sp s2">✧</i><i class="sp s3">✦</i><div class="sign"><i class="rope r1"></i><i class="rope r2"></i><div class="board"><b>{t.idle.card.signTitle}</b><span>{t.idle.card.sign}</span><small>{t.idle.card.back}</small></div></div></div>
+            <div class="plate"><b>{t.idle.card.name}</b><span>{t.idle.card.role}</span><small>{t.idle.card.power}</small></div>
+          </div>
+          <div class="glow" aria-hidden="true"></div>
+          <div class="glyphs" aria-hidden="true"><i>{'{ }'}</i><i>&lt;/&gt;</i><i>=&gt;</i><i>;</i><i>[ ]</i><i>( )</i></div>
+          <svg class="laptop" viewBox="0 0 300 150" aria-hidden="true" focusable="false">
+            <path d="M18 138 L282 138 L292 148 L8 148 Z" fill="#3a3d49"/>
+            <rect x="34" y="8" width="232" height="132" rx="10" fill="#1d2029" stroke="#4b4f5e" stroke-width="2"/>
+            <g class="lg"><circle cx="150" cy="74" r="14" fill="none" stroke="#7c8cff" stroke-width="3" opacity=".85"/><path d="M143 74 l5 6 l10 -12" fill="none" stroke="#36e2c0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+          </svg>
+          <div class="zzz" aria-hidden="true"><i>Z</i><i>z</i><i>z</i></div>
           <svg class="eye" viewBox="0 0 200 120" aria-hidden="true" focusable="false">
             <defs>
               <radialGradient id="eg" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#fff3a0"/><stop offset=".35" stop-color="#ffb300"/><stop offset=".75" stop-color="#ff3d00"/><stop offset="1" stop-color="#7a0900"/></radialGradient>
@@ -732,6 +756,61 @@ const icons = {
     }
   </script>
   <script>
+    // Retrato: estatico por defecto, parallax al mover el mouse y, tras 5 s sin tocar nada, una escena
+    // (dormido, cromo de mago ausente o programando). Los clics repetidos invocan a Sauron (mas abajo).
+    const stg = document.querySelector('[data-stage]');
+    const fig = stg && stg.closest('.foto');
+    const heroSec = document.querySelector('[data-hero]');
+    const calm = matchMedia('(prefers-reduced-motion:reduce)').matches;
+    if (fig && heroSec && !calm) {
+      let tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
+      const loop = () => {
+        cx += (tx - cx) * 0.09;
+        cy += (ty - cy) * 0.09;
+        fig.style.setProperty('--px', cx.toFixed(3));
+        fig.style.setProperty('--py', cy.toFixed(3));
+        raf = Math.abs(tx - cx) > 0.002 || Math.abs(ty - cy) > 0.002 ? requestAnimationFrame(loop) : 0;
+      };
+      const aim = (x, y) => { tx = x; ty = y; if (!raf) raf = requestAnimationFrame(loop); };
+      const clamp = (v) => Math.max(-1, Math.min(1, v));
+      if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
+        heroSec.addEventListener('pointermove', (e) => {
+          const r = heroSec.getBoundingClientRect();
+          aim(clamp(((e.clientX - r.left) / r.width - 0.5) * 2), clamp(((e.clientY - r.top) / r.height - 0.5) * 2));
+        }, { passive: true });
+        heroSec.addEventListener('pointerleave', () => aim(0, 0));
+      }
+      // Escenas de reposo
+      const scenes = ['sleep', 'away', 'code'];
+      let queue = [], last = '', mood = '', timer = 0, visible = true;
+      const root = document.documentElement;
+      const setMood = (m) => {
+        mood = m;
+        if (m) { fig.dataset.mood = m; aim(0, 0); } else delete fig.dataset.mood;
+      };
+      const pick = () => {
+        if (!queue.length) {
+          queue = scenes.slice().sort(() => Math.random() - 0.5);
+          if (queue[queue.length - 1] === last) queue.unshift(queue.pop());
+        }
+        last = queue.pop();
+        return last;
+      };
+      const idle = () => {
+        if (!visible || document.hidden || root.classList.contains('mordor')) { arm(); return; }
+        setMood(pick());
+        timer = setTimeout(idle, 12000);
+      };
+      const arm = () => { clearTimeout(timer); timer = setTimeout(idle, 5000); };
+      const wake = () => { if (mood) setMood(''); arm(); };
+      ['pointermove', 'pointerdown', 'keydown', 'wheel', 'touchstart', 'scroll'].forEach((ev) => addEventListener(ev, wake, { passive: true }));
+      if ('IntersectionObserver' in window) new IntersectionObserver((es) => { visible = es[0].isIntersecting; if (!visible && mood) setMood(''); }).observe(heroSec);
+      arm();
+      // Las fotos de las escenas se piden despues de la carga, para no competir con la foto principal
+      addEventListener('load', () => setTimeout(() => fig.querySelectorAll('img[loading=lazy]').forEach((im) => { im.loading = 'eager'; }), 1500), { once: true });
+    }
+  </script>
+  <script>
     // Detalles de interaccion. Todo arranca con la primera accion del usuario, nunca durante la carga.
     // 1) Estela de brasas/luz que sigue al mouse (solo con mouse y sin "reducir movimiento").
     if (matchMedia('(hover:hover) and (pointer:fine)').matches && !matchMedia('(prefers-reduced-motion:reduce)').matches) {
@@ -821,6 +900,5 @@ const icons = {
       }, { once: true });
     }
   </script>
-  <ChatWidget t={t} />
 </body>
 </html>
