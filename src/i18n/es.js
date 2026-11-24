@@ -391,7 +391,11 @@ export default {
       { role: 'Diseñador de sitios web', org: 'i2es - ideas to e-solutions', kind: 'Implementador de páginas web', date: 'mar. 2014 – sept. 2019' },
     ],
     education: [
-      { title: 'Analista Programador', org: 'Universidad ORT Uruguay', date: '2017 – 2020' },
+      { title: 'Analista Programador', org: 'Universidad ORT Uruguay', date: 'En etapa final' },
+      { title: 'Desarrollador Web', org: 'ORT Uruguay', date: '2011 – 2013' },
+      { title: 'Cursos', org: 'ORT, Taller de Informática, Círculo Informático, UTU y BIOS', date: 'Programador PHP/MySQL, Analista GeneXus, Diseño Web y Gráfico' },
+      { title: 'Inglés', org: 'Your Place', date: 'Nivel B1+' },
+      { title: 'Japonés', org: 'ORT Uruguay', date: 'En curso' },
     ],
   },
   work: {
