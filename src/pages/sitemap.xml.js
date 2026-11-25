@@ -3,7 +3,7 @@ import es from '../i18n/es.js';
 import { allItems } from '../lib/projects.js';
 const CANON = 'https://gustavobentancor.com';
 const slugs = {
-  services: ['desarrollo-web-rapido', 'extensiones-chrome', 'automatizacion-ia', 'apps-pwa', 'seo-tecnico'],
+  services: es.servicePages.map((s) => s.slug),
   projects: allItems(es).map((p) => p.id),
 };
 

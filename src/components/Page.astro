@@ -94,12 +94,12 @@ const cover = (p) => images[p.id] ?? workImg[p.img ?? p.id];
 // Orden por importancia (prioridad de Gustavo): sitios BROU, demos de front-end, apps propias y al final extensiones y herramientas
 const order = [
   'brou-mibrou', 'brou-beneficios', 'brou-asistencia', 'insight-demo', 'nodo-corp', 'talento-sur', 'buscador-replica', 'grano-sur',
-  'eventosanime', 'kiosko', 'automatizaciones-pyme', 'entradas-eventos', 'mesalista', 'urugol',
+  'eventosanime', 'kiosko', 'entradas-eventos', 'mesalista', 'urugol',
   'auf', 'web-performance', 'interbalnearios', 'elarcon', 'museo-celeste', 'rincon', 'rumbo-sur', 'banners',
   'easy-pdf-free', 'gletir-tracker', 'tracker-habits', 'moova-tracker-extension', 'img-generator',
 ];
 const catOf = Object.fromEntries(order.map((id) => [id, 'web']));
-Object.assign(catOf, { 'easy-pdf-free': 'apps', 'tracker-habits': 'apps', 'kiosko': 'apps', 'automatizaciones-pyme': 'apps', 'entradas-eventos': 'apps', 'mesalista': 'apps', 'gletir-tracker': 'ext', 'moova-tracker-extension': 'ext', 'img-generator': 'ext' });
+Object.assign(catOf, { 'easy-pdf-free': 'apps', 'tracker-habits': 'apps', 'kiosko': 'apps', 'entradas-eventos': 'apps', 'mesalista': 'apps', 'gletir-tracker': 'ext', 'moova-tracker-extension': 'ext', 'img-generator': 'ext' });
 const mobile = { 'web-performance': mPerf, 'insight-demo': mInsight, 'buscador-replica': mBuscador };
 // Un proyecto sin captura todavia no se muestra (aparece solo cuando existe su imagen)
 const sorted = order.map((id) => all.find((x) => x.id === id)).filter((p) => p && (p.id === 'easy-pdf-free' || cover(p)));
