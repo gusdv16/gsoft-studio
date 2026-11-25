@@ -12,6 +12,7 @@ import buscador from '../assets/proyectos/buscador-replica.png';
 import gletir from '../assets/proyectos/gletir-tracker.png';
 import kiosko from '../assets/proyectos/kiosko.png';
 import habit from '../assets/proyectos/tracker-habits.png';
+import nova from '../assets/proyectos/nova-web.jpg';
 
 const { t, project, lang } = Astro.props;
 const isEn = lang === 'en';
@@ -30,7 +31,7 @@ const workFiles = import.meta.glob('../assets/trabajo/*.webp', { eager: true, im
 const workCover = Object.entries(workFiles).find(([f]) => f.endsWith(`/${project.img ?? project.id}.webp`))?.[1];
 const galFiles = import.meta.glob('../assets/proyectos/galeria/*/*.webp', { eager: true, import: 'default' });
 const gallery = Object.entries(galFiles).filter(([p]) => p.includes(`/galeria/${slug}/`)).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true })).map(([, img]) => img);
-const images = { 'gletir-tracker': gletir, 'easy-pdf-free': null, 'tracker-habits': habit, 'moova-tracker-extension': moova, 'img-generator': imgGen, 'web-performance': perf, 'insight-demo': insight, 'buscador-replica': buscador, 'kiosko': kiosko };
+const images = { 'gletir-tracker': gletir, 'easy-pdf-free': null, 'tracker-habits': habit, 'moova-tracker-extension': moova, 'img-generator': imgGen, 'web-performance': perf, 'insight-demo': insight, 'buscador-replica': buscador, 'kiosko': kiosko, 'nova-web': nova };
 
 const title = `${project.title} | ${t.brand}`;
 const description = project.text.slice(0, 155);
@@ -202,4 +203,3 @@ const fontCss = `@font-face{font-family:"Inter";font-style:normal;font-weight:10
   </footer>
 </body>
 </html>
----
