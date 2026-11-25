@@ -446,7 +446,7 @@ const icons = {
         <div class="grid4">
           {t.services.items.map((s) => (
             <article class="card" data-r="card">
-              <div class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={icons[s.icon]}/></svg></div>
+              <div class="ico"><svg aria-hidden="true"><use href={`${base}/icons.svg#${s.icon}`} /></svg></div>
               <h3>{s.title}</h3>
               <p>{s.text}</p>
               {s.slug && <a class="svc-more" href={isEn ? `${base}/en/servicios/${s.slug}/` : `${base}/servicios/${s.slug}/`} style="display:inline-block;margin-top:10px;font-size:.9rem;color:var(--a);text-decoration:none">{isEn ? 'Learn more →' : 'Ver más →'}</a>}

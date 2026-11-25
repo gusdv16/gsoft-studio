@@ -1,6 +1,6 @@
 # Gustavo Bentancor
 
-> Estudio de Gustavo Bentancor (Uruguay): desarrollo web rápido, SEO técnico, extensiones de Chrome, apps y automatización con IA para negocios. Trabajo directo con quien diseña y programa, con rendimiento medido (Lighthouse, Core Web Vitals) y código documentado.
+> Gustavo Bentancor, desarrollador front-end freelance en Montevideo (Uruguay): sitios web rápidos y fáciles de encontrar en Google, SEO técnico y rendimiento, sitios con panel de administración (PHP y MySQL), rediseño y migración. Trabajo directo con quien diseña y programa, con rendimiento medido (Lighthouse, Core Web Vitals) y código documentado.
 
 ## Sitio
 
@@ -10,18 +10,17 @@
 
 ## Servicios
 
-- Desarrollo web rápido: sitios optimizados para Core Web Vitals y SEO técnico.
-- Extensiones de Chrome y apps a medida (PWA, Android con Capacitor).
-- Integración de IA en flujos de trabajo.
-- Herramientas a medida para el negocio (PHP, MySQL, Google Apps Script).
+- [Desarrollo web rápido](https://gustavobentancor.com/servicios/desarrollo-web-rapido/): sitios claros y veloces, pensados para el celular y para Google.
+- [SEO técnico y rendimiento](https://gustavobentancor.com/servicios/seo-tecnico/): Core Web Vitals, Lighthouse, datos estructurados y medición con Analytics, Tag Manager y Search Console.
+- [Sitios con panel de administración](https://gustavobentancor.com/servicios/sitios-con-panel/): PHP y MySQL, usuarios con permisos y acceso con 2FA.
+- [Rediseño y migración](https://gustavobentancor.com/servicios/rediseno-y-migracion/): renovar un sitio existente sin perder posicionamiento.
 
 ## Proyectos destacados
 
-- Gletir Tracker: extensión de seguimiento de inversiones.
-- Easy PDF Free: lector de PDF sin publicidad (web y Android).
-- Moova Tracker: extensión de Chrome que avisa cuando cambia el estado de un envío.
-- Kiosko Digital: visor de portadas de diarios.
-- Web Performance Showcase, Habit Tracker, Responsive Image Generator, Insight Demo y Buscador de ofertas.
+- Sitios del Banco República (BROU): MiBROU, Beneficios (con panel de administración) y Asistencia.
+- Urugol (portal de noticias en WordPress), AUF (migración y front-end) y Eventos Anime Uruguay.
+- Web Performance Showcase (Lighthouse de 71 a 100), Insight Demo, Nodo Tecnología, Talento Sur y Buscador de ofertas.
+- Herramientas propias: Kiosko Digital, Gletir Tracker (extensión de Chrome), Easy PDF Free.
 - Código: https://github.com/gusdv16
 
 ## Contacto

@@ -1,8 +1,8 @@
 ---
 import '../styles/global.css';
 import { Picture } from 'astro:assets';
-import foto from '../assets/gustavo.jpg';
-import eps1 from '../assets/proyectos/easy-pdf-inicio.png';
+import { allItems } from '../lib/projects.js';
+import { covers } from '../lib/covers.js';
 
 const { t, service, lang } = Astro.props;
 const isEn = lang === 'en';
@@ -48,9 +48,12 @@ const ld = {
   ],
 };
 
-const relatedProjects = (service.related || [])
-  .map((id) => t.projects.items.find((p) => p.id === id))
-  .filter(Boolean);
+const all = allItems(t, base);
+const relatedProjects = (service.related || []).map((id) => all.find((p) => p.id === id)).filter(Boolean);
+const heroCover = relatedProjects.map((p) => covers[p.img ?? p.id]).filter(Boolean);
+const others = t.services.items.filter((x) => x.slug !== service.slug);
+const outLink = (p) => p.visit ?? p.demo ?? p.links?.[0]?.url ?? p.store ?? null;
+const sprite = (k) => `${base}/icons.svg#${k}`;
 
 const fontCss = `@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("${base}/fonts/inter-latin-wght-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}`;
 ---
@@ -111,38 +114,54 @@ const fontCss = `@font-face{font-family:"Inter";font-style:normal;font-weight:10
   </header>
 
   <main id="main">
-    <section class="hero" data-hero style="min-height:auto;padding:80px 0 40px">
-      <div class="wrap">
-        <div>
-          <span class="badge"><i></i>{t.hero.badge}</span>
-          <h1 style="font-size:clamp(2rem,5vw,3.2rem);line-height:1.05;margin:14px 0 16px">{service.h1}</h1>
+    <section class="sv-hero">
+      <div class="wrap sv-hgrid">
+        <div class="sv-htext">
+          <nav class="sv-crumb" aria-label={isEn ? 'Breadcrumb' : 'Ruta'}>
+            <a href={`${base}${homePath}`}>{t.brand}</a><span aria-hidden="true">›</span><a href={`${base}${homePath}#servicios`}>{t.nav.services}</a>
+          </nav>
+          <h1>{service.h1}</h1>
           <p class="lead">{service.lead}</p>
+          <ul class="facts">{(service.facts || []).map((x) => <li>{x}</li>)}</ul>
           <div class="cta">
             <a class="btn btn-p" href={`${base}${homePath}#contacto`}>{t.hero.primary}</a>
             <a class="btn btn-s" href={`${base}${homePath}#proyectos`}>{t.hero.secondary}</a>
           </div>
-          {service.priceRange && <p style="margin-top:18px;font-size:.9rem;color:var(--muted)"><strong>{service.priceRange}</strong></p>}
+          {service.priceRange && <p class="sv-price"><svg aria-hidden="true"><use href={sprite(service.icon || 'code')} /></svg>{service.priceRange}</p>}
         </div>
+        {heroCover.length > 0 && (
+          <div class="sv-visual" aria-hidden="true">
+            <div class="sv-browser">
+              <div class="sv-bar"><i></i><i></i><i></i></div>
+              <Picture src={heroCover[0]} formats={["avif", "webp"]} fallbackFormat="webp" widths={[480, 720, 960]} sizes="(min-width:900px) 520px, 92vw" alt="" loading="eager" />
+            </div>
+            {heroCover[1] && (
+              <div class="sv-mini">
+                <Picture src={heroCover[1]} formats={["avif", "webp"]} fallbackFormat="webp" widths={[240, 360]} sizes="200px" alt="" loading="lazy" />
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </section>
 
-    <section class="cv" style="--m:900px;--d:600px">
+    <section class="cv" style="--m:700px;--d:520px">
       <div class="wrap">
         <p class="kick" data-r>{isEn ? 'The problem' : 'El problema que resuelvo'}</p>
-        <h2 data-r>{isEn ? 'What you are dealing with' : 'Lo que te frena'}</h2>
-        <ul style="margin:20px 0 0;padding-left:20px;line-height:1.8">
-          {service.problems.map((p) => <li data-r>{p}</li>)}
+        <h2 data-r>{isEn ? 'What is holding you back' : 'Lo que te frena'}</h2>
+        <ul class="sv-problems">
+          {service.problems.map((x) => <li data-r="card"><b aria-hidden="true">✕</b><span>{x}</span></li>)}
         </ul>
       </div>
     </section>
 
-    <section class="alt cv" style="--m:900px;--d:600px">
+    <section class="alt cv" style="--m:760px;--d:560px">
       <div class="wrap">
         <p class="kick" data-r>{isEn ? 'The solution' : 'Cómo lo resuelvo'}</p>
-        <h2 data-r>{isEn ? 'What I deliver' : 'Qué te entrego'}</h2>
-        <ul style="margin:20px 0 0;padding-left:20px;line-height:1.8">
-          {service.solution.map((s) => <li data-r>{s}</li>)}
-        </ul>
+        <h2 data-r>{isEn ? 'What you get' : 'Qué te entrego'}</h2>
+        <ol class="sv-steps">
+          {service.solution.map((x, i) => <li data-r="card"><span class="n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span><p>{x}</p></li>)}
+        </ol>
       </div>
     </section>
 
@@ -150,37 +169,62 @@ const fontCss = `@font-face{font-family:"Inter";font-style:normal;font-weight:10
       <section class="cv" style="--m:900px;--d:600px">
         <div class="wrap">
           <p class="kick" data-r>{t.projects.kicker}</p>
-          <h2 data-r>{isEn ? 'Related projects' : 'Proyectos relacionados'}</h2>
-          <div class="grid4" style="margin-top:20px">
-            {relatedProjects.map((p) => (
-              <article class="card" data-r="card">
-                <span class="type">{t.projects.types[p.type]}</span>
-                <h3>{p.title}</h3>
-                <p>{p.text}</p>
-                <div class="links" style="margin-top:12px">
-                  <a class="btn btn-s" href={`${base}${projectsBase}${p.id}/`}>{isEn ? 'View case study' : 'Ver caso de estudio'} ↗</a>
-                  {p.demo && <a class="btn btn-s" href={p.demo} target="_blank" rel="noopener">{t.projects.demo} ↗</a>}
-                  {p.store && <a class="btn btn-s" href={p.store} target="_blank" rel="noopener">{t.projects.store} ↗</a>}
-                </div>
-              </article>
-            ))}
+          <h2 data-r>{isEn ? 'Related work' : 'Trabajos relacionados'}</h2>
+          <div class="sv-cases">
+            {relatedProjects.map((p) => {
+              const img = covers[p.img ?? p.id];
+              const ext = outLink(p);
+              return (
+                <article class="sv-case" data-r="card">
+                  <a class="sv-cimg" href={`${base}${projectsBase}${p.id}/`} tabindex="-1" aria-hidden="true">
+                    {img && <Picture src={img} formats={["avif", "webp"]} fallbackFormat="webp" widths={[400, 640]} sizes="(min-width:1000px) 300px, (min-width:640px) 45vw, 92vw" alt="" loading="lazy" />}
+                  </a>
+                  <div class="sv-cbody">
+                    <span class="type">{p.kind ?? t.projects.types[p.type]}</span>
+                    <h3>{p.title}</h3>
+                    <p>{t.short[p.id] ?? p.text}</p>
+                    <div class="links">
+                      <a class="btn btn-p" href={`${base}${projectsBase}${p.id}/`}>{isEn ? 'View project' : 'Ver proyecto'}</a>
+                      {ext && <a class="btn btn-s" href={ext} target="_blank" rel="noopener">{isEn ? 'Open' : 'Abrir'} ↗</a>}
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
     )}
 
-    <section class="alt cv" style="--m:900px;--d:600px">
-      <div class="wrap">
+    <section class="alt cv" style="--m:800px;--d:600px">
+      <div class="wrap sv-faqw">
         <p class="kick" data-r>{isEn ? 'FAQ' : 'Preguntas frecuentes'}</p>
-        <h2 data-r>{isEn ? 'Frequently asked questions' : 'Preguntas frecuentes'}</h2>
-        <div style="margin-top:20px;display:grid;gap:16px">
+        <h2 data-r>{isEn ? 'Frequently asked questions' : 'Lo que suelen preguntarme'}</h2>
+        <div class="sv-faq">
           {service.faq.map((f) => (
-            <details class="card" data-r="card" style="padding:18px 20px">
-              <summary style="cursor:pointer;font-weight:600">{f.q}</summary>
-              <p style="margin-top:10px;line-height:1.6">{f.a}</p>
+            <details data-r="card">
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
             </details>
           ))}
         </div>
+      </div>
+    </section>
+
+    <section class="cv" style="--m:500px;--d:400px">
+      <div class="wrap">
+        <p class="kick" data-r>{isEn ? 'More services' : 'Otros servicios'}</p>
+        <ul class="sv-others">
+          {others.map((o) => (
+            <li data-r="card">
+              <a href={`${base}${isEn ? '/en' : ''}/servicios/${o.slug}/`}>
+                <span class="ico"><svg aria-hidden="true"><use href={sprite(o.icon)} /></svg></span>
+                <b>{o.title}</b>
+                <span>{o.text}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
 
