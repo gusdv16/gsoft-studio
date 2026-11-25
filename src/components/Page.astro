@@ -13,6 +13,7 @@ import buscador from '../assets/proyectos/buscador-replica.png';
 import gletir from '../assets/proyectos/gletir-tracker.png';
 import kiosko from '../assets/proyectos/kiosko.png';
 import habit from '../assets/proyectos/tracker-habits.png';
+import nova from '../assets/proyectos/nova-web.jpg';
 import mPerf from '../assets/proyectos/m-web-performance.png';
 import mInsight from '../assets/proyectos/m-insight-demo.png';
 import mBuscador from '../assets/proyectos/m-buscador-replica.png';
@@ -85,7 +86,7 @@ const ld = {
 };
 const other = isEn ? `${base}/` : `${base}/en/`;
 const fontCss = `@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("${base}/fonts/inter-latin-wght-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}`;
-const images = { 'gletir-tracker': gletir, 'easy-pdf-free': null, 'tracker-habits': habit, 'moova-tracker-extension': moova, 'img-generator': imgGen, 'web-performance': perf, 'insight-demo': insight, 'buscador-replica': buscador, 'kiosko': kiosko };
+const images = { 'gletir-tracker': gletir, 'easy-pdf-free': null, 'tracker-habits': habit, 'moova-tracker-extension': moova, 'img-generator': imgGen, 'web-performance': perf, 'insight-demo': insight, 'buscador-replica': buscador, 'kiosko': kiosko, 'nova-web': nova };
 // Orden: Gletir destacado, luego sitios web (con vista movil) y luego aplicaciones/herramientas propias
 // Trabajos para clientes y demos propias (t.work.items) se muestran como proyectos mas
 const all = allItems(t, base);
@@ -93,7 +94,7 @@ const all = allItems(t, base);
 const cover = (p) => images[p.id] ?? workImg[p.img ?? p.id];
 // Orden por importancia (prioridad de Gustavo): sitios BROU, demos de front-end, apps propias y al final extensiones y herramientas
 const order = [
-  'brou-mibrou', 'brou-beneficios', 'brou-asistencia', 'insight-demo', 'nodo-corp', 'talento-sur', 'buscador-replica', 'grano-sur',
+  'brou-mibrou', 'brou-beneficios', 'brou-asistencia', 'insight-demo', 'nova-web', 'nodo-corp', 'talento-sur', 'buscador-replica', 'grano-sur',
   'eventosanime', 'kiosko', 'entradas-eventos', 'mesalista', 'urugol',
   'auf', 'web-performance', 'interbalnearios', 'elarcon', 'museo-celeste', 'rincon', 'rumbo-sur', 'banners',
   'easy-pdf-free', 'gletir-tracker', 'tracker-habits', 'moova-tracker-extension', 'img-generator',
