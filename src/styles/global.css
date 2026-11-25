@@ -618,3 +618,16 @@ html.mordor .foto .pose picture:nth-of-type(4){opacity:1}
 html.mordor .foto .pose picture:nth-of-type(-n+3){opacity:0}
 html.mordor .foto .pose{animation:sauronin .9s ease-out both}
 @keyframes sauronin{0%{transform:scale(1.07);filter:brightness(2.2)}100%{transform:none;filter:none}}
+
+/* tomando cafe */
+.foto .pose picture:nth-of-type(5){position:absolute;left:0;top:0;width:100%;opacity:0;transition:opacity .45s ease}
+.foto[data-mood=coffee] .pose picture:nth-of-type(5){opacity:1}
+.foto[data-mood=coffee] .pose picture:nth-of-type(-n+4){opacity:0}
+.foto[data-mood=coffee] .pose picture:nth-of-type(5){animation:sip 5s ease-in-out infinite}
+@keyframes sip{0%,100%{transform:translateY(0)}50%{transform:translateY(-.6%)}}
+.foto .steam{position:absolute;left:61%;top:60%;width:12%;height:20%;z-index:3;pointer-events:none}
+.foto .steam i{position:absolute;bottom:0;width:22%;height:70%;border-radius:50%;background:radial-gradient(ellipse at 50% 100%,rgba(255,255,255,.55),transparent 70%);filter:blur(3px);opacity:0}
+.foto .steam i:nth-child(1){left:10%}.foto .steam i:nth-child(2){left:40%;animation-delay:.9s!important}.foto .steam i:nth-child(3){left:68%;animation-delay:1.7s!important}
+.foto[data-mood=coffee] .steam i{animation:steam 2.8s ease-in infinite}
+@keyframes steam{0%{opacity:0;transform:translate(0,20%) scale(.8)}30%{opacity:.8}100%{opacity:0;transform:translate(25%,-120%) scale(1.5)}}
+@media(prefers-reduced-motion:reduce){.foto .steam i,.foto .pose picture:nth-of-type(5){animation:none!important}}

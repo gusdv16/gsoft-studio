@@ -21,6 +21,7 @@ import heroMan from '../assets/hero/gustavo-recorte.webp';
 import heroDown from '../assets/hero/gustavo-mirando-abajo.webp';
 import heroCode from '../assets/hero/gustavo-programando.webp';
 import heroSauron from '../assets/hero/gustavo-sauron.webp';
+import heroCafe from '../assets/hero/gustavo-cafe.webp';
 
 // Galerias por proyecto (assets/proyectos/galeria/<id>/N.webp) y capturas de sitios en linea (assets/trabajo/<id>.webp)
 const galFiles = import.meta.glob('../assets/proyectos/galeria/*/*.webp', { eager: true, import: 'default' });
@@ -218,6 +219,7 @@ const icons = {
                 <Picture src={heroDown} formats={["avif", "webp"]} fallbackFormat="webp" widths={[320, 480, 640]} sizes="(min-width:900px) 340px, 66vw" alt="" loading="lazy" />
                 <Picture src={heroCode} formats={["avif", "webp"]} fallbackFormat="webp" widths={[360, 540, 720]} sizes="(min-width:900px) 340px, 66vw" alt="" loading="lazy" />
                 <Picture src={heroSauron} formats={["avif", "webp"]} fallbackFormat="webp" widths={[320, 480, 640]} sizes="(min-width:900px) 340px, 66vw" alt="" loading="lazy" />
+                <Picture src={heroCafe} formats={["avif", "webp"]} fallbackFormat="webp" widths={[320, 480, 640]} sizes="(min-width:900px) 340px, 66vw" alt="" loading="lazy" />
               </div>
             </div>
           </div>
@@ -234,6 +236,7 @@ const icons = {
             <rect x="34" y="8" width="232" height="132" rx="10" fill="#1d2029" stroke="#4b4f5e" stroke-width="2"/>
             <g class="lg"><circle cx="150" cy="74" r="14" fill="none" stroke="#7c8cff" stroke-width="3" opacity=".85"/><path d="M143 74 l5 6 l10 -12" fill="none" stroke="#36e2c0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
           </svg>
+          <div class="steam" aria-hidden="true"><i></i><i></i><i></i></div>
           <div class="zzz" aria-hidden="true"><i>Z</i><i>z</i><i>z</i></div>
         </figure>
         <p class="egg-msg" role="status" aria-live="polite" data-egg-msg></p>
@@ -799,28 +802,22 @@ const icons = {
         } else listen();
       }
       // Escenas de reposo
-      const scenes = ['sleep', 'away', 'code'];
-      let queue = [], last = '', mood = '', timer = 0, visible = true;
+      // Orden fijo: cafe, programando, durmiendo y, al final, el cartel (que se queda hasta que haya interaccion)
+      const scenes = ['coffee', 'code', 'sleep', 'away'];
+      let step = 0, mood = '', timer = 0, visible = true;
       const root = document.documentElement;
       const setMood = (m) => {
         mood = m;
         if (m) { fig.dataset.mood = m; aim(0, 0); } else delete fig.dataset.mood;
       };
-      const pick = () => {
-        if (!queue.length) {
-          queue = scenes.slice().sort(() => Math.random() - 0.5);
-          if (queue[queue.length - 1] === last) queue.unshift(queue.pop());
-        }
-        last = queue.pop();
-        return last;
-      };
       const idle = () => {
         if (!visible || document.hidden || root.classList.contains('mordor')) { arm(); return; }
-        setMood(pick());
-        timer = setTimeout(idle, 12000);
+        setMood(scenes[step]);
+        step++;
+        if (step < scenes.length) timer = setTimeout(idle, 10000);
       };
       const arm = () => { clearTimeout(timer); timer = setTimeout(idle, 5000); };
-      const wake = () => { if (mood) setMood(''); arm(); };
+      const wake = () => { if (mood) setMood(''); step = 0; arm(); };
       ['pointermove', 'pointerdown', 'keydown', 'wheel', 'touchstart', 'scroll'].forEach((ev) => addEventListener(ev, wake, { passive: true }));
       if ('IntersectionObserver' in window) new IntersectionObserver((es) => { visible = es[0].isIntersecting; if (!visible && mood) setMood(''); }).observe(heroSec);
       arm();
