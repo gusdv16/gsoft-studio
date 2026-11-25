@@ -51,10 +51,14 @@ const ENDPOINT = import.meta.env.PUBLIC_CHAT_ENDPOINT ?? 'https://portfolio-chat
     let history = [];
     let busy = false;
 
+    const renderMd = (text) => {
+      const esc = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      return esc.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    };
     const add = (cls, text) => {
       const d = document.createElement('div');
       d.className = 'aic-m ' + cls;
-      d.textContent = text;
+      d.innerHTML = renderMd(text);
       log.appendChild(d);
       log.scrollTop = log.scrollHeight;
       return d;
@@ -70,7 +74,7 @@ const ENDPOINT = import.meta.env.PUBLIC_CHAT_ENDPOINT ?? 'https://portfolio-chat
       const wait = add('a w', c.thinking);
       if (window.gtag) gtag('event', 'ai_chat_message');
       try {
-        const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: history }) });
+        const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: history, lang: (document.documentElement.lang || 'es').slice(0, 2) }) });
         if (r.status === 429) { wait.className = 'aic-m a e'; wait.textContent = c.errRate; history.pop(); }
         else if (!r.ok) throw new Error('http ' + r.status);
         else { const j = await r.json(); wait.className = 'aic-m a'; wait.textContent = j.reply.replace(/\*\*|__|`/g, ''); history.push({ role: 'assistant', content: j.reply }); }
@@ -101,7 +105,7 @@ const ENDPOINT = import.meta.env.PUBLIC_CHAT_ENDPOINT ?? 'https://portfolio-chat
         '<p class="aic-note"></p>';
       box.querySelector('.aic-ti b').textContent = c.title;
       box.querySelector('.aic-ti span').textContent = c.sub;
-      const nb = box.querySelector('.aic-new'); nb.textContent = c.reset; nb.onclick = () => { if (!busy) { start(); input.focus(); } };
+      const nb = box.querySelector('.aic-new'); nb.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M12 8v6M9 11h6"/></svg>'; nb.setAttribute('aria-label', c.reset); nb.title = c.reset; nb.onclick = () => { if (!busy) { start(); input.focus(); } };
       const x = box.querySelector('.aic-x'); x.textContent = '×'; x.setAttribute('aria-label', c.close);
       box.querySelector('.aic-note').textContent = c.note;
       log = box.querySelector('.aic-log'); input = box.querySelector('input'); sendBtn = box.querySelector('.aic-f button');
