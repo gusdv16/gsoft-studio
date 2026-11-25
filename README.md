@@ -2,7 +2,7 @@
 
 **Sitio en vivo: https://gusdv16.github.io/gsoft-studio/** (inglés: https://gusdv16.github.io/gsoft-studio/en/)
 
-También en: https://gustavobentancor.com/gsoft-studio/
+Dominio propio: https://gustavobentancor.com/
 
 Sitio estático (Astro) para presentar los servicios de Gsoft Studio y los proyectos publicados. Disponible en español (`/`) y en inglés (`/en/`).
 
@@ -64,8 +64,8 @@ GH_PAGES=1 npm run build   # build para GitHub Pages (base /gsoft-studio)
 
 ## Despliegue
 
-`.github/workflows/deploy.yml` construye y publica en GitHub Pages en cada push a `main`.
-
+`.github/workflows/deploy.yml` construye y publica en GitHub Pages en cada push a `main`.
+
 `.github/workflows/hosting.yml` también corre en cada push a `main`: compila con `SITE_URL=https://gustavobentancor.com` y publica el resultado (`dist/`) en la rama `hosting`. Hostinger tiene esa rama clonada en `public_html/gsoft-studio/` y un webhook de GitHub (Settings → Webhooks) le avisa para que haga `git pull`. Así `gustavobentancor.com/gsoft-studio/` se actualiza solo.
 
 Notas:
