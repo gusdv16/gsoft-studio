@@ -6,6 +6,7 @@
 
 - [Inicio (español)](https://gustavobentancor.com/): servicios, proceso de trabajo, proyectos, experiencia y contacto.
 - [Home (English)](https://gustavobentancor.com/en/): the same content in English.
+- [Evaluación de proyecto](https://gustavobentancor.com/evaluacion/): 10 preguntas para saber qué tipo de sitio necesita un negocio (estático, con contenido editable o con panel).
 - [Sitemap](https://gustavobentancor.com/sitemap.xml)
 
 ## Servicios

@@ -1,0 +1,423 @@
+---
+import '../styles/global.css';
+
+const { t, e, lang } = Astro.props;
+const isEn = lang === 'en';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const CANON = 'https://gustavobentancor.com';
+const ENDPOINT = 'https://gustavobentancor.com/gsoft-studio/contact.php';
+const SITEKEY = import.meta.env.PUBLIC_TURNSTILE_SITEKEY ?? '';
+const esPath = `/${e.slug}/`;
+const enPath = `/en/${e.slug}/`;
+const canonical = `${CANON}${isEn ? enPath : esPath}`;
+const other = `${base}${isEn ? esPath : enPath}`;
+const homePath = isEn ? '/en/' : '/';
+const svcBase = `${base}${isEn ? '/en' : ''}/servicios/`;
+const svcTitle = Object.fromEntries(t.servicePages.map((s) => [s.slug, s.h1]));
+const fm = t.contact.form;
+
+// Lo que el script del cliente necesita: veredictos, textos y mensajes del formulario.
+const cfg = { r: e.r, svcBase, svcTitle, form: fm, lang: t.lang };
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': `${canonical}#page`, name: e.h1, description: e.description, url: canonical, inLanguage: t.htmlLang },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: t.brand, item: `${CANON}${homePath}` },
+        { '@type': 'ListItem', position: 2, name: e.crumb, item: canonical },
+      ],
+    },
+  ],
+};
+
+const fontCss = `@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("${base}/fonts/inter-latin-wght-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}`;
+---
+<!doctype html>
+<html lang={t.htmlLang}>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{e.title}</title>
+  <meta name="description" content={e.description}>
+  <meta name="theme-color" content="#07080d">
+  <link rel="canonical" href={canonical}>
+  <link rel="alternate" hreflang="es" href={`${CANON}${esPath}`}>
+  <link rel="alternate" hreflang="en" href={`${CANON}${enPath}`}>
+  <link rel="alternate" hreflang="x-default" href={`${CANON}${esPath}`}>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content={e.title}>
+  <meta property="og:description" content={e.description}>
+  <meta property="og:url" content={canonical}>
+  <meta property="og:site_name" content={t.brand}>
+  <meta property="og:locale" content={isEn ? 'en_US' : 'es_ES'}>
+  <meta property="og:image" content={`${CANON}/og.png`}>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="sitemap" type="application/xml" href={`${base}/sitemap.xml`}>
+  <script type="application/ld+json" set:html={JSON.stringify(ld)}></script>
+  <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`}>
+  <link rel="preload" href={`${base}/fonts/inter-latin-wght-normal.woff2`} as="font" type="font/woff2" crossorigin>
+  <style is:inline set:html={fontCss}></style>
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-TEFWE35W1K"></script>
+  <script is:inline>
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+    gtag('js',new Date());gtag('config','G-TEFWE35W1K');
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">{t.skip}</a>
+  <header class="hd">
+    <div class="wrap">
+      <a class="logo" href={`${base}${homePath}`} aria-label={t.brand}>
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#10131e" stroke="#1f2434"/><path d="M9 21l5-10 4 7 2-4 3 7" fill="none" stroke="#7c8cff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        {t.brand}
+      </a>
+      <nav class="nav" aria-label={isEn ? 'Main' : 'Principal'}>
+        <a href={`${base}${homePath}#sobre-mi`}>{t.nav.about}</a>
+        <a href={`${base}${homePath}#proyectos`}>{t.nav.projects}</a>
+        <a href={`${base}${homePath}#servicios`}>{t.nav.services}</a>
+        <a href={`${base}${homePath}#contacto`}>{t.nav.contact}</a>
+      </nav>
+      <a class="lang" href={other} hreflang={isEn ? 'es' : 'en'} title={t.nav.other.title}>{t.nav.other.label}</a>
+      <a class="btn btn-p" href={`${base}${homePath}#contacto`}>{t.nav.cta}</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="ev">
+      <div class="wrap ev-w">
+        <nav class="sv-crumb" aria-label={isEn ? 'Breadcrumb' : 'Ruta'}>
+          <a href={`${base}${homePath}`}>{t.brand}</a><span aria-hidden="true">›</span><span>{e.crumb}</span>
+        </nav>
+        <p class="kick">{e.kicker}</p>
+        <h1>{e.h1}</h1>
+        <p class="lead">{e.lead}</p>
+
+        <form class="ev-form" data-eval novalidate>
+          <div class="ev-prog" aria-hidden="true"><i data-bar></i></div>
+          {e.q.map((q, i) => (
+            <div class="ev-q" data-q={q.id}>
+              {q.type === 'text' || q.type === 'textarea' ? (
+                <>
+                  <label class="ev-l" for={`ev-${q.id}`}><span class="n">{String(i + 1).padStart(2, '0')}</span>{q.label}</label>
+                  {q.hint && <p class="ev-h">{q.hint}</p>}
+                  {q.type === 'text'
+                    ? <input id={`ev-${q.id}`} name={q.id} type="text" maxlength="200" autocomplete="organization">
+                    : <textarea id={`ev-${q.id}`} name={q.id} rows="4" maxlength="1200"></textarea>}
+                </>
+              ) : (
+                <fieldset>
+                  <legend class="ev-l"><span class="n">{String(i + 1).padStart(2, '0')}</span>{q.label}</legend>
+                  {q.hint && <p class="ev-h">{q.hint}</p>}
+                  <div class="ev-opts">
+                    {q.opts.map(([v, l]) => (
+                      <label class="ev-o"><input type={q.type} name={q.id} value={v} data-none={v === 'ninguno' || v === 'ninguna' ? '' : undefined}><span>{l}</span></label>
+                    ))}
+                  </div>
+                </fieldset>
+              )}
+            </div>
+          ))}
+          <p class="ev-warn" data-warn hidden>{e.incomplete}</p>
+          <div class="ev-act">
+            <button class="btn btn-p" type="submit">{e.submit}</button>
+            <button class="btn btn-s" type="reset">{e.reset}</button>
+          </div>
+        </form>
+
+        <section class="ev-res" data-result hidden aria-live="polite" tabindex="-1">
+          <p class="kick">{e.r.title}</p>
+          <h2 data-verdict></h2>
+          <p class="ev-detail" data-detail></p>
+          <div class="ev-cols">
+            <div><h3>{e.r.why}</h3><ul class="ev-list" data-reasons></ul></div>
+            <div data-flagsw><h3>{e.r.notes}</h3><ul class="ev-list ev-flags" data-flags></ul></div>
+          </div>
+          <div class="ev-svc" data-svc></div>
+
+          <div class="ev-send">
+            <h3>{e.r.sendTitle}</h3>
+            <p>{e.r.sendText}</p>
+            <form class="cform" data-send novalidate data-endpoint={ENDPOINT} data-sitekey={SITEKEY}>
+              <label>{e.r.name}<input name="name" type="text" autocomplete="name" required maxlength="100"></label>
+              <label>{e.r.email}<input name="email" type="email" autocomplete="email" maxlength="150" inputmode="email"></label>
+              <label>{e.r.phone}<input name="phone" type="tel" autocomplete="tel" maxlength="40" inputmode="tel"></label>
+              <p class="fhint">{e.r.hint}</p>
+              <input class="hp" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+              <div data-ts></div>
+              <button class="btn btn-p" type="submit">{e.r.send}</button>
+              <p class="fstat" role="status" aria-live="polite" data-status></p>
+            </form>
+            <details class="ev-sum">
+              <summary>{e.r.summary}</summary>
+              <pre data-summary></pre>
+              <button class="btn btn-s" type="button" data-copy>{e.r.copy}</button>
+              <span class="ev-copied" role="status" data-copied></span>
+            </details>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>{t.footer}</span>
+      <span class="flinks"><a href={t.linkedin} target="_blank" rel="noopener">LinkedIn</a><a href={t.github} target="_blank" rel="noopener">GitHub</a><a href={`${base}/${t.cv.file}`} download={t.cv.name} data-cv>CV</a></span>
+    </div>
+  </footer>
+
+  <script is:inline type="application/json" id="ev-cfg" set:html={JSON.stringify(cfg).replace(/</g, '\\u003c')}></script>
+  <script>
+    const cfg = JSON.parse(document.getElementById('ev-cfg')!.textContent!);
+    const R = cfg.r;
+    const form = document.querySelector<HTMLFormElement>('[data-eval]')!;
+    const res = document.querySelector<HTMLElement>('[data-result]')!;
+    const $ = <T extends Element = HTMLElement>(s: string, el: ParentNode = document) => el.querySelector<T>(s)!;
+    const groups = [...form.querySelectorAll<HTMLElement>('[data-q]')];
+
+    const val = (n: string) => form.querySelector<HTMLInputElement>(`[name="${n}"]:checked`)?.value ?? '';
+    const vals = (n: string) => [...form.querySelectorAll<HTMLInputElement>(`[name="${n}"]:checked`)].map((x) => x.value);
+    const text = (n: string) => (form.elements.namedItem(n) as HTMLInputElement).value.trim();
+    const label = (n: string, v: string) => form.querySelector(`[name="${n}"][value="${v}"]`)?.parentElement?.textContent?.trim() ?? v;
+    const fill = (s: string, x: string) => s.replace('{x}', x);
+
+    // "Ninguno" excluye al resto de las casillas del mismo grupo, y viceversa.
+    form.addEventListener('change', (ev) => {
+      const i = ev.target as HTMLInputElement;
+      if (i.type === 'checkbox' && i.checked) {
+        const all = form.querySelectorAll<HTMLInputElement>(`[name="${i.name}"]`);
+        all.forEach((o) => { if (o !== i && (i.hasAttribute('data-none') || o.hasAttribute('data-none'))) o.checked = false; });
+      }
+      progress();
+    });
+    form.addEventListener('input', progress);
+
+    function answered(g: HTMLElement) {
+      return [...g.querySelectorAll<HTMLInputElement>('input,textarea')].some((x) => (x.type === 'radio' || x.type === 'checkbox' ? x.checked : x.value.trim() !== ''));
+    }
+    function progress() {
+      const n = groups.filter(answered).length;
+      $('[data-bar]').style.transform = `scaleX(${n / groups.length})`;
+      groups.forEach((g) => g.classList.toggle('done', answered(g)));
+    }
+
+    function evaluate() {
+      const reasons: string[] = [];
+      const flags: string[] = [];
+      let score = 0;
+
+      // Frecuencia de cambios: lo que mas pesa para decidir si hace falta un CMS.
+      const f = val('frecuencia');
+      score += parseInt(f || '0', 10);
+      reasons.push(fill(R.freq, f ? label('frecuencia', f).toLowerCase() : R.unanswered));
+
+      const editor = val('editor');
+      if (editor === 'duenio' || editor === 'equipo') score += 2;
+      if (editor === 'duenio') reasons.push(R.owner);
+      if (editor === 'nadie') reasons.push(R.nobody);
+
+      const cambia = vals('cambia').filter((v) => v !== 'ninguno');
+      score += Math.min(cambia.length, 3);
+      if (cambia.length >= 2) reasons.push(fill(R.many, cambia.map((v) => label('cambia', v).toLowerCase()).join(', ')));
+
+      const pag = val('paginas');
+      if (pag === '6-15') score += 1;
+      if (pag === '16+') score += 2;
+
+      const pres = val('presupuesto');
+      if (pres === 'alto') score += 1;
+      if (pres === 'bajo' && score >= 4) flags.push(R.lowBudget);
+
+      const fun = vals('funciones').filter((v) => v !== 'ninguna');
+      const obj = val('objetivo');
+      const platform = fun.includes('pagos') || fun.includes('cuentas') || fun.includes('reservas') || obj === 'venta' || obj === 'reservas';
+      if (platform) flags.push(R.platform);
+      if (fun.includes('idiomas')) flags.push(R.langs);
+
+      const key = platform ? 'platform' : score <= 3 ? 'static' : score <= 7 ? 'mid' : 'cms';
+      const [verdict, detail, slug] = R.v[key];
+      const actual = val('actual');
+      const migrate = actual === 'wordpress' || actual === 'estatica';
+      return { verdict, detail, slug, score, reasons, flags, migrate };
+    }
+
+    function summary(r: ReturnType<typeof evaluate>) {
+      const L: string[] = [R.sumHead, ''];
+      L.push(`${R.sumBiz}: ${text('negocio') || R.noName}`);
+      L.push(`${R.sumRec}: ${r.verdict}`);
+      L.push(`${R.sumScore}: ${r.score}`);
+      L.push('', `${R.sumAnswers}:`);
+      groups.forEach((g) => {
+        const id = g.dataset.q!;
+        if (id === 'negocio' || id === 'notas') return;
+        const q = g.querySelector('.ev-l')!.textContent!.replace(/^\d+/, '').trim();
+        const a = vals(id).map((v) => label(id, v)).join(', ') || R.unanswered;
+        L.push(`- ${q} ${a}`);
+      });
+      r.flags.forEach((x) => L.push(`! ${x}`));
+      const notas = text('notas');
+      if (notas) L.push('', `${R.sumNotes}: ${notas}`);
+      return L.join('\n');
+    }
+
+    const li = (s: string) => { const el = document.createElement('li'); el.textContent = s; return el; };
+    let last = '';
+
+    form.addEventListener('submit', (ev) => {
+      ev.preventDefault();
+      const missing = groups.filter((g) => g.dataset.q !== 'notas' && !answered(g)).length;
+      $('[data-warn]').hidden = missing === 0;
+      const r = evaluate();
+      $('[data-verdict]').textContent = r.verdict;
+      $('[data-detail]').textContent = r.detail;
+      $('[data-reasons]').replaceChildren(...r.reasons.map(li));
+      $('[data-flags]').replaceChildren(...r.flags.map(li));
+      $('[data-flagsw]').hidden = r.flags.length === 0;
+
+      const svc = $('[data-svc]');
+      svc.replaceChildren();
+      const add = (slug: string, pre: string) => {
+        const p = document.createElement('p');
+        const a = document.createElement('a');
+        a.href = `${cfg.svcBase}${slug}/`;
+        a.textContent = `${cfg.svcTitle[slug] ?? slug} →`;
+        p.append(pre, a);
+        svc.append(p);
+      };
+      add(r.slug, `${R.service}: `);
+      if (r.migrate) add(R.migrateSlug, `${R.migrate} `);
+
+      last = summary(r);
+      $('[data-summary]').textContent = last;
+      res.hidden = false;
+      res.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+      res.focus({ preventScroll: true });
+      if ((window as any).gtag) (window as any).gtag('event', 'eval_result', { verdict: r.slug, score: r.score });
+    });
+
+    form.addEventListener('reset', () => setTimeout(() => {
+      res.hidden = true;
+      $('[data-warn]').hidden = true;
+      progress();
+      window.scrollTo({ top: 0 });
+    }, 0));
+
+    $('[data-copy]').addEventListener('click', async () => {
+      const m = $('[data-copied]');
+      try { await navigator.clipboard.writeText(last); m.textContent = R.copied; }
+      catch { m.textContent = R.copyFail; }
+    });
+
+    // Envio: mismo endpoint y protecciones que el formulario de contacto de la portada.
+    const send = document.querySelector<HTMLFormElement>('[data-send]')!;
+    const msg = cfg.form;
+    const status = $('[data-status]', send);
+    const btn = $<HTMLButtonElement>('button[type=submit]', send);
+    const t0 = Date.now();
+    let cf = '';
+    let tsLoaded = false;
+    send.addEventListener('focusin', () => {
+      const key = send.dataset.sitekey;
+      if (!key || tsLoaded) return;
+      tsLoaded = true;
+      (window as any).__tsReady = () => (window as any).turnstile.render($('[data-ts]', send), { sitekey: key, callback: (tk: string) => (cf = tk), 'expired-callback': () => (cf = '') });
+      const sc = document.createElement('script');
+      sc.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=__tsReady';
+      sc.async = true;
+      document.head.appendChild(sc);
+    });
+    send.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      status.className = 'fstat';
+      const d = Object.fromEntries(new FormData(send)) as Record<string, string>;
+      const email = send.elements.namedItem('email') as HTMLInputElement;
+      const phoneOk = !d.phone || /^[+()\d\s.-]{6,}$/.test(d.phone.trim());
+      const bad = !d.name.trim() ? msg.invalid
+        : !email.validity.valid ? msg.email_bad
+        : !d.email.trim() && !d.phone.trim() ? msg.need_contact
+        : !phoneOk ? msg.phone_bad : '';
+      if (bad) { status.textContent = bad; status.classList.add('bad'); return; }
+      btn.disabled = true;
+      status.textContent = msg.sending;
+      try {
+        const r = await fetch(send.dataset.endpoint!, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: d.name, email: d.email, phone: d.phone, message: last.slice(0, 3000), website: d.website, lang: cfg.lang, t: t0, cf }),
+        });
+        const j = await r.json().catch(() => ({}));
+        if (j.ok) {
+          if ((window as any).gtag) (window as any).gtag('event', 'generate_lead', { method: 'project_assessment' });
+          status.textContent = msg.ok;
+          status.classList.add('good');
+          send.reset();
+        } else {
+          status.textContent = msg[j.error === 'rate' ? 'rate' : j.error === 'captcha' ? 'captcha' : j.error === 'email' ? 'email_bad' : j.error === 'invalid' ? 'invalid' : 'err'];
+          status.classList.add('bad');
+          if ((window as any).turnstile && cf) { (window as any).turnstile.reset(); cf = ''; }
+        }
+      } catch {
+        status.textContent = msg.err;
+        status.classList.add('bad');
+      }
+      btn.disabled = false;
+    });
+    progress();
+  </script>
+</body>
+</html>
+
+<style is:global>
+  .ev{padding-top:clamp(36px,6vw,64px)}
+  .ev-w{max-width:780px}
+  .ev h1{margin-top:4px}
+  .ev .lead{margin-top:16px}
+  .ev-form{margin-top:36px;display:grid;gap:14px}
+  .ev-prog{position:sticky;top:64px;z-index:5;height:4px;background:var(--line);border-radius:4px;overflow:hidden;margin-bottom:6px}
+  .ev-prog i{display:block;height:100%;background:var(--grad);transform:scaleX(0);transform-origin:0 50%;transition:transform .35s ease}
+  .ev-q{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:clamp(18px,3vw,24px);transition:border-color .25s}
+  .ev-q.done{border-color:rgba(54,226,192,.35)}
+  .ev-q fieldset{border:0;margin:0;padding:0;min-width:0}
+  .ev-l{display:flex;gap:12px;align-items:baseline;font-weight:700;font-size:1.04rem;line-height:1.35;padding:0;margin-bottom:12px}
+  .ev-l .n{flex:none;font-size:.78rem;font-weight:700;color:var(--b);letter-spacing:.06em}
+  .ev-h{margin:-6px 0 12px 32px;font-size:.88rem;color:var(--muted)}
+  .ev-q input[type=text],.ev-q textarea{font:400 1rem/1.5 var(--font);color:var(--text);background:rgba(7,8,13,.7);border:1px solid var(--line);border-radius:12px;padding:12px 14px;width:100%;min-height:46px}
+  .ev-q textarea{resize:vertical;min-height:110px}
+  .ev-q input[type=text]:focus,.ev-q textarea:focus{outline:none;border-color:var(--b)}
+  .ev-opts{display:grid;gap:8px}
+  @media(min-width:640px){.ev-opts{grid-template-columns:1fr 1fr}}
+  .ev-o{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--line);border-radius:12px;cursor:pointer;background:rgba(7,8,13,.45);transition:border-color .2s,background .2s;font-size:.95rem;min-height:46px}
+  .ev-o:hover{border-color:var(--a)}
+  .ev-o input{accent-color:var(--b);width:18px;height:18px;margin:0;flex:none}
+  .ev-o:has(input:checked){border-color:var(--b);background:rgba(54,226,192,.08)}
+  .ev-o:has(input:focus-visible){outline:2px solid var(--b);outline-offset:2px}
+  .ev-warn{color:#f3c66b;font-size:.92rem}
+  .ev-act{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+  .ev-res{margin-top:44px;padding:clamp(26px,5vw,44px);border-radius:28px;border:1px solid var(--line);background:linear-gradient(150deg,#161b33,#0b0d16);scroll-margin-top:84px}
+  .ev-res:focus{outline:none}
+  .ev-res h2{font-size:clamp(1.5rem,4vw,2.2rem);max-width:none;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .ev-detail{margin-top:12px;color:var(--muted);max-width:62ch}
+  .ev-cols{display:grid;gap:24px;margin-top:28px}
+  @media(min-width:720px){.ev-cols{grid-template-columns:1fr 1fr}}
+  .ev-cols h3,.ev-send h3{font-size:1rem;margin-bottom:10px}
+  .ev-list{display:grid;gap:8px}
+  .ev-list li{position:relative;padding-left:22px;font-size:.94rem}
+  .ev-list li::before{content:"";position:absolute;left:0;top:.5em;width:8px;height:8px;border-radius:50%;background:var(--b)}
+  .ev-flags li::before{background:#f3c66b}
+  .ev-svc{margin-top:24px;font-size:.94rem;color:var(--muted);display:grid;gap:6px}
+  .ev-svc a{color:var(--a);text-decoration:none;font-weight:600}
+  .ev-svc a:hover{text-decoration:underline}
+  .ev-send{margin-top:32px;padding-top:28px;border-top:1px solid var(--line)}
+  .ev-send>p{color:var(--muted)}
+  .ev-send .cform{margin:20px 0 0;max-width:none}
+  .ev-sum{margin-top:22px}
+  .ev-sum summary{cursor:pointer;color:var(--muted);font-size:.9rem}
+  .ev-sum pre{white-space:pre-wrap;word-break:break-word;margin:12px 0;padding:14px;background:rgba(7,8,13,.7);border:1px solid var(--line);border-radius:12px;font:.85rem/1.55 ui-monospace,Menlo,Consolas,monospace;color:var(--text)}
+  .ev-copied{margin-left:10px;font-size:.88rem;color:var(--muted)}
+</style>

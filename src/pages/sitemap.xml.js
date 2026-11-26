@@ -18,6 +18,9 @@ export function GET() {
   // Projects index
   urls.push({ loc: `${CANON}/proyectos/`, es: `${CANON}/proyectos/`, en: `${CANON}/en/proyectos/` });
   urls.push({ loc: `${CANON}/en/proyectos/`, es: `${CANON}/proyectos/`, en: `${CANON}/en/proyectos/` });
+  // Evaluacion de proyecto
+  urls.push({ loc: `${CANON}/evaluacion/`, es: `${CANON}/evaluacion/`, en: `${CANON}/en/evaluacion/` });
+  urls.push({ loc: `${CANON}/en/evaluacion/`, es: `${CANON}/evaluacion/`, en: `${CANON}/en/evaluacion/` });
   // Services
   for (const s of slugs.services) {
     urls.push({ loc: `${CANON}/servicios/${s}/`, es: `${CANON}/servicios/${s}/`, en: `${CANON}/en/servicios/${s}/` });

@@ -4,6 +4,7 @@ import { Picture, Image } from 'astro:assets';
 import { brand, gen, tagIcon } from '../icons.js';
 import { allItems } from '../lib/projects.js';
 import ChatWidget from './ChatWidget.astro';
+import evalTexts from '../i18n/eval.js';
 import eps1 from '../assets/proyectos/easy-pdf-inicio.png';
 import eps2 from '../assets/proyectos/easy-pdf-lector.jpg';
 import moova from '../assets/proyectos/moova-popup.png';
@@ -38,6 +39,8 @@ const ENDPOINT = 'https://gustavobentancor.com/gsoft-studio/contact.php';
 const SITEKEY = import.meta.env.PUBLIC_TURNSTILE_SITEKEY ?? '';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const isEn = t.lang === 'en';
+const ev = evalTexts[t.lang];
+const evalHref = `${base}${isEn ? '/en' : ''}/${ev.slug}/`;
 const path = isEn ? '/en/' : '/';
 // URL canonica unica: el dominio propio (la copia de GitHub Pages apunta aqui para no duplicar contenido)
 const CANON = 'https://gustavobentancor.com';
@@ -456,6 +459,10 @@ const icons = {
             </article>
           ))}
         </div>
+        <a class="ev-cta" href={evalHref} data-r>
+          <span><b>{ev.cta.title}</b> {ev.cta.text}</span>
+          <span class="btn btn-s">{ev.cta.btn} →</span>
+        </a>
       </div>
     </section>
 
@@ -512,6 +519,7 @@ const icons = {
           <p class="kick">{t.contact.kicker}</p>
           <h2>{t.contact.title}</h2>
           <p class="sub">{t.contact.text}</p>
+          <p class="ev-mini">{ev.cta.title} <a href={evalHref}>{ev.cta.btn} →</a></p>
           <form class="cform" data-form novalidate action={ENDPOINT} method="post" data-endpoint={ENDPOINT} data-lang={t.lang} data-sitekey={SITEKEY} data-msg={JSON.stringify(t.contact.form)}>
             <label>{t.contact.form.name}<input name="name" type="text" autocomplete="name" required maxlength="100"></label>
             <label>{t.contact.form.email}<input name="email" type="email" autocomplete="email" maxlength="150" inputmode="email"></label>
